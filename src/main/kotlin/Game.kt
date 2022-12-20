@@ -1,6 +1,6 @@
 data class Position(var x: Int, var y: Int)
 
-class Game {
+class Game(val grid: Grid, val parser: Parser) {
     private var x = 0
     private var y = 0
     private var width = 0
@@ -30,6 +30,7 @@ class Game {
                     Direction.S -> Direction.W
                     Direction.E -> Direction.S
                     Direction.W -> Direction.N
+                    Direction.None -> Direction.None
                 }
             } else if (it == Movement.L) {
                 robotDirection = when (robotDirection) {
@@ -37,6 +38,7 @@ class Game {
                     Direction.S -> Direction.E
                     Direction.E -> Direction.N
                     Direction.W -> Direction.S
+                    Direction.None -> Direction.None
                 }
             } else if (it == Movement.F) {
                 var temporaryX = x
@@ -46,6 +48,7 @@ class Game {
                     Direction.S -> temporaryY -= 1
                     Direction.E -> temporaryX += 1
                     Direction.W -> temporaryX -= 1
+                    Direction.None -> Direction.None
                 }
 
                 if (temporaryX in 0..width && temporaryY in 0..height) {
@@ -65,82 +68,27 @@ class Game {
         println("${robotPosition.x} ${robotPosition.y} $robotDirection")
     }
 
-//    private fun drawGrid(
-//        width: Int,
-//        height: Int,
-//        x: Int,
-//        y: Int,
-//        direction: Direction
-//    ) {
-//        require(x in 0..width && y in 0..height) { "Incorrect position: 0 <= x <= width and 0 <= y <= height" }
-//        val currentPlace = when (direction) {
-//            Direction.N -> "↑ "
-//            Direction.S -> "↓ "
-//            Direction.E -> "→ "
-//            Direction.W -> "← "
-//        }
-//        repeat(height + 1) { yAxis ->
-//            repeat(width + 1) { xAxis ->
-//                if (xAxis == x && yAxis == height - y) {
-//                    print(currentPlace)
-//                } else {
-//                    print("□ ")
-//                }
-//            }
-//            println()
-//        }
-//        println()
-//    }
-
     fun startGame(gridSize: String, robotPosition: String, moves: String) {
+        val gridSizeParser = parser.splitGridSize(gridSize)
+        setGrid(gridSizeParser.first, gridSizeParser.second)
 
-        val splitGridSize = gridSize.split(" ")
+        val robotPositionParser = parser.splitRobotPosition(robotPosition)
+        setRobotPosition(robotPositionParser.first, robotPositionParser.second, robotPositionParser.third)
 
-        setGrid(splitGridSize.first().toInt(), splitGridSize.last().toInt())
+        val movesParser = parser.splitMoves(moves)
 
-        val splitRobotPosition = robotPosition.split(" ")
-
-        val x = splitRobotPosition[0].toInt()
-        val y = splitRobotPosition[1].toInt()
-        val direction = when (splitRobotPosition[2]) {
-            "N" -> Direction.N
-            "S" -> Direction.S
-            "E" -> Direction.E
-            "W" -> Direction.W
-            else -> return
-        }
-
-        setRobotPosition(x, y, direction)
-
-        require(moves.length < 101) { "Too long instruction" }
-
-        val splitMoves = moves.split("")
-            .map {
-                when (it) {
-                    "F" -> Movement.F
-                    "R" -> Movement.R
-                    "L" -> Movement.L
-                    else -> Movement.Nothing
-                }
-            }
-//
-//        drawGrid(
-//            splitGridSize.first().toInt(),
-//            splitGridSize.last().toInt(),
-//            x,
-//            y,
-//            direction
-//        )
-        makeMove(splitMoves, Grid())
+        makeMove(movesParser, Grid())
     }
 }
 
 fun main() {
-    val game = Game()
+    val game = Game(Grid(), Parser())
     game.apply {
 //        startGame("5 3", "1 1 E", "RFRFRFRF")
         startGame("3 4", "3 4 W", "FRF")
-        println( pollutedList)
+        println(pollutedList)
+        startGame("3 4", "3 4 N", "FRF")
+        println(pollutedList)
 //        startGame("5 3", "3 2 N", "FRRFLLFFRRFLL")
 //        startGame("5 3", "0 3 W", "LLFFFLFLFL")
     }

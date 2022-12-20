@@ -1,8 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="GameTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-12-20T08:42:43" hostname="natalias-mbp.home" time="0.048">
+<testsuite name="GameTest" tests="20" skipped="0" failures="0" errors="0" timestamp="2022-12-20T09:17:01" hostname="natalias-mbp.home" time="0.118">
   <properties/>
-  <testcase name="robot makes three moves and he is gone()" classname="GameTest" time="0.048"/>
-  <system-out><![CDATA[□ □ □ ← 
+  <testcase name="robot go forward when has one movement()" classname="GameTest" time="0.05"/>
+  <testcase name="set the wrong width and height of the grid ()" classname="GameTest" time="0.016"/>
+  <testcase name="robot makes three moves and he is gone()" classname="GameTest" time="0.006"/>
+  <testcase name="robot turns left when has one movement()" classname="GameTest" time="0.003"/>
+  <testcase name="set the empty size of the grid ()" classname="GameTest" time="0.001"/>
+  <testcase name="robot makes three moves and his direction is all right()" classname="GameTest" time="0.004"/>
+  <testcase name="robot makes three moves and his position is all right()" classname="GameTest" time="0.004"/>
+  <testcase name="robot cannot lost in the same place()" classname="GameTest" time="0.004"/>
+  <testcase name="set the wrong width of the grid ()" classname="GameTest" time="0.001"/>
+  <testcase name="robot go forward and his direction doesn't change when has one movement()" classname="GameTest" time="0.002"/>
+  <testcase name="after the robot has gone, new robot has his last position()" classname="GameTest" time="0.002"/>
+  <testcase name="set robot direction()" classname="GameTest" time="0.002"/>
+  <testcase name="robot is gone when he go outside grid()" classname="GameTest" time="0.002"/>
+  <testcase name="set the wrong height of the grid ()" classname="GameTest" time="0.001"/>
+  <testcase name="robot can't go outside grid again from the same place as before()" classname="GameTest" time="0.003"/>
+  <testcase name="robot makes two moves and his direction is all right()" classname="GameTest" time="0.001"/>
+  <testcase name="after the robot has gone, new robot may make move()" classname="GameTest" time="0.002"/>
+  <testcase name="set robot position()" classname="GameTest" time="0.001"/>
+  <testcase name="robot makes two moves and his position is all right()" classname="GameTest" time="0.001"/>
+  <testcase name="robot turns right when has one movement()" classname="GameTest" time="0.001"/>
+  <system-out><![CDATA[□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ ← □ □ 
+□ □ □ □ 
+
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+← □ □ □ 
+□ □ □ □ 
+
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+← □ □ □ 
+□ □ □ □ 
+
+0 1 W
+□ □ □ ← 
 □ □ □ □ 
 □ □ □ □ 
 □ □ □ □ 
@@ -21,6 +59,360 @@
 □ □ □ □ 
 
 2 4 N LOST
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ ← □ □ 
+□ □ □ □ 
+
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ ↓ □ □ 
+□ □ □ □ 
+
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ ↓ □ □ 
+□ □ □ □ 
+
+1 1 S
+□ □ □ ← 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+
+□ □ ← □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+
+□ □ ↓ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+
+□ □ □ □ 
+□ □ ↓ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+
+□ □ □ □ 
+□ □ ↓ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+
+2 3 S
+□ □ □ ← 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+
+□ □ ← □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+
+□ □ ↓ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+
+□ □ □ □ 
+□ □ ↓ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+
+□ □ □ □ 
+□ □ ↓ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+
+2 3 S
+□ □ □ ← 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+
+□ □ ← □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+
+□ □ ↑ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+
+2 4 N LOST
+□ □ □ ← 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+
+□ □ ← □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+
+□ □ ← □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+
+2 4 W
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ ← □ □ 
+□ □ □ □ 
+
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+← □ □ □ 
+□ □ □ □ 
+
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+← □ □ □ 
+□ □ □ □ 
+
+0 1 W
+□ □ □ ← 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+
+□ □ ← □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+
+□ □ ↑ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+
+2 4 N LOST
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ ↑ □ □ 
+□ □ □ □ 
+
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ ↑ □ □ 
+□ □ □ □ 
+
+1 1 N
+□ □ □ ↑ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+
+3 4 N LOST
+□ □ □ ↑ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+
+□ □ □ ↑ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+
+□ □ □ ↑ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+
+3 4 N
+□ □ □ ↑ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+
+3 4 N LOST
+□ □ □ ↑ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+
+□ □ □ ↑ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+
+□ □ □ ↑ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+
+3 4 N
+□ □ □ ← 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+
+□ □ ← □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+
+□ □ ↑ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+
+□ □ ↑ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+
+2 4 N
+□ □ □ ← 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+
+□ □ ← □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+
+□ □ ↑ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+
+2 4 N LOST
+□ □ ↑ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+
+□ □ → □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+
+□ □ ↓ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+
+□ □ □ □ 
+□ □ ↓ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+
+□ □ □ □ 
+□ □ ↓ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+
+2 3 S
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ → □ □ 
+□ □ □ □ 
+
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ → □ □ 
+□ □ □ □ 
+
+1 1 E
+□ □ □ ← 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+
+□ □ ← □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+
+□ □ ↑ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+
+□ □ ↑ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+
+2 4 N
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ ← □ □ 
+□ □ □ □ 
+
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ ↑ □ □ 
+□ □ □ □ 
+
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ ↑ □ □ 
+□ □ □ □ 
+
+1 1 N
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
