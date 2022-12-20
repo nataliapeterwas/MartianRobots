@@ -138,9 +138,9 @@ class Game {
 fun main() {
     val game = Game()
     game.apply {
-        startGame("5 3", "1 1 E", "RFRFRFRF")
-//        startGame("5 3", "1 1 E", "FFFFFFFFFF")
-//        startGame("5 3", "1 1 E", "FFFFFFFFFF")
+//        startGame("5 3", "1 1 E", "RFRFRFRF")
+        startGame("3 4", "3 4 W", "FRF")
+        println( pollutedList)
 //        startGame("5 3", "3 2 N", "FRRFLLFFRRFLL")
 //        startGame("5 3", "0 3 W", "LLFFFLFLFL")
     }

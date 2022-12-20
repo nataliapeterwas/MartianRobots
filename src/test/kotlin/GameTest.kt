@@ -131,7 +131,7 @@ internal class GameTest {
         val actual = sut.pollutedList
 
         //then
-        actual shouldContain Position(3,4)
+        actual shouldContain Position(3,5)
     }
 
     @Test
@@ -206,7 +206,7 @@ internal class GameTest {
         val actual = sut.pollutedList
 
         //then
-        actual shouldContain Position(2,4)
+        actual shouldContain Position(2,5)
     }
 
     @Test
