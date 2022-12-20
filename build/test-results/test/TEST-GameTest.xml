@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="GameTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-12-20T08:26:25" hostname="natalias-mbp.home" time="0.053">
+  <properties/>
+  <testcase name="after the robot has gone, new robot may make move()" classname="GameTest" time="0.053"/>
+  <system-out><![CDATA[□ □ □ ← 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+
+□ □ ← □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+
+□ □ ↑ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+
+2 4 N LOST
+□ □ ↑ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+
+□ □ → □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+
+□ □ ↓ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+
+□ □ □ □ 
+□ □ ↓ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+
+□ □ □ □ 
+□ □ ↓ □ 
+□ □ □ □ 
+□ □ □ □ 
+□ □ □ □ 
+
+2 3 S
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
