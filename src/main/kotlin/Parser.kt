@@ -3,6 +3,7 @@ class Parser {
         val splitGridSize = gridSize.split(" ")
         val width = splitGridSize.first().toInt()
         val height = splitGridSize.last().toInt()
+        require(width in 1..50 && height in 1..50) { "Grid is rectangle: 51>x>0 and 51>y>0" }
         return Pair(width, height)
     }
 
@@ -21,18 +22,23 @@ class Parser {
         return Triple(x, y, direction)
     }
 
-    fun splitMoves(moves: String): List<Movement> {
+    fun splitMoves(moves: String, robot: Robot, grid: Grid): List<Command> {
         require(moves.length < 101) { "Too long instruction" }
 
         val splitMoves = moves.split("")
             .map {
                 when (it) {
-                    "F" -> Movement.F
-                    "R" -> Movement.R
-                    "L" -> Movement.L
-                    else -> Movement.Nothing
+                    "F" -> MoveForwardCommand(robot, grid)
+                    "R" -> MoveRightCommand(robot)
+                    "L" -> MoveLeftCommand(robot)
+                    else -> NoCommand()
                 }
-            }
+            }.toMutableList()
+
+        splitMoves.removeFirst()
+        splitMoves.removeLast()
+        splitMoves.toList()
+
         return splitMoves
     }
 

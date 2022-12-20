@@ -1,46 +1,39 @@
 class Grid {
 //    var x = 0
 //    var y = 0
-//    var width = 0
-//    var height = 0
-//    var robotDirection = Direction.W
-//    var robotPosition = Position(0, 0)
-//    fun setGrid(width: Int, height: Int) {
-//        require(width in 1..50 && height in 1..50) { "Grid is rectangle: 51>x>0 and 51>y>0" }
-//        this.width = width
-//        this.height = height
-//    }
-//
-//    fun setRobotPosition(x: Int, y: Int, direction: Direction) {
-//        this.x = x
-//        this.y = y
-//        robotDirection = direction
-//        robotPosition = Position(x, y)
-//    }
+    var width = 0
+    var height = 0
+    val pollutedList = mutableListOf<Position>()
+
+    fun setGrid(width: Int, height: Int){
+        require(width in 1..50 && height in 1..50) { "Grid is rectangle: 51>x>0 and 51>y>0" }
+        this.width = width
+        this.height = height
+    }
+
     fun drawGrid(
-        width: Int,
-        height: Int,
-        x: Int,
-        y: Int,
-        direction: Direction
+        robot: Robot
     ) {
-        require(x in 0..width && y in 0..height) { "Incorrect position: 0 <= x <= width and 0 <= y <= height" }
-        val currentPlace = when (direction) {
-            Direction.N -> "↑ "
-            Direction.S -> "↓ "
-            Direction.E -> "→ "
-            Direction.W -> "← "
-        }
-        repeat(height + 1) { yAxis ->
-            repeat(width + 1) { xAxis ->
-                if (xAxis == x && yAxis == height - y) {
-                    print(currentPlace)
-                } else {
-                    print("□ ")
+        if (robot.robotPosition.x in 0..width && robot.robotPosition.y in 0..height) {
+
+            val currentPlace = when (robot.robotDirection) {
+                Direction.N -> "↑ "
+                Direction.S -> "↓ "
+                Direction.E -> "→ "
+                Direction.W -> "← "
+                Direction.None -> ""
+            }
+            repeat(height + 1) { yAxis ->
+                repeat(width + 1) { xAxis ->
+                    if (xAxis == robot.robotPosition.x && yAxis == height - robot.robotPosition.y) {
+                        print(currentPlace)
+                    } else {
+                        print("□ ")
+                    }
                 }
+                println()
             }
             println()
         }
-        println()
     }
 }
