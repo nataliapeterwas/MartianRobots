@@ -1,6 +1,4 @@
 class Grid {
-//    var x = 0
-//    var y = 0
     var width = 0
     var height = 0
     val pollutedList = mutableListOf<Position>()

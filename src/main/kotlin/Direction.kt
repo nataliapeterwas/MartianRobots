@@ -1,8 +1,4 @@
 enum class Direction(letter: String) {
-//        N("N", "↑ "),
-//    S("S", "↓ "),
-//    E("E", "→ "),
-//    W("W", "← ")
     N("N"),
     S("S"),
     E("E"),

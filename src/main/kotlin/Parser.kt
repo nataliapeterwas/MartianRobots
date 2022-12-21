@@ -1,4 +1,14 @@
 class Parser {
+    fun mainInput(input: String): Triple<String, String, String> {
+        val splitMainInput = input.split("\n").toMutableList()
+
+        val gridSize = splitMainInput[0]
+        val robotPosition = splitMainInput[1]
+        val moves = splitMainInput[2]
+
+        return Triple(gridSize, robotPosition, moves)
+    }
+
     fun splitGridSize(gridSize: String): Pair<Int, Int> {
         val splitGridSize = gridSize.split(" ")
         val width = splitGridSize.first().toInt()

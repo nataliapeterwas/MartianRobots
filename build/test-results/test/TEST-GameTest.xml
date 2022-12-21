@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="GameTest" tests="1" skipped="0" failures="1" errors="0" timestamp="2022-12-21T08:13:16" hostname="natalias-mbp.home" time="0.622">
+<testsuite name="GameTest" tests="1" skipped="0" failures="1" errors="0" timestamp="2022-12-21T10:01:50" hostname="natalias-mbp.home" time="0.736">
   <properties/>
-  <testcase name="set the wrong width and height of the grid ()" classname="GameTest" time="0.622">
-    <failure message="org.junit.ComparisonFailure: Expected class java.lang.IllegalArgumentException to be thrown expected:&lt;class [java.lang.IllegalArgument]Exception&gt; but was:&lt;class [io.mockk.MockK]Exception&gt;" type="org.junit.ComparisonFailure">org.junit.ComparisonFailure: Expected class java.lang.IllegalArgumentException to be thrown expected:&lt;class [java.lang.IllegalArgument]Exception&gt; but was:&lt;class [io.mockk.MockK]Exception&gt;
-	at org.amshove.kluent.ExceptionsKt.shouldThrow(Exceptions.kt:22)
-	at GameTest.set the wrong width and height of the grid (GameTest.kt:23)
+  <testcase name="set robot position()" classname="GameTest" time="0.736">
+    <failure message="java.lang.ClassCastException: class java.lang.Object cannot be cast to class java.lang.String (java.lang.Object and java.lang.String are in module java.base of loader 'bootstrap')" type="java.lang.ClassCastException">java.lang.ClassCastException: class java.lang.Object cannot be cast to class java.lang.String (java.lang.Object and java.lang.String are in module java.base of loader 'bootstrap')
+	at Game.startGame(Game.kt:17)
+	at GameTest.set robot position(GameTest.kt:70)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
