@@ -16,13 +16,8 @@ class Grid {
     ) {
         if (robot.robotPosition.x in 0..width && robot.robotPosition.y in 0..height) {
 
-            val currentPlace = when (robot.robotDirection) {
-                Direction.N -> "↑ "
-                Direction.S -> "↓ "
-                Direction.E -> "→ "
-                Direction.W -> "← "
-                Direction.None -> ""
-            }
+            val currentPlace = robot.robotDirection.printArrow(robot.robotDirection)
+
             repeat(height + 1) { yAxis ->
                 repeat(width + 1) { xAxis ->
                     if (xAxis == robot.robotPosition.x && yAxis == height - robot.robotPosition.y) {
@@ -33,6 +28,7 @@ class Grid {
                 }
                 println()
             }
+            println("${robot.robotPosition.x} ${robot.robotPosition.y} ${robot.robotDirection}")
             println()
         }
     }

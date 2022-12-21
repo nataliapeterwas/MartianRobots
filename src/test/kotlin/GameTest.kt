@@ -1,13 +1,21 @@
+import io.mockk.mockk
+import org.amshove.kluent.shouldThrow
+import org.amshove.kluent.withMessage
+import org.junit.jupiter.api.Test
+
 //import org.amshove.kluent.*
 //import org.junit.jupiter.api.Test
 //
-//internal class GameTest {
-//    //    private var movement = mockk<Movement>()
-//    private val sut = Game(Grid(), Parser())
-//
+internal class GameTest {
+    var robot = mockk<Robot>()
+    var grid = mockk<Grid>()
+    var parser = mockk<Parser>()
+    private val sut = Game(grid, parser, robot)
+
 //    @Test
 //    fun `set the wrong width and height of the grid `() {
 //        //given
+//
 //
 //        //when
 //        val actual = { sut.startGame("-1 -2", "", "") }
@@ -15,7 +23,7 @@
 //        //then
 //        actual shouldThrow IllegalArgumentException::class withMessage "Grid is rectangle: 51>x>0 and 51>y>0"
 //    }
-//
+
 //    @Test
 //    fun `set the wrong width of the grid `() {
 //        //given
@@ -250,4 +258,4 @@
 //        actual shouldBeEqualTo Position(2,3)
 //    }
 //
-//}
+}

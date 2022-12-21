@@ -1,4 +1,4 @@
 enum class Status {
     ALIVE,
-    DEAD
+    LOST
 }

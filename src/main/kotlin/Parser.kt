@@ -12,13 +12,9 @@ class Parser {
 
         val x = splitRobotPosition[0].toInt()
         val y = splitRobotPosition[1].toInt()
-        val direction = when (splitRobotPosition[2]) {
-            "N" -> Direction.N
-            "S" -> Direction.S
-            "E" -> Direction.E
-            "W" -> Direction.W
-            else -> Direction.None
-        }
+
+        val direction = Direction.valueOf(splitRobotPosition[2])
+
         return Triple(x, y, direction)
     }
 
