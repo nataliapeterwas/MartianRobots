@@ -48,9 +48,16 @@ fun main() {
         LLFFFLFLFL
     """.trimIndent()
 
+    val x = """
+             5 3
+             0 0 S
+             FFFFFF
+        """.trimIndent()
+
     game.apply {
-        startGame(s)
-        startGame(s2)
-        startGame(s3)
+//        startGame(s)
+//        startGame(s2)
+//        startGame(s3)
+        startGame(x)
     }
 }
