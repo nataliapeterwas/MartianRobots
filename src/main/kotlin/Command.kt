@@ -2,7 +2,7 @@ interface Command {
     fun execute()
 }
 
-class MoveRightCommand(private val robot: Robot) : Command {
+data class MoveRightCommand(private val robot: Robot) : Command {
     override fun execute() {
         robot.robotDirection = when (robot.robotDirection) {
             Direction.N -> Direction.E
@@ -14,7 +14,7 @@ class MoveRightCommand(private val robot: Robot) : Command {
     }
 }
 
-class MoveLeftCommand(private val robot: Robot) : Command {
+data class MoveLeftCommand(private val robot: Robot) : Command {
     override fun execute() {
         robot.robotDirection = when (robot.robotDirection) {
             Direction.N -> Direction.W
@@ -26,7 +26,7 @@ class MoveLeftCommand(private val robot: Robot) : Command {
     }
 }
 
-class MoveForwardCommand(private val robot: Robot, private val grid: Grid) : Command {
+data class MoveForwardCommand(private val robot: Robot, private val grid: Grid) : Command {
     override fun execute() {
         var temporaryX = robot.robotPosition.x
         var temporaryY = robot.robotPosition.y
@@ -50,7 +50,3 @@ class MoveForwardCommand(private val robot: Robot, private val grid: Grid) : Com
     }
 }
 
-class NoCommand(): Command{
-    override fun execute() {
-    }
-}

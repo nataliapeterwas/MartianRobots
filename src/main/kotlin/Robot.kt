@@ -6,5 +6,6 @@ class Robot(
     fun setRobotPosition(position: Position, direction: Direction) {
         robotDirection = direction
         robotPosition = position
+        robotStatus = Status.ALIVE
     }
 }

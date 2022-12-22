@@ -7,67 +7,67 @@ internal class CommandsTest{
 
     @Test
     fun `class MoveRightCommand correctly change direction from N to E`(){
-        //given
+        // given
         robot.robotDirection = Direction.N
 
-        //when
+        // when
         MoveRightCommand(robot).execute()
 
-        //then
+        // then
         robot.robotDirection shouldBeEqualTo Direction.E
     }
 
     @Test
     fun `class MoveLeftCommand correctly change direction from W to S`(){
-        //given
+        // given
         robot.robotDirection = Direction.W
 
-        //when
+        // when
         MoveLeftCommand(robot).execute()
 
-        //then
+        // then
         robot.robotDirection shouldBeEqualTo Direction.S
     }
 
     @Test
     fun `class MoveForwardCommand correctly change his position when his direction is S`(){
-        //given
+        // given
         grid.setGrid(10, 10)
         robot.robotDirection = Direction.S
-        robot.setRobotPosition(1, 3, Direction.S, grid)
+        robot.setRobotPosition(Position(1,3), Direction.S)
 
-        //when
+        // when
         MoveForwardCommand(robot, grid).execute()
 
-        //then
+        // then
         robot.robotPosition shouldBeEqualTo Position(1,2)
     }
 
     @Test
     fun `class MoveForwardCommand doing nothing when robot's position is polluted`(){
-        //given
+        // given
         grid.setGrid(10, 10)
         robot.robotDirection = Direction.S
-        robot.setRobotPosition(0, 0, Direction.S, grid)
+        robot.setRobotPosition(Position(0,0), Direction.S)
         grid.pollutedList.add(Position(0,-1))
 
-        //when
+        // when
         MoveForwardCommand(robot, grid).execute()
 
-        //then
+        // then
         robot.robotPosition shouldBeEqualTo Position(0,0)
     }
 
     @Test
     fun `class MoveForwardCommand makes that robot loses when he went outside grid`(){
-        //given
+        // given
         grid.setGrid(10, 10)
-        robot.setRobotPosition(0, 0, Direction.S, grid)
+        robot.setRobotPosition(Position(0,0), Direction.S)
 
-        //when
+        // when
         MoveForwardCommand(robot, grid).execute()
 
-        //then
+        // then
         robot.robotStatus shouldBeEqualTo Status.LOST
     }
 }

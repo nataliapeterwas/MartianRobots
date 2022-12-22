@@ -1,11 +1,11 @@
 data class Position(var x: Int, var y: Int)
 
-class Game(private val grid: Grid, private val parser: Parser, private val robot: Robot) {
-    private fun makeMove(movements: List<Command>, grid: Grid) {
+class Game(private val grid: Grid, private val robot: Robot) {
+    private fun makeMove(movements: List<Command?>, grid: Grid) {
         movements.forEach { command ->
             if (robot.robotStatus == Status.ALIVE) {
                 grid.drawGrid(robot)
-                command.execute()
+                command?.execute()
             }
         }
 
@@ -13,23 +13,13 @@ class Game(private val grid: Grid, private val parser: Parser, private val robot
     }
 
     fun startGame(input: String) {
-        robot.robotStatus = Status.ALIVE
-        val splitInput = parser.mainInput(input)
-        val gridSizeParser = parser.splitGridSize(splitInput.first)
-
-        grid.setGrid(gridSizeParser.first, gridSizeParser.second)
-
-        val robotPositionParser = parser.splitRobotPosition(splitInput.second)
-        robot.setRobotPosition(robotPositionParser.first, robotPositionParser.second)
-
-        val movesParser = parser.splitMoves(splitInput.third, robot, grid)
-
-        makeMove(movesParser, grid)
+        val parser = Parser(input, grid, robot)
+        makeMove(parser.parse(), grid)
     }
 }
 
 fun main() {
-    val game = Game(Grid(), Parser(), Robot())
+    val game = Game(Grid(), Robot())
 
     val s = """
       5 3
@@ -57,9 +47,10 @@ fun main() {
 
     game.apply {
 //        startGame(s)
-        startGame(s2)
-        startGame(s3)
-//        startGame(x)
+//        startGame(s2)
+//        startGame(s3)
+        startGame(x)
+        startGame(x)
 
     }
 }

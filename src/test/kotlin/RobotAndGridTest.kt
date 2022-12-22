@@ -1,13 +1,13 @@
+import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
-import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
 internal class RobotAndGridTest{
-    private val robot = mockk<Robot>()
-    private val grid = mockk<Grid>()
+    private val robot = Robot()
+    private val grid = Grid()
 
     @Test
     fun `setGrid works correctly`() {
