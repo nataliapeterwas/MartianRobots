@@ -198,9 +198,8 @@ internal class ParserTest {
         val actual = parser.splitRobotPosition(robotPosition)
 
         //then
-        actual.first shouldBeEqualTo 30
-        actual.second shouldBeEqualTo 5
-        actual.third shouldBeEqualTo Direction.E
+        actual.first shouldBeEqualTo Position(30, 5)
+        actual.second shouldBeEqualTo Direction.E
     }
 
     @Test

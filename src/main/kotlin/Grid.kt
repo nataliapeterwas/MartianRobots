@@ -1,7 +1,8 @@
-class Grid {
-    var width = 0
-    var height = 0
-    val pollutedList = mutableListOf<Position>()
+class Grid(
+    var width: Int = 0,
+    var height: Int = 0,
+    val pollutedList: MutableList<Position> = mutableListOf()
+) {
 
     fun setGrid(width: Int, height: Int) {
         require(width in 1..50 && height in 1..50) { "Grid is rectangle: 51>x>0 and 51>y>0" }
@@ -9,22 +10,22 @@ class Grid {
         this.height = height
     }
 
-    fun drawGrid(
-        robot: Robot
-    ) {
-        val currentPlace = robot.robotDirection.printArrow(robot.robotDirection)
+    fun drawGrid(robot: Robot) {
+        robot.robotDirection?.let {
+            val currentPlace = it.printArrow(it)
 
-        repeat(height + 1) { yAxis ->
-            repeat(width + 1) { xAxis ->
-                if (xAxis == robot.robotPosition.x && yAxis == height - robot.robotPosition.y) {
-                    print(currentPlace)
-                } else {
-                    print("□ ")
+            repeat(height + 1) { yAxis ->
+                repeat(width + 1) { xAxis ->
+                    if (xAxis == robot.robotPosition.x && yAxis == height - robot.robotPosition.y) {
+                        print(currentPlace)
+                    } else {
+                        print("□ ")
+                    }
                 }
+                println()
             }
+            println("${robot.robotPosition.x} ${robot.robotPosition.y} ${robot.robotDirection}")
             println()
         }
-        println("${robot.robotPosition.x} ${robot.robotPosition.y} ${robot.robotDirection}")
-        println()
     }
 }

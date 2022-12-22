@@ -8,10 +8,11 @@ class Game(private val grid: Grid, private val parser: Parser, private val robot
                 command.execute()
             }
         }
-        if(robot.robotStatus == Status.ALIVE) grid.drawGrid(robot)
+
+        if (robot.robotStatus == Status.ALIVE) grid.drawGrid(robot)
     }
 
-    fun startGame(input: String){
+    fun startGame(input: String) {
         robot.robotStatus = Status.ALIVE
         val splitInput = parser.mainInput(input)
         val gridSizeParser = parser.splitGridSize(splitInput.first)
@@ -19,7 +20,7 @@ class Game(private val grid: Grid, private val parser: Parser, private val robot
         grid.setGrid(gridSizeParser.first, gridSizeParser.second)
 
         val robotPositionParser = parser.splitRobotPosition(splitInput.second)
-        robot.setRobotPosition(robotPositionParser.first, robotPositionParser.second, robotPositionParser.third, grid)
+        robot.setRobotPosition(robotPositionParser.first, robotPositionParser.second)
 
         val movesParser = parser.splitMoves(splitInput.third, robot, grid)
 
@@ -56,8 +57,9 @@ fun main() {
 
     game.apply {
 //        startGame(s)
-//        startGame(s2)
-//        startGame(s3)
-        startGame(x)
+        startGame(s2)
+        startGame(s3)
+//        startGame(x)
+
     }
 }

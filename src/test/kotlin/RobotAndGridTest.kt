@@ -1,3 +1,4 @@
+import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
@@ -5,8 +6,8 @@ import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
 internal class RobotAndGridTest{
-    val robot = Robot()
-    val grid = Grid()
+    private val robot = mockk<Robot>()
+    private val grid = mockk<Grid>()
 
     @Test
     fun `setGrid works correctly`() {
@@ -37,7 +38,7 @@ internal class RobotAndGridTest{
         grid.setGrid(5,3)
 
         //when
-        robot.setRobotPosition(1, 3, Direction.W, grid)
+        robot.setRobotPosition(Position(1,3), Direction.W)
 
         //then
         robot.robotPosition shouldBeEqualTo Position(1,3)
@@ -49,7 +50,7 @@ internal class RobotAndGridTest{
         grid.setGrid(5,3)
 
         //when
-        robot.setRobotPosition(1, 3, Direction.E, grid)
+        robot.setRobotPosition(Position(1,3), Direction.E)
 
         //then
         robot.robotDirection shouldBeEqualTo Direction.E
@@ -62,7 +63,7 @@ internal class RobotAndGridTest{
         grid.setGrid(5,3)
 
         //when
-        val actual = {robot.setRobotPosition(1, 5, Direction.W, grid)}
+        val actual = {robot.setRobotPosition(Position(1,5), Direction.W)}
 
         //then
         actual shouldThrow IllegalArgumentException::class withMessage "Incorrect position: 0 <= x <= width and 0 <= y <= height"

@@ -9,6 +9,7 @@ class MoveRightCommand(private val robot: Robot) : Command {
             Direction.S -> Direction.W
             Direction.E -> Direction.S
             Direction.W -> Direction.N
+            else -> null
         }
     }
 }
@@ -20,6 +21,7 @@ class MoveLeftCommand(private val robot: Robot) : Command {
             Direction.S -> Direction.E
             Direction.E -> Direction.N
             Direction.W -> Direction.S
+            else -> null
         }
     }
 }
@@ -33,6 +35,7 @@ class MoveForwardCommand(private val robot: Robot, private val grid: Grid) : Com
             Direction.S -> temporaryY -= 1
             Direction.E -> temporaryX += 1
             Direction.W -> temporaryX -= 1
+            else -> null
         }
 
         if (temporaryX in 0..grid.width && temporaryY in 0..grid.height) {
