@@ -1,8 +1,10 @@
 class GridSizeParser(private val gridSize: String) {
     fun gridSizeParser(): Pair<Int, Int> {
-        require(gridSize.split(" ").size == 2 && gridSize.toList()[1] == ' ') { "Incorrect grid size" }
+        val splitGridSize = gridSize.split(" ").toMutableList()
+        splitGridSize.removeIf { it.isEmpty() }
 
-        val splitGridSize = gridSize.split(" ")
+        require(splitGridSize.size == 2) { "Incorrect grid size" }
+
         val width = splitGridSize.first().toInt()
         val height = splitGridSize.last().toInt()
 

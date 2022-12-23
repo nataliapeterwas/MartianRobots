@@ -1,14 +1,15 @@
 class RobotPositionParser(private val robotPositionInput: String) {
     fun robotPositionParser(): Pair<Position, Direction> {
-        require(robotPositionInput.split(" ").size == 3 && robotPositionInput.toList()[1] == ' ' && robotPositionInput.toList()[3] == ' ' && robotPositionInput.toList()[4].isLetter()) { "Incorrect robot position" }
+        val robotPositionSplitAsChar = robotPositionInput.toList()
+        val robotPositionSplitWithSpace = robotPositionInput.split(" ")
 
-        val splitRobotPosition = robotPositionInput.split(" ")
+        require(robotPositionSplitWithSpace.size == 3 &&  robotPositionSplitAsChar.last().isLetter()) { "Incorrect robot position" }
 
-        val x = splitRobotPosition[0].toInt()
-        val y = splitRobotPosition[1].toInt()
+        val x = robotPositionSplitWithSpace[0].toInt()
+        val y = robotPositionSplitWithSpace[1].toInt()
         val robotPosition = Position(x, y)
 
-        val direction = Direction.valueOf(splitRobotPosition[2])
+        val direction = Direction.valueOf(robotPositionSplitWithSpace[2])
 
         return Pair(robotPosition, direction)
     }

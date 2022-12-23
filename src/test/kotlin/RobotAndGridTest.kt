@@ -55,19 +55,4 @@ internal class RobotAndGridTest{
         //then
         robot.robotDirection shouldBeEqualTo Direction.E
     }
-
-    //????????????????
-    @Test
-    fun `setRobotPosition throws exception when his first coordinate is bigger than grid width`(){
-        //given
-        grid.setGrid(5,3)
-
-        //when
-        val actual = {robot.setRobotPosition(Position(1,5), Direction.W)}
-
-        //then
-        actual shouldThrow IllegalArgumentException::class withMessage "Incorrect position: 0 <= x <= width and 0 <= y <= height"
-    }
-
-    //jak testować rysowanie planszy???
 }

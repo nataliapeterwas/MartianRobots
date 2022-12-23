@@ -10,10 +10,6 @@ class MainInputParser(private val input: String){
         val robotPosition = splitMainInput[1]
         val moves = splitMainInput[2]
 
-//        require(gridSize.split(" ").size == 2 && gridSize.toList()[1] == ' ') { "Incorrect grid size" }
-//        require(robotPosition.split(" ").size == 3 && robotPosition.toList()[1] == ' ' && robotPosition.toList()[3] == ' ' && robotPosition.toList()[4].isLetter()) { "Incorrect robot position" }
-//        require(moves.toList().all { it.isLetter() && it.isUpperCase() }) { "Incorrect moves" }
-
         return Triple(gridSize, robotPosition, moves)
     }
 }
