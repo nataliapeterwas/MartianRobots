@@ -12,8 +12,6 @@ class MovesParser(private val moves: String, private val robot: Robot, private v
                     "L" -> MoveLeftCommand(robot)
                     else -> null
                 }
-
-//                checkNotNull(command) { "Unknown command character $it" }
             }.toMutableList()
 
         splitMoves.removeIf { it == null }
