@@ -19,7 +19,6 @@ internal class GameTest {
         every { grid.height } returns 3
         every { grid.pollutedList } answers { mutableListOf() }
         justRun { grid.setGrid(any(), any()) }
-        justRun { grid.drawGrid(robot) }
 
         val command = mockk<Command>()
         every { command.execute() } just Runs
@@ -46,7 +45,6 @@ internal class GameTest {
         )
 
         // then
-//        robot.robotPosition shouldBeEqualTo Position(1, 1)
         verifyOrder {
             moveRightCommand.execute()
             moveForwardCommand.execute()
@@ -109,7 +107,6 @@ internal class GameTest {
         every { grid.pollutedList } answers { mutableListOf() }
 
         every { grid.setGrid(5, 3) } just Runs
-        every { grid.drawGrid(robot) } just Runs
 
         val command = mockk<Command>()
         every { command.execute() } just Runs

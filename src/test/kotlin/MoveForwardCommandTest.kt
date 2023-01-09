@@ -2,9 +2,6 @@ import io.mockk.every
 import io.mockk.justRun
 import io.mockk.mockk
 import io.mockk.verify
-import org.amshove.kluent.should
-import org.amshove.kluent.`should be`
-import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 internal class MoveForwardCommandTest{
@@ -41,7 +38,7 @@ internal class MoveForwardCommandTest{
         sut.execute()
 
         // then
-        verify (exactly = 0){ robot.robotPosition = any()}
+        verify (exactly = 0) { robot.robotPosition = any()}
     }
 
     @Test
