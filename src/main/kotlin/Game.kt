@@ -1,30 +1,33 @@
 data class Position(var x: Int, var y: Int)
 
-class Game(private val grid: Grid, private val robot: Robot) {
+class Game(
+    private val grid: Grid,
+    private val robot: Robot,
+    private val parserFactory: ParserFactory,
+    private val gridRobotLogger: GridRobotLogger,
+) {
     /*
     1. ALIVE true - lista komend + czy kazda komenda wyolana
     2. ALIVE true - 2 komendy wwolane = ALVIE false - 3 komenda nie wywolala
 
      */
-    private fun processCommands(commands: List<Command?>, grid: Grid) {
+    private fun processCommands(commands: List<Command?>) {
         commands.forEach { command ->
             if (robot.robotStatus == Status.ALIVE) {
-                println( grid.toString(robot))
+                println(gridRobotLogger.toString())
                 command?.execute()
             }
         }
-
-        if (robot.robotStatus == Status.ALIVE) println( grid.toString(robot))
-
-//        log.d(grid.toString())
+        if (robot.robotStatus == Status.ALIVE) println(gridRobotLogger.toString())
     }
 
     fun startGame(input: String) {
-        val parser = Parser(input, grid, robot)
-        processCommands(parser.parse(), grid)
+        val parser = parserFactory.create(input, grid, robot)
+        processCommands(parser.parse())
     }
 }
 
+/*
 fun main() {
     val game = Game(Grid(), Robot())
 
@@ -61,3 +64,5 @@ fun main() {
 
     }
 }
+ */
+

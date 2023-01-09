@@ -1,7 +1,4 @@
-import io.mockk.Runs
-import io.mockk.every
-import io.mockk.just
-import io.mockk.mockk
+import io.mockk.*
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
@@ -69,7 +66,9 @@ internal class MainInputParserTest{
         every { grid.width } returns 0
         every { grid.pollutedList } returns mutableListOf()
         every { grid.setGrid(0,0) } just Runs
-        every { grid.drawGrid(robot) } just Runs
+
+        val gridRobotLogger = mockk<GridRobotLogger>()
+        justRun { gridRobotLogger.toString() }
 
         val moves = "FRLLL"
         val moveForwardCommand = MoveForwardCommand(robot, grid)

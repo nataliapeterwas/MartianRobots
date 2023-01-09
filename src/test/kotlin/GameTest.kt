@@ -4,6 +4,87 @@ import org.junit.jupiter.api.Test
 
 internal class GameTest {
     @Test
+    fun `startGame calls three commands`(){
+        //given
+        val robot = mockk<Robot>()
+        every { robot.robotStatus } returns Status.ALIVE
+
+        val grid = mockk<Grid>()
+
+        val gridRobotLogger = mockk<GridRobotLogger>()
+        every { gridRobotLogger.toString() } returns ""
+
+        val input = """
+             5 3
+             1 1 E
+             RFL
+        """.trimIndent()
+
+        val parserFactory = mockk<ParserFactory>()
+        val parser = mockk<Parser>()
+
+        every { parserFactory.create(input, grid, robot) } returns parser
+        val moveForwardCommand = mockk<MoveForwardCommand>()
+        every { moveForwardCommand.execute() } just Runs
+        val moveRightCommand = mockk<MoveRightCommand>()
+        every { moveRightCommand.execute() } just Runs
+        val moveLeftCommand = mockk<MoveLeftCommand>()
+        every { moveLeftCommand.execute() } just Runs
+
+        every { parser.parse() } returns listOf(moveRightCommand, moveForwardCommand, moveLeftCommand)
+
+        val sut = Game(grid, robot, parserFactory, gridRobotLogger)
+
+        //when
+        sut.startGame(input)
+
+        verifyOrder {
+            moveRightCommand.execute()
+            moveForwardCommand.execute()
+            moveLeftCommand.execute()
+        }
+    }
+
+    @Test
+    fun `startGame() calls two commands and the last is not called`(){
+        //given
+        val robot = mockk<Robot>()
+        every { robot.robotStatus } returnsMany listOf(Status.ALIVE, Status.ALIVE, Status.LOST)
+
+        val grid = mockk<Grid>()
+
+        val gridRobotLogger = mockk<GridRobotLogger>()
+        every { gridRobotLogger.toString() } returns ""
+
+        val input = """
+             5 3
+             1 1 E
+             RFF
+        """.trimIndent()
+
+        val parserFactory = mockk<ParserFactory>()
+        val parser = mockk<Parser>()
+
+        every { parserFactory.create(input, grid, robot) } returns parser
+        val moveForwardCommand = mockk<MoveForwardCommand>()
+        every { moveForwardCommand.execute() } just Runs
+        val moveRightCommand = mockk<MoveRightCommand>()
+        every { moveRightCommand.execute() } just Runs
+        val moveLeftCommand = mockk<MoveLeftCommand>()
+        every { moveLeftCommand.execute() } just Runs
+
+        every { parser.parse() } returns listOf(moveRightCommand, moveForwardCommand, moveLeftCommand)
+
+        val sut = Game(grid, robot, parserFactory, gridRobotLogger)
+
+        //when
+        sut.startGame(input)
+
+        verify(exactly = 0) { moveLeftCommand.execute()}
+    }
+
+    /*
+    @Test
     fun `startGame sets robot on correct position after changes`() {
         // given
         val robot = mockk<Robot>()
@@ -142,23 +223,23 @@ internal class GameTest {
         robot.robotStatus shouldBeEqualTo Status.LOST
     }
 
-//    @Test
-//    fun `startGame works correctly - robot status is lost when he went outside grid`() {
-//        // given
-//
-//
-//        // when
-//        sut.startGame(
-//            """
-//             5 3
-//             0 0 S
-//             FFFFFF
-//        """.trimIndent()
-//        )
-//
-//        // then
-//        robot.robotStatus shouldBeEqualTo Status.LOST
-//    }
-//
+    @Test
+    fun `startGame works correctly - robot status is lost when he went outside grid`() {
+        // given
 
+
+        // when
+        sut.startGame(
+            """
+             5 3
+             0 0 S
+             FFFFFF
+        """.trimIndent()
+        )
+
+        // then
+        robot.robotStatus shouldBeEqualTo Status.LOST
+    }
+
+     */
 }
