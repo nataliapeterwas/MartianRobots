@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="MoveForwardCommandTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2023-01-09T11:25:00" hostname="natalias-mbp.home" time="1.383">
+  <properties/>
+  <testcase name="class MoveForwardCommand makes that robot loses when he went outside grid()" classname="MoveForwardCommandTest" time="1.003"/>
+  <testcase name="class MoveForwardCommand doing nothing when robot's position is polluted()" classname="MoveForwardCommandTest" time="0.369"/>
+  <testcase name="class MoveForwardCommand correctly change his position when his direction is S()" classname="MoveForwardCommandTest" time="0.009"/>
+  <system-out><![CDATA[0 0 S LOST 
+
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

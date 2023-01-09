@@ -1,25 +1,25 @@
 import io.mockk.*
 import org.amshove.kluent.shouldBeEqualTo
-import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
 internal class GameTest {
-
     @Test
     fun `startGame sets robot on correct position after changes`() {
         // given
         val robot = mockk<Robot>()
-        every { robot.robotDirection } returns Direction.E
-        every { robot.robotPosition } returns Position(1, 1)
-        every { robot.robotStatus } returns Status.ALIVE
-        every { robot.setRobotPosition(Position(1,1), Direction.E) } just Runs
+        every { robot.robotDirection } answers { Direction.E }
+        every { robot.robotPosition } answers { Position(1, 1) }
+        every { robot.robotStatus } answers { Status.ALIVE }
+        justRun { robot.setRobotPosition(any(), any()) }
+        justRun { robot.robotDirection = any()}
+        justRun { robot.robotPosition = any() }
 
         val grid = mockk<Grid>()
-        every { grid.height } returns 3
         every { grid.width } returns 5
-        every { grid.pollutedList } returns mutableListOf()
-        every { grid.setGrid(5,3) } just Runs
-        every { grid.drawGrid(robot) } just Runs
+        every { grid.height } returns 3
+        every { grid.pollutedList } answers { mutableListOf() }
+        justRun { grid.setGrid(any(), any()) }
+        justRun { grid.drawGrid(robot) }
 
         val command = mockk<Command>()
         every { command.execute() } just Runs
@@ -33,6 +33,7 @@ internal class GameTest {
 
         val parser = mockk<Parser>()
         every { parser.parse() } returns listOf(moveRightCommand, moveForwardCommand, moveLeftCommand)
+
         val sut = Game(grid, robot)
 
         // when
@@ -45,25 +46,26 @@ internal class GameTest {
         )
 
         // then
-        verify (exactly = 3) { command.execute() }
+//        robot.robotPosition shouldBeEqualTo Position(1, 1)
+        verifyOrder {
+            moveRightCommand.execute()
+            moveForwardCommand.execute()
+            moveLeftCommand.execute()
+        }
     }
-
 
     @Test
     fun `startGame works correctly - it sets robot in correct direction after changes`() {
         // given
-        val robot = mockk<Robot>()
-        every { robot.robotDirection } returns Direction.E
-        every { robot.robotPosition } returns Position(1, 1)
-        every { robot.robotStatus } returns Status.ALIVE
-        every { robot.setRobotPosition(Position(1,1), Direction.E) } just Runs
+        val robot = spyk<Robot>()
+        every { robot.robotDirection } answers { Direction.E }
+        every { robot.robotPosition } answers { Position(1, 1) }
+        every { robot.robotStatus } answers { Status.ALIVE }
 
-        val grid = mockk<Grid>()
-        every { grid.height } returns 3
-        every { grid.width } returns 5
-        every { grid.pollutedList } returns mutableListOf()
-        every { grid.setGrid(5,3) } just Runs
-        every { grid.drawGrid(robot) } just Runs
+        val grid = spyk<Grid>()
+        every { grid.width } answers { 5 }
+        every { grid.height } answers { 3 }
+        every { grid.pollutedList } answers { mutableListOf() }
 
         val command = mockk<Command>()
         every { command.execute() } just Runs
@@ -92,28 +94,57 @@ internal class GameTest {
         robot.robotDirection shouldBeEqualTo Direction.E
     }
 
+    // ??????
+    @Test
+    fun `startGame doesn't go to next moves when robot has been lost`() {
+        // given
+        val robot = spyk(Robot(), recordPrivateCalls = true)
+        every { robot.robotDirection } answers { Direction.S }
+        every { robot.robotPosition } answers { Position(0, 0) }
+        every { robot.robotStatus } answers { Status.ALIVE }
 
-//    // ??????
-//    @Test
-//    fun `startGame works correctly - it breaks app when robot has been lost`() {
-//        // given
-//
-//
-//        // when
-//        sut.startGame(
-//            """
-//             5 3
-//             0 0 S
-//             FFFFFF
-//        """.trimIndent()
-//        )
-//
-//        // then
-//        verify(exactly = 1) {
-//            grid.drawGrid(robot)
-//        }
-//    }
-//
+        val grid = spyk(Grid(), recordPrivateCalls = true)
+        every { grid.width } answers { 5 }
+        every { grid.height } answers { 3 }
+        every { grid.pollutedList } answers { mutableListOf() }
+
+        every { grid.setGrid(5, 3) } just Runs
+        every { grid.drawGrid(robot) } just Runs
+
+        val command = mockk<Command>()
+        every { command.execute() } just Runs
+
+        val moveForwardCommand = mockk<MoveForwardCommand>()
+        every { moveForwardCommand.execute() } just Runs
+        val moveRightCommand = mockk<MoveRightCommand>()
+        every { moveRightCommand.execute() } just Runs
+        val moveLeftCommand = mockk<MoveLeftCommand>()
+        every { moveLeftCommand.execute() } just Runs
+
+        val parser = mockk<Parser>()
+        every { parser.parse() } returns listOf(
+            moveForwardCommand,
+            moveForwardCommand,
+            moveForwardCommand,
+            moveForwardCommand,
+            moveForwardCommand,
+            moveForwardCommand
+        )
+        val sut = Game(grid, robot)
+
+        // when
+        sut.startGame(
+            """
+             5 3
+             0 0 S
+             FFFFFF
+        """.trimIndent()
+        )
+
+        // then
+        robot.robotStatus shouldBeEqualTo Status.LOST
+    }
+
 //    @Test
 //    fun `startGame works correctly - robot status is lost when he went outside grid`() {
 //        // given
