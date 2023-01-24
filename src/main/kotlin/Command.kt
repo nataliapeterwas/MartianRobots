@@ -49,4 +49,3 @@ data class MoveForwardCommand(private val robot: Robot, private val grid: Grid) 
         }
     }
 }
-

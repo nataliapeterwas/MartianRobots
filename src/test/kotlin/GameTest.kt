@@ -46,7 +46,7 @@ internal class GameTest {
     }
 
     @Test
-    fun `startGame() calls two commands and the last is not called`(){
+    fun `startGame() calls only two commands and the last is not called`(){
         //given
         val robot = mockk<Robot>()
         every { robot.robotStatus } returnsMany listOf(Status.ALIVE, Status.ALIVE, Status.LOST)

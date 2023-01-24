@@ -11,6 +11,7 @@ class Game(
     2. ALIVE true - 2 komendy wwolane = ALVIE false - 3 komenda nie wywolala
 
      */
+
     private fun processCommands(commands: List<Command?>) {
         commands.forEach { command ->
             if (robot.robotStatus == Status.ALIVE) {

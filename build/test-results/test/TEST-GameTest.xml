@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="GameTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2023-01-09T16:46:45" hostname="natalias-mbp.home" time="2.025">
+<testsuite name="GameTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-01-09T16:49:45" hostname="natalias-mbp.home" time="1.81">
   <properties/>
-  <testcase name="startGame() calls two commands and the last is not called()" classname="GameTest" time="1.994"/>
-  <testcase name="startGame calls three commands()" classname="GameTest" time="0.029"/>
+  <testcase name="startGame() calls only two commands and the last is not called()" classname="GameTest" time="1.81"/>
   <system-out><![CDATA[
-
-
-
-
 
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
