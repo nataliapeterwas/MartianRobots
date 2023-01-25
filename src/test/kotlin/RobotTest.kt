@@ -1,34 +1,29 @@
-//import io.mockk.every
-//import io.mockk.mockk
-//import org.amshove.kluent.shouldBeEqualTo
-//import org.junit.jupiter.api.Test
-//
-//internal class RobotTest{
-//    private val sut = Robot(Direction.N)
-//    private val grid = mockk<Grid>()
-//    @Test
-//    fun `setRobotPosition set him to correct position`(){
-//        //given
-//        every { grid.width } returns 5
-//        every { grid.height } returns 3
-//
-//        //when
-//        sut.setRobotPosition(Position(1,3), Direction.W)
-//
-//        //then
-//        sut.robotPosition shouldBeEqualTo Position(1,3)
-//    }
-//
-//    @Test
-//    fun `setRobotPosition set him with correct direction`(){
-//        //given
-//        every { grid.width } returns 5
-//        every { grid.height } returns 3
-//
-//        //when
-//        sut.setRobotPosition(Position(1,3), Direction.E)
-//
-//        //then
-//        sut.robotDirection shouldBeEqualTo Direction.E
-//    }
-//}
+import io.mockk.every
+import io.mockk.mockk
+import org.amshove.kluent.shouldBeEqualTo
+import org.junit.jupiter.api.Test
+
+internal class RobotTest{
+    private val sut = Robot(Direction.N, Position(1,3))
+    @Test
+    fun `updatePosition set robot to correct position`(){
+        //given
+
+        //when
+        sut.updatePosition(2,4)
+
+        //then
+        sut.robotPosition shouldBeEqualTo Position(2,4)
+    }
+
+    @Test
+    fun `updateRobotStatus set robot correct status`(){
+        //given
+
+        //when
+        sut.updateRobotStatus(RobotStatus.LOST)
+
+        //then
+        sut.robotStatus shouldBeEqualTo RobotStatus.LOST
+    }
+}

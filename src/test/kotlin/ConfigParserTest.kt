@@ -9,7 +9,6 @@ internal class ConfigParserTest {
         // given
         val robot = mockk<Robot>()
         every { robot.robotPosition } returns Position(0, 0)
-        every { robot.robotStatus } returns null
 
         val grid = mockk<Grid>()
         every { grid.height } returns 5
