@@ -29,7 +29,7 @@ internal class MoveForwardCommandTest {
         every { grid.height } returns 10
         every { grid.width } returns 10
         every { robot.robotDirection } returns Direction.S
-        every { grid.hasPositionInPollutedList(0, -1) } returns true
+        every { grid.isDeadPoint(0, -1) } returns true
         every { robot.robotPosition } returns Position(0, 0)
 
         // when
@@ -44,12 +44,12 @@ internal class MoveForwardCommandTest {
         // given
         every { grid.height } returns 10
         every { grid.width } returns 10
-        every { grid.pollutedList } returns mutableListOf()
+        every { grid.deadPoints } returns mutableListOf()
         every { robot.robotDirection } returns Direction.S
         every { robot.robotPosition } returns Position(0, 0)
         every { robot.robotStatus } returns RobotStatus.ALIVE
-        every { grid.hasPositionInPollutedList(0, -1) } returns false
-        justRun { grid.addPositionToPollutedList(0, -1) }
+        every { grid.isDeadPoint(0, -1) } returns false
+        justRun { grid.addDeadPoint(0, -1) }
         justRun { robot.updateRobotStatus(RobotStatus.LOST) }
 
         // when
@@ -57,7 +57,7 @@ internal class MoveForwardCommandTest {
 
         // then
         verifyOrder {
-            grid.addPositionToPollutedList(0, -1)
+            grid.addDeadPoint(0, -1)
             robot.updateRobotStatus(RobotStatus.LOST)
         }
     }

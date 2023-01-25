@@ -1,11 +1,11 @@
 class Grid(
     var width: Int,
     var height: Int,
-    val pollutedList: MutableList<Position> = mutableListOf()
+    val deadPoints: MutableList<Position> = mutableListOf()
 ) {
-    fun hasPositionInPollutedList(x: Int, y: Int) = pollutedList.contains(Position(x, y))
+    fun isDeadPoint(x: Int, y: Int) = deadPoints.contains(Position(x, y))
 
-    fun addPositionToPollutedList(x: Int, y: Int) {
-        pollutedList.add(Position(x, y))
+    fun addDeadPoint(x: Int, y: Int) {
+        deadPoints.add(Position(x, y))
     }
 }

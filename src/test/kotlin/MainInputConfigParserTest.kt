@@ -62,7 +62,7 @@ internal class MainInputConfigParserTest{
         val grid = mockk<Grid>()
         every { grid.height } returns 0
         every { grid.width } returns 0
-        every { grid.pollutedList } returns mutableListOf()
+        every { grid.deadPoints } returns mutableListOf()
 
         val gridRobotLogger = mockk<GridRobotLogger>()
         justRun { gridRobotLogger.toString() }
