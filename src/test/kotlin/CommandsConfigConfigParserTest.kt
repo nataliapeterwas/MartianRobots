@@ -16,7 +16,7 @@ internal class CommandsConfigConfigParserTest{
         every { grid.height } returns 4
 
         // when
-        val actual = {CommandsConfigParser(input, robot, grid).movesParser()}
+        val actual = {CommandsConfigParser().parse(input)}
 
         // then
         actual shouldThrow IllegalArgumentException::class withMessage "Incorrect moves"
@@ -33,7 +33,7 @@ internal class CommandsConfigConfigParserTest{
         every { grid.height } returns 4
 
         // when
-        val actual = {CommandsConfigParser(input, robot, grid).movesParser()}
+        val actual = {CommandsConfigParser().parse(input)}
 
         // then
         actual shouldThrow IllegalArgumentException::class withMessage "Incorrect moves"
@@ -50,7 +50,7 @@ internal class CommandsConfigConfigParserTest{
         every { grid.height } returns 4
 
         // when
-        val actual = {CommandsConfigParser(input, robot, grid).movesParser()}
+        val actual = {CommandsConfigParser().parse(input)}
 
         // then
         actual shouldThrow IllegalArgumentException::class withMessage "Incorrect moves"

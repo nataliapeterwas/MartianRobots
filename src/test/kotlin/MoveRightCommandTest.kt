@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test
 
 internal class MoveRightCommandTest {
     private val robot = mockk<Robot>()
-    private val sut = MoveRightCommand(robot)
+    private val sut = MoveRightCommand
 
     @Test
     fun `class MoveRightCommand correctly change direction from N to E`() {
@@ -15,7 +15,7 @@ internal class MoveRightCommandTest {
         justRun { robot.robotDirection = any()}
 
         // when
-        sut.execute()
+        sut.execute(robot)
 
         // then
         verify { robot.robotDirection = Direction.E }

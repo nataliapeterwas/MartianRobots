@@ -68,13 +68,13 @@ internal class MainInputConfigParserTest{
         val gridRobotLogger = mockk<GridRobotLogger>()
         justRun { gridRobotLogger.toString() }
 
-        val moves = "FRLLL"
-        val moveForwardCommand = MoveForwardCommand(robot, grid)
-        val moveRightCommand = MoveRightCommand(robot)
-        val moveLeftCommand = MoveLeftCommand(robot)
+        val input = "FRLLL"
+        val moveForwardCommand = MoveForwardCommand
+        val moveRightCommand = MoveRightCommand
+        val moveLeftCommand = MoveLeftCommand
 
         // when
-        val actual = CommandsConfigParser(moves, robot, grid).movesParser()
+        val actual = CommandsConfigParser().parse(input)
 
         // then
         actual shouldBeEqualTo listOf(moveForwardCommand, moveRightCommand, moveLeftCommand, moveLeftCommand, moveLeftCommand)

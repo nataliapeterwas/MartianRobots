@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test
 internal class MoveForwardCommandTest {
     private val robot = mockk<Robot>()
     private val grid = mockk<Grid>()
-    private val sut = MoveForwardCommand(robot, grid)
+    private val sut = MoveForwardCommand
 
     @Test
     fun `class MoveForwardCommand correctly change his position when his direction is S`() {
@@ -16,7 +16,7 @@ internal class MoveForwardCommandTest {
         justRun { robot.updatePosition(1, 2)  }
 
         // when
-        sut.execute()
+        sut.execute(robot, grid)
 
         // then
         verify { robot.updatePosition(1, 2) }
@@ -33,7 +33,7 @@ internal class MoveForwardCommandTest {
         every { robot.robotPosition } returns Position(0, 0)
 
         // when
-        sut.execute()
+        sut.execute(robot, grid)
 
         // then
         verify(exactly = 0) { robot.updatePosition(any(), any()) }
@@ -54,7 +54,7 @@ internal class MoveForwardCommandTest {
         justRun { robot.updateRobotStatus(RobotStatus.LOST) }
 
         // when
-        sut.execute()
+        sut.execute(robot, grid)
 
         // then
         verifyOrder {

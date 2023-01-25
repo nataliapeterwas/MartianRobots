@@ -1,23 +1,26 @@
-class ConfigParser(
-    private val grid: Grid,
-    private val robot: Robot
-) {
-    fun parse(input: String): List<Command?> {
-        val splitInput = MainInputConfigParser().parse(input)
-        val gridSizeParser = GridConfigParser().parse(splitInput.first)
+class ConfigParser {
+    fun parse(
+        input: String,
+        mainInputConfigParser: MainInputConfigParser = MainInputConfigParser(),
+        positionAndDirectionConfigParser: PositionAndDirectionConfigParser = PositionAndDirectionConfigParser(),
+        gridConfigParser: GridConfigParser = GridConfigParser(),
+        commandsConfigParser: CommandsConfigParser = CommandsConfigParser()
+    ): Config {
+        val splitInput = mainInputConfigParser.parse(input)
+        val gridSize = gridConfigParser.parse(splitInput.first)
 
-        grid.setSize(gridSizeParser.first, gridSizeParser.second)
+//        grid.setSize(gridSizeParser.first, gridSizeParser.second)
 
-        val positionAndDirectionConfigParser = PositionAndDirectionConfigParser().parse(splitInput.second)
-        robot.setRobotPosition(positionAndDirectionConfigParser.first, positionAndDirectionConfigParser.second)
+        val positionAndDirection = positionAndDirectionConfigParser.parse(splitInput.second)
+//        robot.setRobotPosition(positionAndDirectionConfigParser.first, positionAndDirectionConfigParser.second)
 
-        return CommandsConfigParser(splitInput.third, robot, grid).movesParser()
+        val commands = commandsConfigParser.parse(splitInput.third)
+        return Config(
+            robotPosition = positionAndDirection.first,
+            robotDirection = positionAndDirection.second,
+            gridWidth = gridSize.first,
+            gridHeight = gridSize.second,
+            commands = commands
+        )
     }
-
-    /*
-    parse(input) = Config(
-    parseGridConfig(input),
-    ...
-    )
-     */
 }

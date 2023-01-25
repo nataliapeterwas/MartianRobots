@@ -1,9 +1,7 @@
-sealed interface Command {
-    fun execute()
-}
+sealed interface Command
 
-data class MoveRightCommand(private val robot: Robot) : Command {
-    override fun execute() {
+object MoveRightCommand : Command {
+    fun execute(robot: Robot) {
         robot.robotDirection = when (robot.robotDirection) {
             Direction.N -> Direction.E
             Direction.S -> Direction.W
@@ -13,8 +11,8 @@ data class MoveRightCommand(private val robot: Robot) : Command {
     }
 }
 
-data class MoveLeftCommand(private val robot: Robot) : Command {
-    override fun execute() {
+object MoveLeftCommand : Command {
+    fun execute(robot: Robot) {
         robot.robotDirection = when (robot.robotDirection) {
             Direction.N -> Direction.W
             Direction.S -> Direction.E
@@ -24,8 +22,8 @@ data class MoveLeftCommand(private val robot: Robot) : Command {
     }
 }
 
-data class MoveForwardCommand(private val robot: Robot, private val grid: Grid) : Command {
-    override fun execute() {
+object MoveForwardCommand : Command {
+    fun execute(robot: Robot, grid: Grid) {
         var temporaryX = robot.robotPosition.x
         var temporaryY = robot.robotPosition.y
 
@@ -38,7 +36,7 @@ data class MoveForwardCommand(private val robot: Robot, private val grid: Grid) 
 
         if (temporaryX in 0..grid.width && temporaryY in 0..grid.height) {
             robot.updatePosition(temporaryX, temporaryY)
-        } else if (!grid.hasPositionInPollutedList(temporaryX, temporaryY)){
+        } else if (!grid.hasPositionInPollutedList(temporaryX, temporaryY)) {
             grid.addPositionToPollutedList(temporaryX, temporaryY)
             println("${robot.robotPosition.x} ${robot.robotPosition.y} ${robot.robotDirection} LOST \n")
             robot.updateRobotStatus(RobotStatus.LOST)

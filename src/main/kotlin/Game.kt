@@ -1,22 +1,23 @@
+import factory.GridFactory
 import factory.ParserFactory
+import factory.RobotFactory
 
 class Game(
-    private val grid: Grid,
-    private val robot: Robot,
     private val parserFactory: ParserFactory,
+    private val robotFactory: RobotFactory,
+    private val gridFactory: GridFactory,
     private val gridRobotLogger: GridRobotLogger,
-) {
-    /*
-    1. ALIVE true - lista komend + czy kazda komenda wyolana
-    2. ALIVE true - 2 komendy wwolane = ALVIE false - 3 komenda nie wywolala
 
-     */
-
-    private fun processCommands(commands: List<Command?>) {
+    ) {
+    private fun processCommands(robot: Robot, grid: Grid, commands: List<Command>) {
         commands.forEach { command ->
             if (robot.robotStatus == RobotStatus.ALIVE) {
                 gridRobotLogger.log(robot, grid)
-                command?.execute()
+                when(command){
+                    is MoveForwardCommand -> command.execute(robot, grid)
+                    is MoveLeftCommand -> command.execute(robot)
+                    is MoveRightCommand -> command.execute(robot)
+                }
             }
         }
 
@@ -25,10 +26,15 @@ class Game(
         }
     }
 
-    fun startGame(input: String) {
-        val parser = parserFactory.create(grid, robot)
-        processCommands(parser.parse(input))
-    }
+//    fun startGame(input: String) {
+//        val parser = parserFactory.create().parse(input)
+//        val robot = robotFactory.create()
+//        val grid = gridFactory.create()
+//        require(robot.robotPosition.x in 0..grid.width && robot.robotPosition.y in 0..grid.height) { "Incorrect position: 0 <= x <= width and 0 <= y <= height" }
+//
+//
+//        processCommands(parser.commands)
+//    }
 }
 
 
