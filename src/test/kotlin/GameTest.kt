@@ -21,7 +21,7 @@
 //        """.trimIndent()
 //
 //        val parserFactory = mockk<ParserFactory>()
-//        val configParser = mockk<ConfigParser>()
+//        val configParser = mockk<parser.ConfigParser>()
 //
 //        every { parserFactory.create() } returns configParser
 //        val moveForwardCommand = mockk<MoveForwardCommand>()
@@ -63,7 +63,7 @@
 //        """.trimIndent()
 //
 //        val parserFactory = mockk<ParserFactory>()
-//        val configParser = mockk<ConfigParser>()
+//        val configParser = mockk<parser.ConfigParser>()
 //
 //        every { parserFactory.create() } returns configParser
 //        val moveForwardCommand = mockk<MoveForwardCommand>()

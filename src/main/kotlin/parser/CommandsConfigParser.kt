@@ -1,3 +1,10 @@
+package parser
+
+import Command
+import MoveForwardCommand
+import MoveLeftCommand
+import MoveRightCommand
+
 class CommandsConfigParser {
     fun parse(input: String): List<Command> {
         require(input.length < 101) { "Too long instruction" }

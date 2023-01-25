@@ -9,6 +9,6 @@ class RobotFactory {
     fun create(
         robotDirection: Direction,
         robotPosition: Position,
-        robotStatus: RobotStatus
+        robotStatus: RobotStatus = RobotStatus.ALIVE
     ) = Robot(robotDirection, robotPosition, robotStatus)
 }

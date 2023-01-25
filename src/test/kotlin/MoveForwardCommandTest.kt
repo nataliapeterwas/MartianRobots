@@ -48,7 +48,6 @@ internal class MoveForwardCommandTest {
         every { robot.robotDirection } returns Direction.S
         every { robot.robotPosition } returns Position(0, 0)
         every { robot.robotStatus } returns RobotStatus.ALIVE
-        justRun { robot.setRobotPosition(any(), any()) }
         every { grid.hasPositionInPollutedList(0, -1) } returns false
         justRun { grid.addPositionToPollutedList(0, -1) }
         justRun { robot.updateRobotStatus(RobotStatus.LOST) }

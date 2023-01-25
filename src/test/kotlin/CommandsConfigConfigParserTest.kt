@@ -3,6 +3,7 @@ import io.mockk.mockk
 import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
+import parser.CommandsConfigParser
 
 internal class CommandsConfigConfigParserTest{
     @Test
@@ -16,7 +17,7 @@ internal class CommandsConfigConfigParserTest{
         every { grid.height } returns 4
 
         // when
-        val actual = {CommandsConfigParser().parse(input)}
+        val actual = { CommandsConfigParser().parse(input)}
 
         // then
         actual shouldThrow IllegalArgumentException::class withMessage "Incorrect moves"
@@ -33,7 +34,7 @@ internal class CommandsConfigConfigParserTest{
         every { grid.height } returns 4
 
         // when
-        val actual = {CommandsConfigParser().parse(input)}
+        val actual = { CommandsConfigParser().parse(input)}
 
         // then
         actual shouldThrow IllegalArgumentException::class withMessage "Incorrect moves"
@@ -50,7 +51,7 @@ internal class CommandsConfigConfigParserTest{
         every { grid.height } returns 4
 
         // when
-        val actual = {CommandsConfigParser().parse(input)}
+        val actual = { CommandsConfigParser().parse(input)}
 
         // then
         actual shouldThrow IllegalArgumentException::class withMessage "Incorrect moves"

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="ConfigParserTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-01-25T13:38:04" hostname="natalias-mbp.home" time="2.038">
+<testsuite name="ConfigParserTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-01-25T13:56:29" hostname="natalias-mbp.home" time="1.855">
   <properties/>
-  <testcase name="Parser correctly transforms '5 3   1 1 E   RFLR' to list contains of commandList moveRight, moveForward, moveLeft, moveRight()" classname="ConfigParserTest" time="2.038"/>
+  <testcase name="Parser correctly transforms '5 3   1 1 E   RFLR' to list contains of commandList moveRight, moveForward, moveLeft, moveRight()" classname="ConfigParserTest" time="1.855"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

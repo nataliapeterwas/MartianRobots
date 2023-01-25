@@ -3,6 +3,8 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
+import parser.CommandsConfigParser
+import parser.MainInputConfigParser
 
 internal class MainInputConfigParserTest{
     @Test
@@ -30,7 +32,7 @@ internal class MainInputConfigParserTest{
         """.trimIndent()
 
         // when
-        val actual = {MainInputConfigParser().parse(input)}
+        val actual = { MainInputConfigParser().parse(input)}
 
         // then
         actual shouldThrow IllegalArgumentException::class withMessage "You must pass grid size, robot position and robot moves"
@@ -45,7 +47,7 @@ internal class MainInputConfigParserTest{
         """.trimIndent()
 
         // when
-        val actual = {MainInputConfigParser().parse(input)}
+        val actual = { MainInputConfigParser().parse(input)}
 
         // then
         actual shouldThrow IllegalArgumentException::class withMessage "Incorrect input"
@@ -57,13 +59,11 @@ internal class MainInputConfigParserTest{
         val robot = mockk<Robot>()
         every { robot.robotPosition } returns Position(0, 0)
         every { robot.robotStatus } returns null
-        every { robot.setRobotPosition(Position(0,0), Direction.W) } just Runs
 
         val grid = mockk<Grid>()
         every { grid.height } returns 0
         every { grid.width } returns 0
         every { grid.pollutedList } returns mutableListOf()
-        every { grid.setSize(0,0) } just Runs
 
         val gridRobotLogger = mockk<GridRobotLogger>()
         justRun { gridRobotLogger.toString() }

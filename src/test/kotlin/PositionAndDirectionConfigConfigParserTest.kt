@@ -2,6 +2,7 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
+import parser.PositionAndDirectionConfigParser
 
 internal class PositionAndDirectionConfigConfigParserTest{
 
@@ -11,7 +12,7 @@ internal class PositionAndDirectionConfigConfigParserTest{
         val input = "1"
 
         // when
-        val actual = {PositionAndDirectionConfigParser().parse(input)}
+        val actual = { PositionAndDirectionConfigParser().parse(input)}
 
         // then
         actual shouldThrow IllegalArgumentException::class withMessage "Incorrect robot position"
@@ -23,7 +24,7 @@ internal class PositionAndDirectionConfigConfigParserTest{
         val input = "1 E 1"
 
         // when
-        val actual = {PositionAndDirectionConfigParser().parse(input)}
+        val actual = { PositionAndDirectionConfigParser().parse(input)}
 
         // then
         actual shouldThrow IllegalArgumentException::class withMessage "Incorrect robot position"

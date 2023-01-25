@@ -1,3 +1,5 @@
+package parser
+
 class MainInputConfigParser {
     fun parse(input: String): Triple<String, String, String> {
         require(input.isNotEmpty()) { "You must pass grid size, robot position and robot moves" }

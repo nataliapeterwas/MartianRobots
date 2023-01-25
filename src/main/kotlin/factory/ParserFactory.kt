@@ -1,8 +1,6 @@
 package factory
 
-import Grid
-import ConfigParser
-import Robot
+import parser.ConfigParser
 
 class ParserFactory {
     fun create() = ConfigParser()

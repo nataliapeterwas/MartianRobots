@@ -26,17 +26,17 @@ class Game(
         }
     }
 
-//    fun startGame(input: String) {
-//        val parser = parserFactory.create().parse(input)
-//        val robot = robotFactory.create()
-//        val grid = gridFactory.create()
-//        require(robot.robotPosition.x in 0..grid.width && robot.robotPosition.y in 0..grid.height) { "Incorrect position: 0 <= x <= width and 0 <= y <= height" }
-//
-//
-//        processCommands(parser.commands)
-//    }
-}
+    fun startGame(input: String) {
+        val parser = parserFactory.create().parse(input)
+        val robot = robotFactory.create(parser.robotDirection, parser.robotPosition)
+        val grid = gridFactory.create(parser.gridWidth, parser.gridHeight)
 
+        require(robot.robotPosition.x in 0..grid.width && robot.robotPosition.y in 0..grid.height) { "Incorrect position: 0 <= x <= width and 0 <= y <= height" }
+        require(grid.width in 1..50 && grid.height in 1..50) { "Grid is rectangle: 51>x>0 and 51>y>0" }
+
+        processCommands(robot, grid, parser.commands)
+    }
+}
 
 //fun main() {
 //    val game = Game(Grid(), Robot(Direction.S), ParserFactory(), GridRobotLogger(Grid(), Robot()))

@@ -1,3 +1,8 @@
+package parser
+
+import Direction
+import Position
+
 class PositionAndDirectionConfigParser {
     fun parse(input: String): Pair<Position, Direction> {
         val robotPositionSplitAsChar = input.toList()

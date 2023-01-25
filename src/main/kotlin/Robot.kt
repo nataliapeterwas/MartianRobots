@@ -3,11 +3,6 @@ class Robot(
     var robotPosition: Position = Position(0,0),
     var robotStatus: RobotStatus? = null
 ) {
-    fun setRobotPosition(position: Position, direction: Direction) {
-        robotDirection = direction
-        robotPosition = position
-        robotStatus = RobotStatus.ALIVE
-    }
     fun updatePosition(x: Int, y: Int){
         robotPosition = Position(x,y)
     }

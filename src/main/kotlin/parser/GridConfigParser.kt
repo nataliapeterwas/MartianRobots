@@ -1,3 +1,5 @@
+package parser
+
 class GridConfigParser {
     fun parse(input: String): Pair<Int, Int> {
         val splitGridSize = input.split(" ").toMutableList()
