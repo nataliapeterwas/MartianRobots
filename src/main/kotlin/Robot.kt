@@ -1,6 +1,6 @@
 class Robot(
     var robotDirection: Direction,
-    var robotPosition: Position = Position(0,0),
+    var robotPosition: Position,
     var robotStatus: RobotStatus? = null
 ) {
     fun updatePosition(x: Int, y: Int){
