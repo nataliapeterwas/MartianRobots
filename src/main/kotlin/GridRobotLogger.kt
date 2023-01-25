@@ -22,4 +22,8 @@ class GridRobotLogger(
             append("\n")
         }
     }
+
+    fun log(){
+        println(this.toString())
+    }
 }

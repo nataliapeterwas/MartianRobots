@@ -12,7 +12,7 @@ internal class GameTest {
         val grid = mockk<Grid>()
 
         val gridRobotLogger = mockk<GridRobotLogger>()
-        every { gridRobotLogger.toString() } returns ""
+        justRun { gridRobotLogger.log() }
 
         val input = """
              5 3
@@ -54,7 +54,7 @@ internal class GameTest {
         val grid = mockk<Grid>()
 
         val gridRobotLogger = mockk<GridRobotLogger>()
-        every { gridRobotLogger.toString() } returns ""
+        justRun { gridRobotLogger.log() }
 
         val input = """
              5 3
