@@ -1,5 +1,3 @@
-data class Position(var x: Int, var y: Int)
-
 class Game(
     private val grid: Grid,
     private val robot: Robot,
