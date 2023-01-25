@@ -14,13 +14,13 @@ class Game(
 
     private fun processCommands(commands: List<Command?>) {
         commands.forEach { command ->
-            if (robot.robotStatus == Status.ALIVE) {
+            if (robot.robotStatus == RobotStatus.ALIVE) {
                 gridRobotLogger.log()
                 command?.execute()
             }
         }
 
-        if (robot.robotStatus == Status.ALIVE) {
+        if (robot.robotStatus == RobotStatus.ALIVE) {
             gridRobotLogger.log()
         }
     }
@@ -31,42 +31,42 @@ class Game(
     }
 }
 
-/*
-fun main() {
-    val game = Game(Grid(), Robot())
 
-    val s = """
-      5 3
-      1 1 E
-      RFRFRFRF
-    """.trimIndent()
+//fun main() {
+//    val game = Game(Grid(), Robot(Direction.S), ParserFactory(), GridRobotLogger(Grid(), Robot()))
+//
+//    val s = """
+//      5 3
+//      1 1 E
+//      RFRFRFRF
+//    """.trimIndent()
+//
+//    val s2 = """
+//        5 3
+//        3 2 N
+//        FRRFLLFFRRFLL
+//    """.trimIndent()
+//
+//    val s3 = """
+//        5 3
+//        0 3 W
+//        LLFFFLFLFL
+//    """.trimIndent()
+//
+//    val x = """
+//             5 3
+//             0 0 S
+//             FFFFFF
+//        """.trimIndent()
+//
+//    game.apply {
+//        startGame(s)
+//        startGame(s2)
+//        startGame(s3)
+////        startGame(x)
+////        startGame(x)
+//
+//    }
+//}
 
-    val s2 = """
-        5 3
-        3 2 N
-        FRRFLLFFRRFLL
-    """.trimIndent()
-
-    val s3 = """
-        5 3
-        0 3 W
-        LLFFFLFLFL
-    """.trimIndent()
-
-    val x = """
-             5 3
-             0 0 S
-             FFFFFF
-        """.trimIndent()
-
-    game.apply {
-        startGame(s)
-        startGame(s2)
-        startGame(s3)
-//        startGame(x)
-//        startGame(x)
-
-    }
-}
- */
 

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="MovesParserTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2023-01-25T11:16:57" hostname="natalias-mbp.home" time="0.017">
+<testsuite name="MovesParserTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2023-01-25T11:50:19" hostname="natalias-mbp.home" time="0.018">
   <properties/>
   <testcase name="MovesParser throws exception when we pass incorrect moves (contains small letter)()" classname="MovesParserTest" time="0.005"/>
   <testcase name="MovesParser throws exception when we pass incorrect moves (contains Digit)()" classname="MovesParserTest" time="0.006"/>
-  <testcase name="MovesParser throws exception when we pass incorrect moves (contains blank space)()" classname="MovesParserTest" time="0.005"/>
+  <testcase name="MovesParser throws exception when we pass incorrect moves (contains blank space)()" classname="MovesParserTest" time="0.006"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

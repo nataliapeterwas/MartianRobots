@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="MoveForwardCommandTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2023-01-25T11:16:57" hostname="natalias-mbp.home" time="0.076">
+<testsuite name="MoveForwardCommandTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2023-01-25T11:50:19" hostname="natalias-mbp.home" time="0.066">
   <properties/>
-  <testcase name="class MoveForwardCommand makes that robot loses when he went outside grid()" classname="MoveForwardCommandTest" time="0.054"/>
-  <testcase name="class MoveForwardCommand doing nothing when robot's position is polluted()" classname="MoveForwardCommandTest" time="0.011"/>
-  <testcase name="class MoveForwardCommand correctly change his position when his direction is S()" classname="MoveForwardCommandTest" time="0.009"/>
+  <testcase name="class MoveForwardCommand makes that robot loses when he went outside grid()" classname="MoveForwardCommandTest" time="0.048"/>
+  <testcase name="class MoveForwardCommand doing nothing when robot's position is polluted()" classname="MoveForwardCommandTest" time="0.009"/>
+  <testcase name="class MoveForwardCommand correctly change his position when his direction is S()" classname="MoveForwardCommandTest" time="0.006"/>
   <system-out><![CDATA[0 0 S LOST 
 
 ]]></system-out>

@@ -7,7 +7,7 @@ internal class GameTest {
     fun `startGame calls three commands`(){
         //given
         val robot = mockk<Robot>()
-        every { robot.robotStatus } returns Status.ALIVE
+        every { robot.robotStatus } returns RobotStatus.ALIVE
 
         val grid = mockk<Grid>()
 
@@ -49,7 +49,7 @@ internal class GameTest {
     fun `startGame() calls only two commands and the last is not called`(){
         //given
         val robot = mockk<Robot>()
-        every { robot.robotStatus } returnsMany listOf(Status.ALIVE, Status.ALIVE, Status.LOST)
+        every { robot.robotStatus } returnsMany listOf(RobotStatus.ALIVE, RobotStatus.ALIVE, RobotStatus.LOST)
 
         val grid = mockk<Grid>()
 

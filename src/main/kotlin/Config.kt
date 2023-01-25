@@ -1,1 +1,1 @@
-class Config(robotPosition: Position, robotDirection: Direction, gridWidth: Int, gridHeight: Int)
+data class Config(val robotPosition: Position, val robotDirection: Direction, val gridWidth: Int, val gridHeight: Int)

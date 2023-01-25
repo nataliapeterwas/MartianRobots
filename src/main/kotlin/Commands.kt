@@ -41,7 +41,7 @@ data class MoveForwardCommand(private val robot: Robot, private val grid: Grid) 
         } else if (!grid.hasPositionInPollutedList(temporaryX, temporaryY)){
             grid.addPositionToPollutedList(temporaryX, temporaryY)
             println("${robot.robotPosition.x} ${robot.robotPosition.y} ${robot.robotDirection} LOST \n")
-            robot.updateRobotStatus(Status.LOST)
+            robot.updateRobotStatus(RobotStatus.LOST)
         }
     }
 }

@@ -2,7 +2,6 @@ import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
-import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
 internal class MovesParserTest{
@@ -17,7 +16,7 @@ internal class MovesParserTest{
         every { grid.height } returns 4
 
         // when
-        val actual = {MovesParser(input, robot, grid).movesParser()}
+        val actual = {CommandsConfigParser(input, robot, grid).movesParser()}
 
         // then
         actual shouldThrow IllegalArgumentException::class withMessage "Incorrect moves"
@@ -34,7 +33,7 @@ internal class MovesParserTest{
         every { grid.height } returns 4
 
         // when
-        val actual = {MovesParser(input, robot, grid).movesParser()}
+        val actual = {CommandsConfigParser(input, robot, grid).movesParser()}
 
         // then
         actual shouldThrow IllegalArgumentException::class withMessage "Incorrect moves"
@@ -51,7 +50,7 @@ internal class MovesParserTest{
         every { grid.height } returns 4
 
         // when
-        val actual = {MovesParser(input, robot, grid).movesParser()}
+        val actual = {CommandsConfigParser(input, robot, grid).movesParser()}
 
         // then
         actual shouldThrow IllegalArgumentException::class withMessage "Incorrect moves"

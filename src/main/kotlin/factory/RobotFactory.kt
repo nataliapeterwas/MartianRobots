@@ -3,12 +3,12 @@ package factory
 import Direction
 import Position
 import Robot
-import Status
+import RobotStatus
 
 class RobotFactory {
     fun create(
         robotDirection: Direction,
         robotPosition: Position,
-        robotStatus: Status
+        robotStatus: RobotStatus
     ) = Robot(robotDirection, robotPosition, robotStatus)
 }

@@ -1,7 +1,6 @@
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
-import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
 internal class GridSizeParserTest{
@@ -11,7 +10,7 @@ internal class GridSizeParserTest{
         val input = "66"
 
         // when
-        val actual = {GridSizeParser(input).gridSizeParser()}
+        val actual = {GridConfigParser(input).gridSizeParser()}
 
         // then
         actual shouldThrow IllegalArgumentException::class withMessage "Incorrect grid size"
@@ -23,7 +22,7 @@ internal class GridSizeParserTest{
         val input = " 66"
 
         // when
-        val actual = {GridSizeParser(input).gridSizeParser()}
+        val actual = {GridConfigParser(input).gridSizeParser()}
 
         // then
         actual shouldThrow IllegalArgumentException::class withMessage "Incorrect grid size"
@@ -35,7 +34,7 @@ internal class GridSizeParserTest{
         val gridSize = "30 5"
 
         // when
-        val actual = GridSizeParser(gridSize).gridSizeParser()
+        val actual = GridConfigParser(gridSize).gridSizeParser()
 
         // then
         actual.first shouldBeEqualTo 30
@@ -48,7 +47,7 @@ internal class GridSizeParserTest{
         val gridSize = "60 5"
 
         // when
-        val actual = {GridSizeParser(gridSize).gridSizeParser()}
+        val actual = {GridConfigParser(gridSize).gridSizeParser()}
 
         // then
         actual shouldThrow IllegalArgumentException::class withMessage "Grid is rectangle: 51>x>0 and 51>y>0"

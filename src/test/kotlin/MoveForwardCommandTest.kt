@@ -47,11 +47,11 @@ internal class MoveForwardCommandTest {
         every { grid.pollutedList } returns mutableListOf()
         every { robot.robotDirection } returns Direction.S
         every { robot.robotPosition } returns Position(0, 0)
-        every { robot.robotStatus } returns Status.ALIVE
+        every { robot.robotStatus } returns RobotStatus.ALIVE
         justRun { robot.setRobotPosition(any(), any()) }
         every { grid.hasPositionInPollutedList(0, -1) } returns false
         justRun { grid.addPositionToPollutedList(0, -1) }
-        justRun { robot.updateRobotStatus(Status.LOST) }
+        justRun { robot.updateRobotStatus(RobotStatus.LOST) }
 
         // when
         sut.execute()
@@ -59,7 +59,7 @@ internal class MoveForwardCommandTest {
         // then
         verifyOrder {
             grid.addPositionToPollutedList(0, -1)
-            robot.updateRobotStatus(Status.LOST)
+            robot.updateRobotStatus(RobotStatus.LOST)
         }
     }
 }
