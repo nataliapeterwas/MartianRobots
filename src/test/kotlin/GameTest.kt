@@ -12,7 +12,7 @@ internal class GameTest {
         val grid = mockk<Grid>()
 
         val gridRobotLogger = mockk<GridRobotLogger>()
-        justRun { gridRobotLogger.log() }
+        justRun { gridRobotLogger.log(robot, grid) }
 
         val input = """
              5 3
@@ -21,9 +21,9 @@ internal class GameTest {
         """.trimIndent()
 
         val parserFactory = mockk<ParserFactory>()
-        val parser = mockk<Parser>()
+        val configParser = mockk<ConfigParser>()
 
-        every { parserFactory.create(grid, robot) } returns parser
+        every { parserFactory.create(grid, robot) } returns configParser
         val moveForwardCommand = mockk<MoveForwardCommand>()
         every { moveForwardCommand.execute() } just Runs
         val moveRightCommand = mockk<MoveRightCommand>()
@@ -31,7 +31,7 @@ internal class GameTest {
         val moveLeftCommand = mockk<MoveLeftCommand>()
         every { moveLeftCommand.execute() } just Runs
 
-        every { parser.parse(any()) } returns listOf(moveRightCommand, moveForwardCommand, moveLeftCommand)
+        every { configParser.parse(any()) } returns listOf(moveRightCommand, moveForwardCommand, moveLeftCommand)
 
         val sut = Game(grid, robot, parserFactory, gridRobotLogger)
 
@@ -54,7 +54,7 @@ internal class GameTest {
         val grid = mockk<Grid>()
 
         val gridRobotLogger = mockk<GridRobotLogger>()
-        justRun { gridRobotLogger.log() }
+        justRun { gridRobotLogger.log(robot, grid) }
 
         val input = """
              5 3
@@ -63,9 +63,9 @@ internal class GameTest {
         """.trimIndent()
 
         val parserFactory = mockk<ParserFactory>()
-        val parser = mockk<Parser>()
+        val configParser = mockk<ConfigParser>()
 
-        every { parserFactory.create(grid, robot) } returns parser
+        every { parserFactory.create(grid, robot) } returns configParser
         val moveForwardCommand = mockk<MoveForwardCommand>()
         every { moveForwardCommand.execute() } just Runs
         val moveRightCommand = mockk<MoveRightCommand>()
@@ -73,7 +73,7 @@ internal class GameTest {
         val moveLeftCommand = mockk<MoveLeftCommand>()
         every { moveLeftCommand.execute() } just Runs
 
-        every { parser.parse(any()) } returns listOf(moveRightCommand, moveForwardCommand, moveLeftCommand)
+        every { configParser.parse(any()) } returns listOf(moveRightCommand, moveForwardCommand, moveLeftCommand)
 
         val sut = Game(grid, robot, parserFactory, gridRobotLogger)
 

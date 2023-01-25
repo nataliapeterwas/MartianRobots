@@ -4,5 +4,3 @@ enum class Direction(val letter: String, val arrow: String) {
     E("E", "→ "),
     W("W", "← ")
 }
-
-//Direction.values().firstOrNull { it.letter == "String z config text" }

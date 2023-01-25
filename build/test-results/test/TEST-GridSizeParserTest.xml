@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="GridSizeParserTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2023-01-25T11:50:19" hostname="natalias-mbp.home" time="0.006">
+<testsuite name="GridSizeParserTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2023-01-25T12:31:39" hostname="natalias-mbp.home" time="0.014">
   <properties/>
-  <testcase name="GridSizeParser throws exception when width is 60 (it is too big)()" classname="GridSizeParserTest" time="0.001"/>
+  <testcase name="GridSizeParser throws exception when width is 60 (it is too big)()" classname="GridSizeParserTest" time="0.008"/>
   <testcase name="GridSizeParser transforms string '30 5' to grid width and grid height()" classname="GridSizeParserTest" time="0.002"/>
   <testcase name="gridSizeParser throws exception when we pass incorrect gridSize (it has blank space at beginning)()" classname="GridSizeParserTest" time="0.001"/>
   <testcase name="gridSizeParser throws exception when we pass incorrect gridSize (it length is 2)()" classname="GridSizeParserTest" time="0.001"/>

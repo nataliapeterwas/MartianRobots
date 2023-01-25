@@ -4,7 +4,7 @@ import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
-internal class MovesParserTest{
+internal class CommandsConfigConfigParserTest{
     @Test
     fun `MovesParser throws exception when we pass incorrect moves (contains Digit)`() {
         // given

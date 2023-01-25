@@ -1,6 +1,6 @@
-class GridConfigParser(private val gridSize: String) {
-    fun gridSizeParser(): Pair<Int, Int> {
-        val splitGridSize = gridSize.split(" ").toMutableList()
+class GridConfigParser {
+    fun parse(input: String): Pair<Int, Int> {
+        val splitGridSize = input.split(" ").toMutableList()
         splitGridSize.removeIf { it.isEmpty() }
 
         require(splitGridSize.size == 2) { "Incorrect grid size" }

@@ -3,14 +3,14 @@ import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
-internal class GridSizeParserTest{
+internal class GridConfigConfigParserTest{
     @Test
     fun `gridSizeParser throws exception when we pass incorrect gridSize (it length is 2)`() {
         // given
         val input = "66"
 
         // when
-        val actual = {GridConfigParser(input).gridSizeParser()}
+        val actual = {GridConfigParser().parse(input)}
 
         // then
         actual shouldThrow IllegalArgumentException::class withMessage "Incorrect grid size"
@@ -22,7 +22,7 @@ internal class GridSizeParserTest{
         val input = " 66"
 
         // when
-        val actual = {GridConfigParser(input).gridSizeParser()}
+        val actual = {GridConfigParser().parse(input)}
 
         // then
         actual shouldThrow IllegalArgumentException::class withMessage "Incorrect grid size"
@@ -31,10 +31,10 @@ internal class GridSizeParserTest{
     @Test
     fun `GridSizeParser transforms string '30 5' to grid width and grid height`() {
         // given
-        val gridSize = "30 5"
+        val input = "30 5"
 
         // when
-        val actual = GridConfigParser(gridSize).gridSizeParser()
+        val actual = GridConfigParser().parse(input)
 
         // then
         actual.first shouldBeEqualTo 30
@@ -44,14 +44,12 @@ internal class GridSizeParserTest{
     @Test
     fun `GridSizeParser throws exception when width is 60 (it is too big)`() {
         // given
-        val gridSize = "60 5"
+        val input = "60 5"
 
         // when
-        val actual = {GridConfigParser(gridSize).gridSizeParser()}
+        val actual = {GridConfigParser().parse(input)}
 
         // then
         actual shouldThrow IllegalArgumentException::class withMessage "Grid is rectangle: 51>x>0 and 51>y>0"
     }
-
-
 }

@@ -4,7 +4,7 @@ import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
-internal class MainInputParserTest{
+internal class MainInputConfigParserTest{
     @Test
     fun `MainInputParser is correctly split  '5 3   1 1 E   RFRFRFRF' to three separate strings`() {
         // given
@@ -15,7 +15,7 @@ internal class MainInputParserTest{
         """.trimIndent()
 
         // when
-        val actual = MainInputParser(input).mainInput()
+        val actual = MainInputConfigParser().parse(input)
 
         // then
         actual.first shouldBeEqualTo "5 3"
@@ -30,7 +30,7 @@ internal class MainInputParserTest{
         """.trimIndent()
 
         // when
-        val actual = {MainInputParser(input).mainInput()}
+        val actual = {MainInputConfigParser().parse(input)}
 
         // then
         actual shouldThrow IllegalArgumentException::class withMessage "You must pass grid size, robot position and robot moves"
@@ -45,7 +45,7 @@ internal class MainInputParserTest{
         """.trimIndent()
 
         // when
-        val actual = {MainInputParser(input).mainInput()}
+        val actual = {MainInputConfigParser().parse(input)}
 
         // then
         actual shouldThrow IllegalArgumentException::class withMessage "Incorrect input"

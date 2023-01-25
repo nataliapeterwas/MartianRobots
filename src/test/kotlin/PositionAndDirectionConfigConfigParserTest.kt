@@ -1,10 +1,9 @@
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
-import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
-internal class RobotPositionParserTest{
+internal class PositionAndDirectionConfigConfigParserTest{
 
     @Test
     fun `robotPositionParser throws exception when we pass incorrect robotPosition (it length is 1)`() {
@@ -12,7 +11,7 @@ internal class RobotPositionParserTest{
         val input = "1"
 
         // when
-        val actual = {RobotPositionParser(input).robotPositionParser()}
+        val actual = {PositionAndDirectionConfigParser().parse(input)}
 
         // then
         actual shouldThrow IllegalArgumentException::class withMessage "Incorrect robot position"
@@ -24,7 +23,7 @@ internal class RobotPositionParserTest{
         val input = "1 E 1"
 
         // when
-        val actual = {RobotPositionParser(input).robotPositionParser()}
+        val actual = {PositionAndDirectionConfigParser().parse(input)}
 
         // then
         actual shouldThrow IllegalArgumentException::class withMessage "Incorrect robot position"
@@ -36,7 +35,7 @@ internal class RobotPositionParserTest{
         val robotPosition = "30 5 E"
 
         // when
-        val actual = RobotPositionParser(robotPosition).robotPositionParser()
+        val actual = PositionAndDirectionConfigParser().parse(robotPosition)
 
         // then
         actual.first shouldBeEqualTo Position(30, 5)
@@ -49,9 +48,9 @@ internal class RobotPositionParserTest{
         val robotPosition = "60 5 K"
 
         // when
-        val actual = { RobotPositionParser(robotPosition).robotPositionParser()}
+        val actual = { PositionAndDirectionConfigParser().parse(robotPosition)}
 
         // then
-        actual shouldThrow IllegalArgumentException::class
+        actual shouldThrow Exception::class withMessage "Incorrect direction"
     }
 }

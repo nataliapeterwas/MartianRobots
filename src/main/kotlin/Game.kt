@@ -15,13 +15,13 @@ class Game(
     private fun processCommands(commands: List<Command?>) {
         commands.forEach { command ->
             if (robot.robotStatus == RobotStatus.ALIVE) {
-                gridRobotLogger.log()
+                gridRobotLogger.log(robot, grid)
                 command?.execute()
             }
         }
 
         if (robot.robotStatus == RobotStatus.ALIVE) {
-            gridRobotLogger.log()
+            gridRobotLogger.log(robot, grid)
         }
     }
 

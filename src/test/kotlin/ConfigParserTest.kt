@@ -2,7 +2,7 @@ import io.mockk.*
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-internal class ParserTest {
+internal class ConfigParserTest {
     @Test
     fun `Parser correctly transforms '5 3   1 1 E   RFLR' to list contains of commandList moveRight, moveForward, moveLeft, moveRight`() {
         // given
@@ -31,10 +31,10 @@ internal class ParserTest {
             RFLR
     """.trimIndent()
 
-        val parser = Parser(grid, robot)
+        val configParser = ConfigParser(grid, robot)
 
         // when
-        val actual = parser.parse(input)
+        val actual = configParser.parse(input)
 
         // then
         actual shouldBeEqualTo listOf(moveRightCommand, moveForwardCommand, moveLeftCommand, moveRightCommand)

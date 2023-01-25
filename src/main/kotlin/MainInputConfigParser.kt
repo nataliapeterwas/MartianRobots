@@ -1,5 +1,5 @@
-class MainInputParser(private val input: String){
-    fun mainInput(): Triple<String, String, String> {
+class MainInputConfigParser {
+    fun parse(input: String): Triple<String, String, String> {
         require(input.isNotEmpty()) { "You must pass grid size, robot position and robot moves" }
 
         val splitMainInput = input.split("\n").toMutableList()
