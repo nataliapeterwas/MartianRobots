@@ -4,7 +4,7 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 internal class RobotTest{
-    private val sut = Robot()
+    private val sut = Robot(Direction.N)
     private val grid = mockk<Grid>()
     @Test
     fun `setRobotPosition set him to correct position`(){

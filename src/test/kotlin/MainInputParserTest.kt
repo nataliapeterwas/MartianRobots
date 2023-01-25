@@ -56,7 +56,7 @@ internal class MainInputParserTest{
     fun `MovesParser correctly transforms 'FRLLL' to list contains of commandList moveForward, moveRight, moveLeft, moveLeft, moveLeft`(){
         // given
         val robot = mockk<Robot>()
-        every { robot.robotDirection } returns null
+//        every { robot.robotDirection } returns null
         every { robot.robotPosition } returns Position(0, 0)
         every { robot.robotStatus } returns null
         every { robot.setRobotPosition(Position(0,0), Direction.W) } just Runs

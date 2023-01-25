@@ -14,4 +14,11 @@ class Parser(
 
         return MovesParser(splitInput.third, robot, grid).movesParser()
     }
+
+    /*
+    parse(input) = Config(
+    parseGridConfig(input),
+    ...
+    )
+     */
 }

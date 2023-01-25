@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="MoveForwardCommandTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-01-25T10:50:12" hostname="natalias-mbp.home" time="0.742">
+  <properties/>
+  <testcase name="class MoveForwardCommand correctly change his position when his direction is S()" classname="MoveForwardCommandTest" time="0.742"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

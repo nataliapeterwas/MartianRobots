@@ -9,7 +9,7 @@ internal class ParserTest {
     fun `Parser correctly transforms '5 3   1 1 E   RFLR' to list contains of commandList moveRight, moveForward, moveLeft, moveRight`() {
         // given
         val robot = mockk<Robot>()
-        every { robot.robotDirection } returns null
+//        every { robot.robotDirection } returns null
         every { robot.robotPosition } returns Position(0, 0)
         every { robot.robotStatus } returns null
         every { robot.setRobotPosition(Position(1,1), Direction.E) } just Runs

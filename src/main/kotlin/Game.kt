@@ -19,7 +19,10 @@ class Game(
                 command?.execute()
             }
         }
-        if (robot.robotStatus == Status.ALIVE) println(gridRobotLogger.toString())
+
+        if (robot.robotStatus == Status.ALIVE) {
+            println(gridRobotLogger.toString())
+        }
     }
 
     fun startGame(input: String) {

@@ -1,5 +1,5 @@
 class Robot(
-    var robotDirection: Direction? = null,
+    var robotDirection: Direction,
     var robotPosition: Position = Position(0,0),
     var robotStatus: Status? = null
 ) {
@@ -7,5 +7,12 @@ class Robot(
         robotDirection = direction
         robotPosition = position
         robotStatus = Status.ALIVE
+    }
+    fun updatePosition(x: Int, y: Int){
+        robotPosition = Position(x,y)
+    }
+
+    fun updateRobotStatus(status: Status){
+        robotStatus = status
     }
 }
