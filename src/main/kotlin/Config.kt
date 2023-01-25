@@ -1,0 +1,1 @@
+class Config(robotPosition: Position, robotDirection: Direction, gridWidth: Int, gridHeight: Int)

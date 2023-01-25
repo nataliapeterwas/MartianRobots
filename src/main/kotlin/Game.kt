@@ -1,3 +1,5 @@
+import factory.ParserFactory
+
 class Game(
     private val grid: Grid,
     private val robot: Robot,
@@ -24,8 +26,8 @@ class Game(
     }
 
     fun startGame(input: String) {
-        val parser = parserFactory.create(input, grid, robot)
-        processCommands(parser.parse())
+        val parser = parserFactory.create(grid, robot)
+        processCommands(parser.parse(input))
     }
 }
 

@@ -11,7 +11,7 @@ internal class GridTest{
         //given
 
         //when
-        sut.setGrid(4, 6)
+        sut.setSize(4, 6)
 
         //then
         sut.width shouldBeEqualTo 4
@@ -23,7 +23,7 @@ internal class GridTest{
         //given
 
         //when
-        val actual = {sut.setGrid(51, 6)}
+        val actual = {sut.setSize(51, 6)}
 
         //then
         actual shouldThrow IllegalArgumentException::class withMessage "Grid is rectangle: 51>x>0 and 51>y>0"

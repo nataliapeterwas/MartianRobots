@@ -2,7 +2,6 @@ import io.mockk.*
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
-import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
 internal class MainInputParserTest{
@@ -65,7 +64,7 @@ internal class MainInputParserTest{
         every { grid.height } returns 0
         every { grid.width } returns 0
         every { grid.pollutedList } returns mutableListOf()
-        every { grid.setGrid(0,0) } just Runs
+        every { grid.setSize(0,0) } just Runs
 
         val gridRobotLogger = mockk<GridRobotLogger>()
         justRun { gridRobotLogger.toString() }

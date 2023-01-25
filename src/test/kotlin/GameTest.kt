@@ -1,5 +1,5 @@
+import factory.ParserFactory
 import io.mockk.*
-import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 internal class GameTest {
@@ -23,7 +23,7 @@ internal class GameTest {
         val parserFactory = mockk<ParserFactory>()
         val parser = mockk<Parser>()
 
-        every { parserFactory.create(input, grid, robot) } returns parser
+        every { parserFactory.create(grid, robot) } returns parser
         val moveForwardCommand = mockk<MoveForwardCommand>()
         every { moveForwardCommand.execute() } just Runs
         val moveRightCommand = mockk<MoveRightCommand>()
@@ -31,7 +31,7 @@ internal class GameTest {
         val moveLeftCommand = mockk<MoveLeftCommand>()
         every { moveLeftCommand.execute() } just Runs
 
-        every { parser.parse() } returns listOf(moveRightCommand, moveForwardCommand, moveLeftCommand)
+        every { parser.parse(any()) } returns listOf(moveRightCommand, moveForwardCommand, moveLeftCommand)
 
         val sut = Game(grid, robot, parserFactory, gridRobotLogger)
 
@@ -65,7 +65,7 @@ internal class GameTest {
         val parserFactory = mockk<ParserFactory>()
         val parser = mockk<Parser>()
 
-        every { parserFactory.create(input, grid, robot) } returns parser
+        every { parserFactory.create(grid, robot) } returns parser
         val moveForwardCommand = mockk<MoveForwardCommand>()
         every { moveForwardCommand.execute() } just Runs
         val moveRightCommand = mockk<MoveRightCommand>()
@@ -73,7 +73,7 @@ internal class GameTest {
         val moveLeftCommand = mockk<MoveLeftCommand>()
         every { moveLeftCommand.execute() } just Runs
 
-        every { parser.parse() } returns listOf(moveRightCommand, moveForwardCommand, moveLeftCommand)
+        every { parser.parse(any()) } returns listOf(moveRightCommand, moveForwardCommand, moveLeftCommand)
 
         val sut = Game(grid, robot, parserFactory, gridRobotLogger)
 

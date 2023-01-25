@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="MoveLeftCommandTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-01-25T11:00:15" hostname="natalias-mbp.home" time="0.006">
+<testsuite name="MoveLeftCommandTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-01-25T11:16:57" hostname="natalias-mbp.home" time="0.006">
   <properties/>
   <testcase name="class MoveLeftCommand correctly change direction from W to S()" classname="MoveLeftCommandTest" time="0.006"/>
   <system-out><![CDATA[]]></system-out>

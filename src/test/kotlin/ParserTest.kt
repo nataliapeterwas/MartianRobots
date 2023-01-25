@@ -1,7 +1,5 @@
 import io.mockk.*
 import org.amshove.kluent.shouldBeEqualTo
-import org.amshove.kluent.shouldThrow
-import org.amshove.kluent.*
 import org.junit.jupiter.api.Test
 
 internal class ParserTest {
@@ -18,7 +16,7 @@ internal class ParserTest {
         every { grid.height } returns 5
         every { grid.width } returns 3
         every { grid.pollutedList } returns mutableListOf()
-        every { grid.setGrid(5,3) } just Runs
+        every { grid.setSize(5,3) } just Runs
 
         val gridRobotLogger = mockk<GridRobotLogger>()
         justRun { gridRobotLogger.toString() }
@@ -33,10 +31,10 @@ internal class ParserTest {
             RFLR
     """.trimIndent()
 
-        val parser = Parser(input, grid, robot)
+        val parser = Parser(grid, robot)
 
         // when
-        val actual = parser.parse()
+        val actual = parser.parse(input)
 
         // then
         actual shouldBeEqualTo listOf(moveRightCommand, moveForwardCommand, moveLeftCommand, moveRightCommand)
