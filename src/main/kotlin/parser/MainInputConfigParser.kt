@@ -1,7 +1,9 @@
 package parser
 
+import InputParsedToThreeLines
+
 class MainInputConfigParser {
-    fun parse(input: String): Triple<String, String, String> {
+    fun parse(input: String): InputParsedToThreeLines {
         require(input.isNotEmpty()) { "You must pass grid size, robot position and robot moves" }
 
         val splitMainInput = input.split("\n").toMutableList()
@@ -12,6 +14,6 @@ class MainInputConfigParser {
         val robotPosition = splitMainInput[1]
         val moves = splitMainInput[2]
 
-        return Triple(gridSize, robotPosition, moves)
+        return InputParsedToThreeLines(gridSize, robotPosition, moves)
     }
 }

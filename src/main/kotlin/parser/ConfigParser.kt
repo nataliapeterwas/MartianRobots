@@ -5,22 +5,22 @@ import Config
 class ConfigParser {
     fun parse(
         input: String,
-        mainInputConfigParser: MainInputConfigParser = MainInputConfigParser(),
-        positionAndDirectionConfigParser: PositionAndDirectionConfigParser = PositionAndDirectionConfigParser(),
-        gridConfigParser: GridConfigParser = GridConfigParser(),
-        commandsConfigParser: CommandsConfigParser = CommandsConfigParser()
+        mainInputConfigParser: MainInputConfigParser,
+        positionAndDirectionConfigParser: PositionAndDirectionConfigParser,
+        gridConfigParser: GridConfigParser,
+        commandsConfigParser: CommandsConfigParser,
     ): Config {
         val splitInput = mainInputConfigParser.parse(input)
-        val gridSize = gridConfigParser.parse(splitInput.first)
+        val gridSize = gridConfigParser.parse(splitInput.gridSizeInfo)
 
-        val positionAndDirection = positionAndDirectionConfigParser.parse(splitInput.second)
+        val positionAndDirection = positionAndDirectionConfigParser.parse(splitInput.robotInfo)
 
-        val commands = commandsConfigParser.parse(splitInput.third)
+        val commands = commandsConfigParser.parse(splitInput.commandsInfo)
         return Config(
-            robotPosition = positionAndDirection.first,
-            robotDirection = positionAndDirection.second,
-            gridWidth = gridSize.first,
-            gridHeight = gridSize.second,
+            robotPosition = positionAndDirection.position,
+            robotDirection = positionAndDirection.direction,
+            gridWidth = gridSize.width,
+            gridHeight = gridSize.height,
             commands = commands
         )
     }

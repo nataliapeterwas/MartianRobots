@@ -39,8 +39,8 @@ internal class PositionAndDirectionConfigConfigParserTest{
         val actual = PositionAndDirectionConfigParser().parse(robotPosition)
 
         // then
-        actual.first shouldBeEqualTo Position(30, 5)
-        actual.second shouldBeEqualTo Direction.E
+        actual.position shouldBeEqualTo Position(30, 5)
+        actual.direction shouldBeEqualTo Direction.E
     }
 
     @Test

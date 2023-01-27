@@ -2,9 +2,10 @@ package parser
 
 import Direction
 import Position
+import RobotPositionAndDirection
 
 class PositionAndDirectionConfigParser {
-    fun parse(input: String): Pair<Position, Direction> {
+    fun parse(input: String): RobotPositionAndDirection {
         val robotPositionSplitAsChar = input.toList()
         val robotPositionSplitWithSpace = input.split(" ")
 
@@ -19,7 +20,7 @@ class PositionAndDirectionConfigParser {
         val direction = Direction.values().firstOrNull { it.letter == robotPositionSplitWithSpace[2] }
             ?: throw Exception("Incorrect direction")
 
-        return Pair(robotPosition, direction)
+        return RobotPositionAndDirection(robotPosition, direction)
     }
 }
 

@@ -20,9 +20,9 @@ internal class MainInputConfigParserTest{
         val actual = MainInputConfigParser().parse(input)
 
         // then
-        actual.first shouldBeEqualTo "5 3"
-        actual.second shouldBeEqualTo "1 1 E"
-        actual.third shouldBeEqualTo "RFRFRFRF"
+        actual.gridSizeInfo shouldBeEqualTo "5 3"
+        actual.robotInfo shouldBeEqualTo "1 1 E"
+        actual.commandsInfo shouldBeEqualTo "RFRFRFRF"
     }
 
     @Test

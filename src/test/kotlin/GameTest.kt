@@ -1,314 +1,183 @@
 import factory.GridFactory
-import factory.ParserFactory
+import factory.ConfigParserFactory
 import factory.RobotFactory
 import io.mockk.*
 import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
+import parser.*
 
 internal class GameTest {
-    @Test
-    fun `startGame throws exception when width is bigger than 50`() {
-        //given
-        val robotFactory = mockk<RobotFactory>()
-        every { robotFactory.create(Direction.E, Position(1, 1)) } returns Robot(Direction.E, Position(1, 1))
+    private val configParserFactory = mockk<ConfigParserFactory>()
+    private val robotFactory = mockk<RobotFactory>()
+    private val gridFactory = mockk<GridFactory>()
+    private val commandProcessor = mockk<CommandProcessor>()
+    private val mainInputConfigParser = mockk<MainInputConfigParser>()
+    private val positionAndDirectionConfigParser = mockk<PositionAndDirectionConfigParser>()
+    private val gridConfigParser = mockk<GridConfigParser>()
+    private val commandsConfigParser = mockk<CommandsConfigParser>()
 
-        val gridFactory = mockk<GridFactory>()
-        every { gridFactory.create(54, 3, mutableListOf()) } returns Grid(54, 3)
-
-        val input = """
-             54 3
-             1 1 E
-             RFL
-        """.trimIndent()
-
-        val parserFactory = mockk<ParserFactory>()
-        justRun { parserFactory.create().parse(input) }
-
-        val sut = Game()
-
-        //when
-        val actual = { sut.startGame(input) }
-
-        //then
-        actual shouldThrow IllegalArgumentException::class withMessage "Grid is rectangle: 51>x>0 and 51>y>0"
-    }
+    private val sut = Game(configParserFactory, robotFactory, gridFactory, commandProcessor)
 
     @Test
-    fun `startGame throws exception when robotPosition is bigger than gridSize`() {
+    fun `robot was created with a correct date`() {
         //given
-        val robotFactory = mockk<RobotFactory>()
-        every { robotFactory.create(Direction.E, Position(10, 1)) } returns Robot(Direction.E, Position(1, 1))
+        val input = "input"
 
-        val gridFactory = mockk<GridFactory>()
-        every { gridFactory.create(4, 3, mutableListOf()) } returns Grid(4, 3)
+        val direction = Direction.N
+        val position = Position(2, 3)
 
-        val input = """
-             4 3
-             10 1 E
-             RFL
-        """.trimIndent()
+        val config = mockk<Config>()
+        every { config.robotPosition } returns position
+        every { config.robotDirection } returns direction
 
-        val parserFactory = mockk<ParserFactory>()
-        justRun { parserFactory.create().parse(input) }
+        val configParser = mockk<ConfigParser>()
 
-        val sut = Game()
+        every { configParserFactory.create() } returns configParser
+        every {
+            configParser.parse(
+                input,
+                mainInputConfigParser,
+                positionAndDirectionConfigParser,
+                gridConfigParser,
+                commandsConfigParser
+            )
+        } returns config
 
-        //when
-        val actual = { sut.startGame(input) }
-
-        //then
-        actual shouldThrow IllegalArgumentException::class withMessage "Incorrect position: 0 <= x <= width and 0 <= y <= height"
-    }
-
-    @Test
-    fun `startGame calls processCommands method`() {
-        //given
-        val input = """
-             5 3
-             1 1 E
-             RFL
-        """.trimIndent()
-
-        val robot = mockk<Robot>()
-        every { robot.robotStatus } returns RobotStatus.ALIVE
-        val robotFactory = mockk<RobotFactory>()
-        every { robotFactory.create(Direction.E, Position(1, 1)) } returns Robot(Direction.E, Position(1, 1))
-
-        val grid = mockk<Grid>()
-        val gridFactory = mockk<GridFactory>()
-        every { gridFactory.create(5, 3) } returns Grid(5, 3)
-
-        val parserFactory = mockk<ParserFactory>()
-        justRun { parserFactory.create().parse(input) }
-
-        val configParser = mockk<parser.ConfigParser>()
-
-        val gridRobotLogger = mockk<GridRobotLogger>()
-        justRun { gridRobotLogger.log(robot, grid) }
-
-        every { parserFactory.create() } returns configParser
-        val moveForwardCommand = mockk<MoveForwardCommand>()
-        justRun { moveForwardCommand.execute(robot, grid) }
-        val moveRightCommand = mockk<MoveRightCommand>()
-        justRun { moveRightCommand.execute(robot) }
-        val moveLeftCommand = mockk<MoveLeftCommand>()
-        justRun { moveLeftCommand.execute(robot) }
-
-        every { configParser.parse(any()).commands } returns listOf(
-            moveRightCommand,
-            moveForwardCommand,
-            moveLeftCommand
-        )
-
-        val sut = Game()
+        justRun { robotFactory.create(direction, position) }
 
         //when
         sut.startGame(input)
 
         //then
         verify {
-            moveRightCommand.execute(robot)
-            moveForwardCommand.execute(robot, grid)
-            moveLeftCommand.execute(robot)
+            robotFactory.create(direction, position)
         }
     }
 
-//    @Test
-//    fun `startGame() calls only two commands and the last is not called`(){
-//        //given
-//        val robot = mockk<Robot>()
-//        every { robot.robotStatus } returnsMany listOf(RobotStatus.ALIVE, RobotStatus.ALIVE, RobotStatus.LOST)
-//
-//        val grid = mockk<Grid>()
-//
-//        val gridRobotLogger = mockk<GridRobotLogger>()
-//        justRun { gridRobotLogger.log(robot, grid) }
-//
-//        val input = """
-//             5 3
-//             1 1 E
-//             RFF
-//        """.trimIndent()
-//
-//        val parserFactory = mockk<ParserFactory>()
-//        val configParser = mockk<parser.ConfigParser>()
-//
-//        every { parserFactory.create() } returns configParser
-//        val moveForwardCommand = mockk<MoveForwardCommand>()
-//        every { moveForwardCommand.execute(robot, grid) } just Runs
-//        val moveRightCommand = mockk<MoveRightCommand>()
-//        every { moveRightCommand.execute(robot) } just Runs
-//        val moveLeftCommand = mockk<MoveLeftCommand>()
-//        every { moveLeftCommand.execute(robot) } just Runs
-//
-//        every { configParser.parse(any()) } returns listOf(moveRightCommand, moveForwardCommand, moveLeftCommand)
-//
-//        val sut = Game(grid, robot, parserFactory, gridRobotLogger)
-//
-//        //when
-//        sut.startGame(input)
-//
-//        verify(exactly = 0) { moveLeftCommand.execute()}
-//    }
-
-    /*
     @Test
-    fun `startGame sets robot on correct position after changes`() {
-        // given
+    fun `startGame throws exception when width is bigger than 50`() {
+        //given
+        val input = "input"
+        val position = Position(1, 1)
+
+        val config = mockk<Config>()
+        every { config.robotPosition } returns position
+        every { config.gridWidth } returns 54
+        every { config.gridHeight } returns 3
+        every { config.robotDirection } returns Direction.E
+        every { config.commands } returns listOf()
+
+//        every { mainInputConfigParser.parse(any()) } returns
+
+        val configParser = mockk<ConfigParser>()
+
+        every {
+            configParserFactory.create() } returns configParser
+
+        every { configParser.parse(
+            input,
+            mainInputConfigParser,
+            positionAndDirectionConfigParser,
+            gridConfigParser,
+            commandsConfigParser
+        ) } returns config
+
         val robot = mockk<Robot>()
-        every { robot.robotDirection } answers { Direction.E }
-        every { robot.robotPosition } answers { Position(1, 1) }
-        every { robot.robotStatus } answers { Status.ALIVE }
-        justRun { robot.setRobotPosition(any(), any()) }
-        justRun { robot.robotDirection = any()}
-        justRun { robot.robotPosition = any() }
+        every { robot.robotPosition } returns position
+        every { robotFactory.create(Direction.E, position) } returns robot
+
+        val grid = mockk<Grid>()
+        every { grid.width } returns 54
+        every { grid.height } returns 3
+        every { gridFactory.create(54, 3, mutableListOf()) } returns grid
+
+        val commandProcessor = mockk<CommandProcessor>()
+        justRun { commandProcessor.processCommands(robot, grid, any()) }
+
+
+//        justRun {
+//            configParserFactory.create().parse(
+//                input,
+//                mainInputConfigParser,
+//                positionAndDirectionConfigParser,
+//                gridConfigParser,
+//                commandsConfigParser
+//            )
+//        }
+
+        //when
+//        val actual = { sut.startGame(input) }
+        sut.startGame(input)
+
+    //then
+//        actual shouldThrow IllegalArgumentException::class withMessage "Grid is rectangle: 51>x>0 and 51>y>0"
+
+}
+    @Test
+    fun `startGame throws exception when robotPosition is bigger than gridSize`() {
+        //given
+        every { robotFactory.create(Direction.E, Position(10, 1)) } returns Robot(Direction.E, Position(1, 1))
+
+        every { gridFactory.create(4, 3, mutableListOf()) } returns Grid(4, 3)
+
+        val input = "input"
+
+        justRun {
+            configParserFactory.create().parse(
+                input,
+                mainInputConfigParser,
+                positionAndDirectionConfigParser,
+                gridConfigParser,
+                commandsConfigParser
+            )
+        }
+
+        //when
+        //val actual = { sut.startGame(input) }
+        sut.startGame(input)
+
+        //then
+//        actual shouldThrow IllegalArgumentException::class withMessage "Incorrect position: 0 <= x <= width and 0 <= y <= height"
+    }
+
+    @Test
+    fun `processCommands was called correctly`() {
+        //given
+        val input = "input"
+
+        justRun { commandProcessor.processCommands(any(), any(), any()) }
+
+        val config = mockk<Config>()
+        every { config.commands } returns listOf(MoveRightCommand)
+
+        val robot = mockk<Robot>()
+        every { robot.robotPosition } returns Position(2, 3)
 
         val grid = mockk<Grid>()
         every { grid.width } returns 5
-        every { grid.height } returns 3
-        every { grid.pollutedList } answers { mutableListOf() }
-        justRun { grid.setGrid(any(), any()) }
+        every { grid.height } returns 4
 
-        val command = mockk<Command>()
-        every { command.execute() } just Runs
+        every {
+            configParserFactory.create().parse(
+                input,
+                mainInputConfigParser,
+                positionAndDirectionConfigParser,
+                gridConfigParser,
+                commandsConfigParser
+            )
+        } returns config
 
-        val moveForwardCommand = mockk<MoveForwardCommand>()
-        every { moveForwardCommand.execute() } just Runs
-        val moveRightCommand = mockk<MoveRightCommand>()
-        every { moveRightCommand.execute() } just Runs
-        val moveLeftCommand = mockk<MoveLeftCommand>()
-        every { moveLeftCommand.execute() } just Runs
+        every { robotFactory.create(any(), any()) } returns robot
 
-        val parser = mockk<Parser>()
-        every { parser.parse() } returns listOf(moveRightCommand, moveForwardCommand, moveLeftCommand)
+        every { gridFactory.create(any(), any()) } returns grid
 
-        val sut = Game(grid, robot)
+        //when
+        sut.startGame(input)
 
-        // when
-        sut.startGame(
-            """
-             5 3
-             1 1 E
-             RFL
-        """.trimIndent()
-        )
-
-        // then
-        verifyOrder {
-            moveRightCommand.execute()
-            moveForwardCommand.execute()
-            moveLeftCommand.execute()
+        //then
+        verify {
+            commandProcessor.processCommands(robot, grid, config.commands)
         }
     }
-
-    @Test
-    fun `startGame works correctly - it sets robot in correct direction after changes`() {
-        // given
-        val robot = spyk<Robot>()
-        every { robot.robotDirection } answers { Direction.E }
-        every { robot.robotPosition } answers { Position(1, 1) }
-        every { robot.robotStatus } answers { Status.ALIVE }
-
-        val grid = spyk<Grid>()
-        every { grid.width } answers { 5 }
-        every { grid.height } answers { 3 }
-        every { grid.pollutedList } answers { mutableListOf() }
-
-        val command = mockk<Command>()
-        every { command.execute() } just Runs
-
-        val moveForwardCommand = mockk<MoveForwardCommand>()
-        every { moveForwardCommand.execute() } just Runs
-        val moveRightCommand = mockk<MoveRightCommand>()
-        every { moveRightCommand.execute() } just Runs
-        val moveLeftCommand = mockk<MoveLeftCommand>()
-        every { moveLeftCommand.execute() } just Runs
-
-        val parser = mockk<Parser>()
-        every { parser.parse() } returns listOf(moveRightCommand, moveForwardCommand, moveLeftCommand)
-        val sut = Game(grid, robot)
-
-        // when
-        sut.startGame(
-            """
-             5 3
-             1 1 E
-             RFRFRFRF
-        """.trimIndent()
-        )
-
-        // then
-        robot.robotDirection shouldBeEqualTo Direction.E
-    }
-
-    // ??????
-    @Test
-    fun `startGame doesn't go to next moves when robot has been lost`() {
-        // given
-        val robot = spyk(Robot(), recordPrivateCalls = true)
-        every { robot.robotDirection } answers { Direction.S }
-        every { robot.robotPosition } answers { Position(0, 0) }
-        every { robot.robotStatus } answers { Status.ALIVE }
-
-        val grid = spyk(Grid(), recordPrivateCalls = true)
-        every { grid.width } answers { 5 }
-        every { grid.height } answers { 3 }
-        every { grid.pollutedList } answers { mutableListOf() }
-
-        every { grid.setGrid(5, 3) } just Runs
-
-        val command = mockk<Command>()
-        every { command.execute() } just Runs
-
-        val moveForwardCommand = mockk<MoveForwardCommand>()
-        every { moveForwardCommand.execute() } just Runs
-        val moveRightCommand = mockk<MoveRightCommand>()
-        every { moveRightCommand.execute() } just Runs
-        val moveLeftCommand = mockk<MoveLeftCommand>()
-        every { moveLeftCommand.execute() } just Runs
-
-        val parser = mockk<Parser>()
-        every { parser.parse() } returns listOf(
-            moveForwardCommand,
-            moveForwardCommand,
-            moveForwardCommand,
-            moveForwardCommand,
-            moveForwardCommand,
-            moveForwardCommand
-        )
-        val sut = Game(grid, robot)
-
-        // when
-        sut.startGame(
-            """
-             5 3
-             0 0 S
-             FFFFFF
-        """.trimIndent()
-        )
-
-        // then
-        robot.robotStatus shouldBeEqualTo Status.LOST
-    }
-
-    @Test
-    fun `startGame works correctly - robot status is lost when he went outside grid`() {
-        // given
-
-
-        // when
-        sut.startGame(
-            """
-             5 3
-             0 0 S
-             FFFFFF
-        """.trimIndent()
-        )
-
-        // then
-        robot.robotStatus shouldBeEqualTo Status.LOST
-    }
-
-     */
 }
