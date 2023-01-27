@@ -17,7 +17,7 @@ repositories {
 
 dependencies {
     testImplementation(kotlin("test"))
-    testImplementation ("io.insert-koin:koin-test:$koinVersion")
+//    testImplementation ("io.insert-koin:koin-test:$koinVersion")
     implementation ("io.insert-koin:koin-core:$koinVersion")
     testImplementation ("io.mockk:mockk:${mockkVersion}")
     testImplementation("org.amshove.kluent:kluent:${kluentVersion}")

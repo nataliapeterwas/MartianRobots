@@ -1,16 +1,17 @@
 package com.natalia.mars
 
-import com.natalia.mars.Grid
-import com.natalia.mars.Position
-import com.natalia.mars.Robot
+import com.natalia.mars.parser.CommandsConfigParser
 import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
-import com.natalia.mars.parser.CommandsConfigParser
 
-internal class CommandsConfigConfigParserTest{
+internal class CommandsConfigConfigParserTest {
+    private val moveRightCommand = mockk<MoveRightCommand>()
+    private val moveLeftCommand = mockk<MoveLeftCommand>()
+    private val moveForwardCommand = mockk<MoveForwardCommand>()
+
     @Test
     fun `MovesParser throws exception when we pass incorrect moves (contains Digit)`() {
         // given
@@ -22,7 +23,13 @@ internal class CommandsConfigConfigParserTest{
         every { grid.height } returns 4
 
         // when
-        val actual = { CommandsConfigParser().parse(input)}
+        val actual = {
+            CommandsConfigParser(
+                moveForwardCommand,
+                moveRightCommand,
+                moveLeftCommand
+            ).parse(input)
+        }
 
         // then
         actual shouldThrow IllegalArgumentException::class withMessage "Incorrect moves"
@@ -39,7 +46,13 @@ internal class CommandsConfigConfigParserTest{
         every { grid.height } returns 4
 
         // when
-        val actual = { CommandsConfigParser().parse(input)}
+        val actual = {
+            CommandsConfigParser(
+                moveForwardCommand,
+                moveRightCommand,
+                moveLeftCommand
+            ).parse(input)
+        }
 
         // then
         actual shouldThrow IllegalArgumentException::class withMessage "Incorrect moves"
@@ -56,7 +69,13 @@ internal class CommandsConfigConfigParserTest{
         every { grid.height } returns 4
 
         // when
-        val actual = { CommandsConfigParser().parse(input)}
+        val actual = {
+            CommandsConfigParser(
+                moveForwardCommand,
+                moveRightCommand,
+                moveLeftCommand
+            ).parse(input)
+        }
 
         // then
         actual shouldThrow IllegalArgumentException::class withMessage "Incorrect moves"

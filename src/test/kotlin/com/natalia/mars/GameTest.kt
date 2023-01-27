@@ -1,11 +1,13 @@
 package com.natalia.mars
 
-import com.natalia.mars.*
-import com.natalia.mars.factory.GridFactory
 import com.natalia.mars.factory.ConfigParserFactory
+import com.natalia.mars.factory.GridFactory
 import com.natalia.mars.factory.RobotFactory
-import com.natalia.mars.parser.*
-import io.mockk.*
+import com.natalia.mars.parser.ConfigParser
+import io.mockk.every
+import io.mockk.justRun
+import io.mockk.mockk
+import io.mockk.verify
 import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
@@ -15,10 +17,6 @@ internal class GameTest {
     private val robotFactory = mockk<RobotFactory>()
     private val gridFactory = mockk<GridFactory>()
     private val commandProcessor = mockk<CommandProcessor>()
-    private val mainInputConfigParser = mockk<MainInputConfigParser>()
-    private val positionAndDirectionConfigParser = mockk<PositionAndDirectionConfigParser>()
-    private val gridConfigParser = mockk<GridConfigParser>()
-    private val commandsConfigParser = mockk<CommandsConfigParser>()
 
     private val sut = Game(configParserFactory, robotFactory, gridFactory, commandProcessor)
 
@@ -40,37 +38,23 @@ internal class GameTest {
 
         every { configParserFactory.create() } returns configParser
 
-        every {
-            configParser.parse(
-                input,
-                mainInputConfigParser,
-                positionAndDirectionConfigParser,
-                gridConfigParser,
-                commandsConfigParser
-            )
-        } returns config
+        every { configParser.parse(input) } returns config
 
         val robot = mockk<Robot>()
         every { robot.robotDirection } returns direction
         every { robot.robotPosition } returns position
-        every {robotFactory.create(direction, position) } returns robot
+        every { robotFactory.create(direction, position) } returns robot
 
         val grid = mockk<Grid>()
         every { grid.width } returns 4
         every { grid.height } returns 5
         every { grid.deadPoints } returns mutableListOf()
-        every {gridFactory.create(4,5) } returns grid
+        every { gridFactory.create(4, 5) } returns grid
 
         justRun { commandProcessor.processCommands(robot, grid, config.commands) }
 
         //when
-        sut.startGame(
-            input,
-            mainInputConfigParser,
-            positionAndDirectionConfigParser,
-            gridConfigParser,
-            commandsConfigParser
-        )
+        sut.startGame(input)
 
         //then
         verify {
@@ -96,41 +80,27 @@ internal class GameTest {
 
         every { configParserFactory.create() } returns configParser
 
-        every {
-            configParser.parse(
-                input,
-                mainInputConfigParser,
-                positionAndDirectionConfigParser,
-                gridConfigParser,
-                commandsConfigParser
-            )
-        } returns config
+        every { configParser.parse(input) } returns config
 
         val robot = mockk<Robot>()
         every { robot.robotDirection } returns direction
         every { robot.robotPosition } returns position
-        every {robotFactory.create(direction, position) } returns robot
+        every { robotFactory.create(direction, position) } returns robot
 
         val grid = mockk<Grid>()
         every { grid.width } returns 4
         every { grid.height } returns 5
         every { grid.deadPoints } returns mutableListOf()
-        every {gridFactory.create(4,5) } returns grid
+        every { gridFactory.create(4, 5) } returns grid
 
         justRun { commandProcessor.processCommands(robot, grid, config.commands) }
 
         //when
-        sut.startGame(
-            input,
-            mainInputConfigParser,
-            positionAndDirectionConfigParser,
-            gridConfigParser,
-            commandsConfigParser
-        )
+        sut.startGame(input)
 
         //then
         verify {
-            gridFactory.create(4,5)
+            gridFactory.create(4, 5)
         }
     }
 
@@ -152,15 +122,7 @@ internal class GameTest {
 
         every { configParserFactory.create() } returns configParser
 
-        every {
-            configParser.parse(
-                input,
-                mainInputConfigParser,
-                positionAndDirectionConfigParser,
-                gridConfigParser,
-                commandsConfigParser
-            )
-        } returns config
+        every { configParser.parse(input) } returns config
 
         val robot = mockk<Robot>()
         every { robot.robotPosition } returns position
@@ -174,10 +136,10 @@ internal class GameTest {
         justRun { commandProcessor.processCommands(robot, grid, config.commands) }
 
         //when
-        val actual = { sut.startGame(input, mainInputConfigParser, positionAndDirectionConfigParser, gridConfigParser, commandsConfigParser) }
+        val actual = { sut.startGame(input) }
 
         //then
-        actual shouldThrow IllegalArgumentException::class withMessage "com.natalia.mars.Grid is rectangle: 51>x>0 and 51>y>0"
+        actual shouldThrow IllegalArgumentException::class withMessage "Grid is rectangle: 51>x>0 and 51>y>0"
     }
 
     @Test
@@ -198,15 +160,7 @@ internal class GameTest {
 
         every { configParserFactory.create() } returns configParser
 
-        every {
-            configParser.parse(
-                input,
-                mainInputConfigParser,
-                positionAndDirectionConfigParser,
-                gridConfigParser,
-                commandsConfigParser
-            )
-        } returns config
+        every { configParser.parse(input) } returns config
 
         val robot = mockk<Robot>()
         every { robot.robotPosition } returns position
@@ -220,7 +174,7 @@ internal class GameTest {
         justRun { commandProcessor.processCommands(robot, grid, config.commands) }
 
         //when
-        val actual = { sut.startGame(input, mainInputConfigParser, positionAndDirectionConfigParser, gridConfigParser, commandsConfigParser) }
+        val actual = { sut.startGame(input) }
 
         //then
         actual shouldThrow IllegalArgumentException::class withMessage "Incorrect position: 0 <= x <= width and 0 <= y <= height"
@@ -244,15 +198,7 @@ internal class GameTest {
 
         every { configParserFactory.create() } returns configParser
 
-        every {
-            configParser.parse(
-                input,
-                mainInputConfigParser,
-                positionAndDirectionConfigParser,
-                gridConfigParser,
-                commandsConfigParser
-            )
-        } returns config
+        every { configParser.parse(input) } returns config
 
         val robot = mockk<Robot>()
         every { robot.robotPosition } returns position
@@ -267,13 +213,7 @@ internal class GameTest {
         justRun { commandProcessor.processCommands(robot, grid, config.commands) }
 
         //when
-        sut.startGame(
-            input,
-            mainInputConfigParser,
-            positionAndDirectionConfigParser,
-            gridConfigParser,
-            commandsConfigParser
-        )
+        sut.startGame(input)
 
         //then
         verify {

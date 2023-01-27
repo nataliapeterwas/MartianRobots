@@ -1,7 +1,5 @@
 package com.natalia.mars
 
-import com.natalia.mars.Direction
-import com.natalia.mars.Position
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage

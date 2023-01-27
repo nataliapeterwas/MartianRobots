@@ -2,7 +2,7 @@ package com.natalia.mars
 
 sealed interface Command
 
-object MoveRightCommand : Command {
+class MoveRightCommand : Command {
     fun execute(robot: Robot) {
         robot.robotDirection = when (robot.robotDirection) {
             Direction.N -> Direction.E
@@ -13,7 +13,7 @@ object MoveRightCommand : Command {
     }
 }
 
-object MoveLeftCommand : Command {
+class MoveLeftCommand : Command {
     fun execute(robot: Robot) {
         robot.robotDirection = when (robot.robotDirection) {
             Direction.N -> Direction.W
@@ -24,7 +24,7 @@ object MoveLeftCommand : Command {
     }
 }
 
-object MoveForwardCommand : Command {
+class MoveForwardCommand : Command {
     fun execute(robot: Robot, grid: Grid) {
         var temporaryX = robot.robotPosition.x
         var temporaryY = robot.robotPosition.y

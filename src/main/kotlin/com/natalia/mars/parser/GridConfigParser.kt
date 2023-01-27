@@ -3,10 +3,6 @@ package com.natalia.mars.parser
 import com.natalia.mars.GridSize
 
 class GridConfigParser {
-
-    init {
-        println("GridConfigParser")
-    }
     fun parse(input: String): GridSize {
         val splitGridSize = input.split(" ").toMutableList()
         splitGridSize.removeIf { it.isEmpty() }

@@ -1,9 +1,5 @@
 package com.natalia.mars
 
-import com.natalia.mars.Direction
-import com.natalia.mars.Position
-import com.natalia.mars.Robot
-import com.natalia.mars.RobotStatus
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 

@@ -1,13 +1,12 @@
 package com.natalia.mars
 
-import com.natalia.mars.*
 import io.mockk.*
 import org.junit.jupiter.api.Test
 
 internal class MoveForwardCommandTest {
     private val robot = mockk<Robot>()
     private val grid = mockk<Grid>()
-    private val sut = MoveForwardCommand
+    private val sut = MoveForwardCommand()
 
     @Test
     fun `class MoveForwardCommand correctly change his position when his direction is S`() {

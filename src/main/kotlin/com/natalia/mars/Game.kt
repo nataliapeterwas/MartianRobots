@@ -16,7 +16,7 @@ class Game(
         val grid = gridFactory.create(config.gridWidth, config.gridHeight, deadPoints)
 
         require(robot.robotPosition.x in 0..grid.width && robot.robotPosition.y in 0..grid.height) { "Incorrect position: 0 <= x <= width and 0 <= y <= height" }
-        require(grid.width in 1..50 && grid.height in 1..50) { "com.natalia.mars.Grid is rectangle: 51>x>0 and 51>y>0" }
+        require(grid.width in 1..50 && grid.height in 1..50) { "Grid is rectangle: 51>x>0 and 51>y>0" }
 
         commandProcessor.processCommands(robot, grid, config.commands)
         deadPoints = grid.deadPoints
