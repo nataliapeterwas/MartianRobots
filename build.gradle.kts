@@ -7,9 +7,9 @@ plugins {
 
 group = "org.example"
 version = "1.0-SNAPSHOT"
-val koinVersion = "3.2.2"
+val koinVersion = "3.3.0"
 val mockkVersion = "1.13.2"
-val kluentVersion = "1.68"
+val kluentVersion = "1.72"
 
 repositories {
     mavenCentral()
@@ -17,6 +17,7 @@ repositories {
 
 dependencies {
     testImplementation(kotlin("test"))
+    testImplementation ("io.insert-koin:koin-test:$koinVersion")
     implementation ("io.insert-koin:koin-core:$koinVersion")
     testImplementation ("io.mockk:mockk:${mockkVersion}")
     testImplementation("org.amshove.kluent:kluent:${kluentVersion}")
