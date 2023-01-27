@@ -1,0 +1,15 @@
+# Build folders
+build/
+
+# IntelliJ
+*.iml
+.idea/
+
+#MacOS DS_Store
+**/.DS_Store
+
+# Gradle files
+.gradle/
+
+# Local configuration file (sdk path, etc)
+local.properties
