@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="CommandsConfigConfigParserTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2023-01-27T11:59:02" hostname="natalias-mbp.home" time="0.043">
+  <properties/>
+  <testcase name="MovesParser throws exception when we pass incorrect moves (contains small letter)()" classname="CommandsConfigConfigParserTest" time="0.024"/>
+  <testcase name="MovesParser throws exception when we pass incorrect moves (contains Digit)()" classname="CommandsConfigConfigParserTest" time="0.01"/>
+  <testcase name="MovesParser throws exception when we pass incorrect moves (contains blank space)()" classname="CommandsConfigConfigParserTest" time="0.007"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

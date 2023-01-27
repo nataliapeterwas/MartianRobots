@@ -56,17 +56,6 @@ internal class MainInputConfigParserTest{
     @Test
     fun `MovesParser correctly transforms 'FRLLL' to list contains of commandList moveForward, moveRight, moveLeft, moveLeft, moveLeft`(){
         // given
-        val robot = mockk<Robot>()
-        every { robot.robotPosition } returns Position(0, 0)
-
-        val grid = mockk<Grid>()
-        every { grid.height } returns 0
-        every { grid.width } returns 0
-        every { grid.deadPoints } returns mutableListOf()
-
-        val gridRobotLogger = mockk<GridRobotLogger>()
-        justRun { gridRobotLogger.toString() }
-
         val input = "FRLLL"
         val moveForwardCommand = MoveForwardCommand
         val moveRightCommand = MoveRightCommand

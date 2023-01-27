@@ -20,7 +20,7 @@ internal class GameTest {
     private val sut = Game(configParserFactory, robotFactory, gridFactory, commandProcessor)
 
     @Test
-    fun `robot was created with a correct date`() {
+    fun `robot was created with a correct data`() {
         //given
         val input = "input"
 
@@ -30,10 +30,13 @@ internal class GameTest {
         val config = mockk<Config>()
         every { config.robotPosition } returns position
         every { config.robotDirection } returns direction
+        every { config.gridHeight } returns 5
+        every { config.gridWidth } returns 4
 
         val configParser = mockk<ConfigParser>()
 
         every { configParserFactory.create() } returns configParser
+
         every {
             configParser.parse(
                 input,
@@ -44,10 +47,27 @@ internal class GameTest {
             )
         } returns config
 
-        justRun { robotFactory.create(direction, position) }
+        val robot = mockk<Robot>()
+        every { robot.robotDirection } returns direction
+        every { robot.robotPosition } returns position
+        every {robotFactory.create(direction, position) } returns robot
+
+        val grid = mockk<Grid>()
+        every { grid.width } returns 4
+        every { grid.height } returns 5
+        every { grid.deadPoints } returns mutableListOf()
+        every {gridFactory.create(4,5) } returns grid
+
+        justRun { commandProcessor.processCommands(robot, grid, config.commands) }
 
         //when
-        sut.startGame(input)
+        sut.startGame(
+            input,
+            mainInputConfigParser,
+            positionAndDirectionConfigParser,
+            gridConfigParser,
+            commandsConfigParser
+        )
 
         //then
         verify {
@@ -56,110 +76,25 @@ internal class GameTest {
     }
 
     @Test
-    fun `startGame throws exception when width is bigger than 50`() {
+    fun `grid was created with a correct data`() {
         //given
         val input = "input"
-        val position = Position(1, 1)
+
+        val direction = Direction.N
+        val position = Position(2, 3)
 
         val config = mockk<Config>()
         every { config.robotPosition } returns position
-        every { config.gridWidth } returns 54
-        every { config.gridHeight } returns 3
-        every { config.robotDirection } returns Direction.E
-        every { config.commands } returns listOf()
-
-//        every { mainInputConfigParser.parse(any()) } returns
+        every { config.robotDirection } returns direction
+        every { config.gridHeight } returns 5
+        every { config.gridWidth } returns 4
 
         val configParser = mockk<ConfigParser>()
 
-        every {
-            configParserFactory.create() } returns configParser
-
-        every { configParser.parse(
-            input,
-            mainInputConfigParser,
-            positionAndDirectionConfigParser,
-            gridConfigParser,
-            commandsConfigParser
-        ) } returns config
-
-        val robot = mockk<Robot>()
-        every { robot.robotPosition } returns position
-        every { robotFactory.create(Direction.E, position) } returns robot
-
-        val grid = mockk<Grid>()
-        every { grid.width } returns 54
-        every { grid.height } returns 3
-        every { gridFactory.create(54, 3, mutableListOf()) } returns grid
-
-        val commandProcessor = mockk<CommandProcessor>()
-        justRun { commandProcessor.processCommands(robot, grid, any()) }
-
-
-//        justRun {
-//            configParserFactory.create().parse(
-//                input,
-//                mainInputConfigParser,
-//                positionAndDirectionConfigParser,
-//                gridConfigParser,
-//                commandsConfigParser
-//            )
-//        }
-
-        //when
-//        val actual = { sut.startGame(input) }
-        sut.startGame(input)
-
-    //then
-//        actual shouldThrow IllegalArgumentException::class withMessage "Grid is rectangle: 51>x>0 and 51>y>0"
-
-}
-    @Test
-    fun `startGame throws exception when robotPosition is bigger than gridSize`() {
-        //given
-        every { robotFactory.create(Direction.E, Position(10, 1)) } returns Robot(Direction.E, Position(1, 1))
-
-        every { gridFactory.create(4, 3, mutableListOf()) } returns Grid(4, 3)
-
-        val input = "input"
-
-        justRun {
-            configParserFactory.create().parse(
-                input,
-                mainInputConfigParser,
-                positionAndDirectionConfigParser,
-                gridConfigParser,
-                commandsConfigParser
-            )
-        }
-
-        //when
-        //val actual = { sut.startGame(input) }
-        sut.startGame(input)
-
-        //then
-//        actual shouldThrow IllegalArgumentException::class withMessage "Incorrect position: 0 <= x <= width and 0 <= y <= height"
-    }
-
-    @Test
-    fun `processCommands was called correctly`() {
-        //given
-        val input = "input"
-
-        justRun { commandProcessor.processCommands(any(), any(), any()) }
-
-        val config = mockk<Config>()
-        every { config.commands } returns listOf(MoveRightCommand)
-
-        val robot = mockk<Robot>()
-        every { robot.robotPosition } returns Position(2, 3)
-
-        val grid = mockk<Grid>()
-        every { grid.width } returns 5
-        every { grid.height } returns 4
+        every { configParserFactory.create() } returns configParser
 
         every {
-            configParserFactory.create().parse(
+            configParser.parse(
                 input,
                 mainInputConfigParser,
                 positionAndDirectionConfigParser,
@@ -168,12 +103,174 @@ internal class GameTest {
             )
         } returns config
 
-        every { robotFactory.create(any(), any()) } returns robot
+        val robot = mockk<Robot>()
+        every { robot.robotDirection } returns direction
+        every { robot.robotPosition } returns position
+        every {robotFactory.create(direction, position) } returns robot
 
-        every { gridFactory.create(any(), any()) } returns grid
+        val grid = mockk<Grid>()
+        every { grid.width } returns 4
+        every { grid.height } returns 5
+        every { grid.deadPoints } returns mutableListOf()
+        every {gridFactory.create(4,5) } returns grid
+
+        justRun { commandProcessor.processCommands(robot, grid, config.commands) }
 
         //when
-        sut.startGame(input)
+        sut.startGame(
+            input,
+            mainInputConfigParser,
+            positionAndDirectionConfigParser,
+            gridConfigParser,
+            commandsConfigParser
+        )
+
+        //then
+        verify {
+            gridFactory.create(4,5)
+        }
+    }
+
+    @Test
+    fun `startGame throws exception when width is bigger than 50`() {
+        //given
+        val input = "input"
+
+        val position = Position(1, 1)
+        val direction = Direction.N
+
+        val config = mockk<Config>()
+        every { config.robotPosition } returns position
+        every { config.robotDirection } returns direction
+        every { config.gridHeight } returns 3
+        every { config.gridWidth } returns 54
+
+        val configParser = mockk<ConfigParser>()
+
+        every { configParserFactory.create() } returns configParser
+
+        every {
+            configParser.parse(
+                input,
+                mainInputConfigParser,
+                positionAndDirectionConfigParser,
+                gridConfigParser,
+                commandsConfigParser
+            )
+        } returns config
+
+        val robot = mockk<Robot>()
+        every { robot.robotPosition } returns position
+        every { robotFactory.create(direction, position) } returns robot
+
+        val grid = mockk<Grid>()
+        every { grid.width } returns 54
+        every { grid.height } returns 3
+        every { gridFactory.create(54, 3) } returns grid
+
+        justRun { commandProcessor.processCommands(robot, grid, config.commands) }
+
+        //when
+        val actual = { sut.startGame(input, mainInputConfigParser, positionAndDirectionConfigParser, gridConfigParser, commandsConfigParser) }
+
+        //then
+        actual shouldThrow IllegalArgumentException::class withMessage "Grid is rectangle: 51>x>0 and 51>y>0"
+    }
+
+    @Test
+    fun `startGame throws exception when robotPosition is bigger than gridSize`() {
+        //given
+        val input = "input"
+
+        val position = Position(10, 1)
+        val direction = Direction.N
+
+        val config = mockk<Config>()
+        every { config.robotPosition } returns position
+        every { config.robotDirection } returns direction
+        every { config.gridHeight } returns 3
+        every { config.gridWidth } returns 5
+
+        val configParser = mockk<ConfigParser>()
+
+        every { configParserFactory.create() } returns configParser
+
+        every {
+            configParser.parse(
+                input,
+                mainInputConfigParser,
+                positionAndDirectionConfigParser,
+                gridConfigParser,
+                commandsConfigParser
+            )
+        } returns config
+
+        val robot = mockk<Robot>()
+        every { robot.robotPosition } returns position
+        every { robotFactory.create(direction, position) } returns robot
+
+        val grid = mockk<Grid>()
+        every { grid.width } returns 5
+        every { grid.height } returns 3
+        every { gridFactory.create(5, 3) } returns grid
+
+        justRun { commandProcessor.processCommands(robot, grid, config.commands) }
+
+        //when
+        val actual = { sut.startGame(input, mainInputConfigParser, positionAndDirectionConfigParser, gridConfigParser, commandsConfigParser) }
+
+        //then
+        actual shouldThrow IllegalArgumentException::class withMessage "Incorrect position: 0 <= x <= width and 0 <= y <= height"
+    }
+
+    @Test
+    fun `processCommands was called correctly`() {
+        //given
+        val input = "input"
+
+        val position = Position(1, 1)
+        val direction = Direction.N
+
+        val config = mockk<Config>()
+        every { config.robotPosition } returns position
+        every { config.robotDirection } returns direction
+        every { config.gridHeight } returns 3
+        every { config.gridWidth } returns 5
+
+        val configParser = mockk<ConfigParser>()
+
+        every { configParserFactory.create() } returns configParser
+
+        every {
+            configParser.parse(
+                input,
+                mainInputConfigParser,
+                positionAndDirectionConfigParser,
+                gridConfigParser,
+                commandsConfigParser
+            )
+        } returns config
+
+        val robot = mockk<Robot>()
+        every { robot.robotPosition } returns position
+        every { robotFactory.create(direction, position) } returns robot
+
+        val grid = mockk<Grid>()
+        every { grid.width } returns 5
+        every { grid.height } returns 3
+        every { grid.deadPoints } returns mutableListOf()
+        every { gridFactory.create(5, 3) } returns grid
+
+        justRun { commandProcessor.processCommands(robot, grid, config.commands) }
+
+        //when
+        sut.startGame(
+            input,
+            mainInputConfigParser,
+            positionAndDirectionConfigParser,
+            gridConfigParser,
+            commandsConfigParser
+        )
 
         //then
         verify {

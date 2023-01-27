@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="CommandProcessorTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-01-27T10:30:01" hostname="natalias-mbp.home" time="0.99">
+<testsuite name="CommandProcessorTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2023-01-27T11:59:02" hostname="natalias-mbp.home" time="0.231">
   <properties/>
-  <testcase name="processCommands calls command when robot status is Alive and not call when the status is Lost()" classname="CommandProcessorTest" time="0.99"/>
+  <testcase name="processCommands calls three commands when robot status is Alive()" classname="CommandProcessorTest" time="0.116"/>
+  <testcase name="MoveLeftCommand is called with correct parameters()" classname="CommandProcessorTest" time="0.018"/>
+  <testcase name="nothing happens when robot status is Lost()" classname="CommandProcessorTest" time="0.013"/>
+  <testcase name="processCommands calls command when robot status is Alive and not call when the status is Lost()" classname="CommandProcessorTest" time="0.025"/>
+  <testcase name="logger is called when robot status is Alive()" classname="CommandProcessorTest" time="0.017"/>
+  <testcase name="MoveRightCommand is called with correct parameters()" classname="CommandProcessorTest" time="0.017"/>
+  <testcase name="MoveForwardCommand is called with correct parameters()" classname="CommandProcessorTest" time="0.018"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

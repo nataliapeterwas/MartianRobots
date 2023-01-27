@@ -12,18 +12,10 @@ internal class ConfigParserTest {
     private val sut = ConfigParser()
 
     @Test
-    fun `Parser correctly transforms '5 3   1 1 E   RFLR' to list contains of commandList moveRight, moveForward, moveLeft, moveRight`() {
+    fun `Parser correctly transforms input to list contains of commandList moveRight, moveForward, moveLeft, moveRight`() {
         // given
         val position = Position(1,1)
         val gridSize = GridSize(5,3)
-
-        val robot = mockk<Robot>()
-        every { robot.robotPosition } returns position
-
-        val grid = mockk<Grid>()
-        every { grid.height } returns gridSize.height
-        every { grid.width } returns gridSize.width
-        every { grid.deadPoints } returns mutableListOf()
 
         val gridRobotLogger = mockk<GridRobotLogger>()
         justRun { gridRobotLogger.toString() }

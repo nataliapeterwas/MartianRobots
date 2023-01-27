@@ -58,12 +58,8 @@ internal class CommandProcessorTest {
         //given
         val robot = mockk<Robot>()
         every { robot.robotStatus } returns RobotStatus.ALIVE
-        every { robot.robotDirection } returns Direction.N
-        every { robot.robotPosition } returns Position(1, 2)
 
         val grid = mockk<Grid>()
-        every { grid.height } returns 3
-        every { grid.width } returns 5
 
         val moveLeftCommand = mockk<MoveLeftCommand>()
         justRun { moveLeftCommand.execute(robot) }
@@ -88,12 +84,8 @@ internal class CommandProcessorTest {
         //given
         val robot = mockk<Robot>()
         every { robot.robotStatus } returns RobotStatus.ALIVE
-        every { robot.robotDirection } returns Direction.N
-        every { robot.robotPosition } returns Position(1, 2)
 
         val grid = mockk<Grid>()
-        every { grid.height } returns 3
-        every { grid.width } returns 5
 
         val moveForwardCommand = mockk<MoveForwardCommand>()
         justRun { moveForwardCommand.execute(robot, grid) }
@@ -120,12 +112,8 @@ internal class CommandProcessorTest {
 
         val robot = mockk<Robot>()
         every { robot.robotStatus } returns RobotStatus.ALIVE
-//        every { robot.robotDirection } returns Direction.N
-//        every { robot.robotPosition } returns Position(1, 2)
 
         val grid = mockk<Grid>()
-//        every { grid.height } returns 3
-//        every { grid.width } returns 5
 
         justRun { gridRobotLogger.log(robot, grid) }
 
@@ -159,12 +147,7 @@ internal class CommandProcessorTest {
         val robot = mockk<Robot>()
         every { robot.robotStatus } returns RobotStatus.ALIVE andThen RobotStatus.LOST
 
-        every { robot.robotDirection } returns Direction.N
-        every { robot.robotPosition } returns Position(1, 2)
-
         val grid = mockk<Grid>()
-        every { grid.height } returns 3
-        every { grid.width } returns 5
 
         justRun { gridRobotLogger.log(robot, grid) }
 
@@ -199,12 +182,8 @@ internal class CommandProcessorTest {
         //given
         val robot = mockk<Robot>()
         every { robot.robotStatus } returns RobotStatus.ALIVE
-//        every { robot.robotDirection } returns Direction.N
-        every { robot.robotPosition } returns Position(1, 2)
 
         val grid = mockk<Grid>()
-        every { grid.height } returns 3
-        every { grid.width } returns 5
 
         val moveRightCommand = mockk<MoveRightCommand>()
         justRun { moveRightCommand.execute(robot) }

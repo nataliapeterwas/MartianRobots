@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="GridTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2023-01-27T11:59:03" hostname="natalias-mbp.home" time="0.003">
+  <properties/>
+  <testcase name="addPositionToPollutedList added Position(3,4) to pollutedList()" classname="GridTest" time="0.001"/>
+  <testcase name="hasPositionInPollutedList returns true when Position(2,3) is in this list()" classname="GridTest" time="0.001"/>
+  <testcase name="hasPositionInPollutedList returns false when Position(2,3) is not in this list()" classname="GridTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

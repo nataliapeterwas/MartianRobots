@@ -12,23 +12,29 @@ class Game(
     private val gridFactory: GridFactory,
     private val commandProcessor: CommandProcessor,
 ) {
-    private var pollutedList = mutableListOf<Position>()
-    fun startGame(input: String) {
+    private var deadPoints = mutableListOf<Position>()
+    fun startGame(
+        input: String,
+        mainInputConfigParser: MainInputConfigParser,
+        positionAndDirectionConfigParser: PositionAndDirectionConfigParser,
+        gridConfigParser: GridConfigParser,
+        commandsConfigParser: CommandsConfigParser,
+    ) {
         val config = configParserFactory.create().parse(
             input,
-            MainInputConfigParser(),
-            PositionAndDirectionConfigParser(),
-            GridConfigParser(),
-            CommandsConfigParser()
+            mainInputConfigParser,
+            positionAndDirectionConfigParser,
+            gridConfigParser,
+            commandsConfigParser,
         )
         val robot = robotFactory.create(config.robotDirection, config.robotPosition)
-        val grid = gridFactory.create(config.gridWidth, config.gridHeight, pollutedList)
+        val grid = gridFactory.create(config.gridWidth, config.gridHeight, deadPoints)
 
         require(robot.robotPosition.x in 0..grid.width && robot.robotPosition.y in 0..grid.height) { "Incorrect position: 0 <= x <= width and 0 <= y <= height" }
         require(grid.width in 1..50 && grid.height in 1..50) { "Grid is rectangle: 51>x>0 and 51>y>0" }
 
         commandProcessor.processCommands(robot, grid, config.commands)
-        pollutedList = grid.deadPoints
+        deadPoints = grid.deadPoints
     }
 
 //    fun createNewRobot(input: String) {
