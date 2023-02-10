@@ -1,7 +1,8 @@
-package com.natalia.martianrobots
+package com.natalia.martianrobots.parser
 
-import com.natalia.martianrobots.parser.CommandsConfigParser
-import com.natalia.martianrobots.parser.MainInputConfigParser
+import com.natalia.martianrobots.commands.MoveForwardCommand
+import com.natalia.martianrobots.commands.MoveLeftCommand
+import com.natalia.martianrobots.commands.MoveRightCommand
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldThrow

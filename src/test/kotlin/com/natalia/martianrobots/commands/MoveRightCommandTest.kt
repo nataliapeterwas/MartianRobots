@@ -1,5 +1,7 @@
-package com.natalia.martianrobots
+package com.natalia.martianrobots.commands
 
+import com.natalia.martianrobots.Direction
+import com.natalia.martianrobots.Robot
 import io.mockk.every
 import io.mockk.justRun
 import io.mockk.mockk

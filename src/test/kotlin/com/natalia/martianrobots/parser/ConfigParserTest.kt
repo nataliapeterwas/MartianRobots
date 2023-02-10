@@ -1,6 +1,9 @@
-package com.natalia.martianrobots
+package com.natalia.martianrobots.parser
 
-import com.natalia.martianrobots.parser.*
+import com.natalia.martianrobots.*
+import com.natalia.martianrobots.commands.MoveForwardCommand
+import com.natalia.martianrobots.commands.MoveLeftCommand
+import com.natalia.martianrobots.commands.MoveRightCommand
 import io.mockk.every
 import io.mockk.justRun
 import io.mockk.mockk

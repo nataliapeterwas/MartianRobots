@@ -1,5 +1,6 @@
 package com.natalia.martianrobots
 
+import com.natalia.martianrobots.commands.CommandProcessor
 import com.natalia.martianrobots.factory.ConfigParserFactory
 import com.natalia.martianrobots.factory.GridFactory
 import com.natalia.martianrobots.factory.RobotFactory

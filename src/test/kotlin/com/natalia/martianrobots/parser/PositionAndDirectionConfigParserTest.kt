@@ -1,12 +1,13 @@
-package com.natalia.martianrobots
+package com.natalia.martianrobots.parser
 
+import com.natalia.martianrobots.Direction
+import com.natalia.martianrobots.Position
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
-import com.natalia.martianrobots.parser.PositionAndDirectionConfigParser
 
-internal class PositionAndDirectionConfigConfigParserTest{
+internal class PositionAndDirectionConfigParserTest{
 
     @Test
     fun `robotPositionParser throws exception when we pass incorrect robotPosition (it length is 1)`() {

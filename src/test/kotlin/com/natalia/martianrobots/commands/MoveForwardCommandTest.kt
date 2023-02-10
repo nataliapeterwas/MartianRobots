@@ -1,5 +1,6 @@
-package com.natalia.martianrobots
+package com.natalia.martianrobots.commands
 
+import com.natalia.martianrobots.*
 import io.mockk.*
 import org.junit.jupiter.api.Test
 

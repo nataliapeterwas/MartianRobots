@@ -1,4 +1,4 @@
-package com.natalia.martianrobots
+package com.natalia.martianrobots.parser
 
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldThrow

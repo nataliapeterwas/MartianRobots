@@ -1,4 +1,9 @@
-package com.natalia.martianrobots
+package com.natalia.martianrobots.commands
+
+import com.natalia.martianrobots.Direction
+import com.natalia.martianrobots.Grid
+import com.natalia.martianrobots.Robot
+import com.natalia.martianrobots.RobotStatus
 
 sealed interface Command
 
