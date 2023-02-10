@@ -8,7 +8,7 @@ class GridRobotLogger {
 
                 repeat(grid.height + 1) { yAxis ->
                     repeat(grid.width + 1) { xAxis ->
-                        if (xAxis == robot.robotPosition.x && yAxis == grid.height - robot.robotPosition.y) {
+                        if (xAxis == robot.robotPosition.x && yAxis == robot.robotPosition.y) {
                             append(currentPlace)
                         } else {
                             append("□ ")

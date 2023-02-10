@@ -34,8 +34,8 @@ class MoveForwardCommand : Command {
         var temporaryY = robot.robotPosition.y
 
         when (robot.robotDirection) {
-            Direction.N -> temporaryY += 1
-            Direction.S -> temporaryY -= 1
+            Direction.N -> temporaryY -= 1
+            Direction.S -> temporaryY += 1
             Direction.E -> temporaryX += 1
             Direction.W -> temporaryX -= 1
         }

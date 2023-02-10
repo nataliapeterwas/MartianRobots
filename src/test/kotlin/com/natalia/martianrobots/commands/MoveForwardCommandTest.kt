@@ -17,13 +17,13 @@ internal class MoveForwardCommandTest {
         every { grid.width } returns 10
         every { robot.robotDirection } returns Direction.S
         every { robot.robotPosition } returns Position(1, 3)
-        justRun { robot.updatePosition(1, 2)  }
+        justRun { robot.updatePosition(1, 4)  }
 
         // when
         sut.execute(robot, grid)
 
         // then
-        verify { robot.updatePosition(1, 2) }
+        verify { robot.updatePosition(1, 4) }
     }
 
     @Test
@@ -31,7 +31,7 @@ internal class MoveForwardCommandTest {
         // given
         every { grid.height } returns 10
         every { grid.width } returns 10
-        every { robot.robotDirection } returns Direction.S
+        every { robot.robotDirection } returns Direction.N
         every { grid.isDeadPoint(0, -1) } returns true
         every { robot.robotPosition } returns Position(0, 0)
 
@@ -48,7 +48,7 @@ internal class MoveForwardCommandTest {
         every { grid.height } returns 10
         every { grid.width } returns 10
         every { grid.deadPoints } returns mutableListOf()
-        every { robot.robotDirection } returns Direction.S
+        every { robot.robotDirection } returns Direction.N
         every { robot.robotPosition } returns Position(0, 0)
         every { robot.isAlive } returns true
         every { grid.isDeadPoint(0, -1) } returns false
