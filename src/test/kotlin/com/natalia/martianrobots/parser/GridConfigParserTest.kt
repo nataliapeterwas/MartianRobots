@@ -6,14 +6,16 @@ import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 import com.natalia.martianrobots.parser.GridConfigParser
 
-internal class GridConfigParserTest{
+internal class GridConfigParserTest {
+    private val sut = GridConfigParser()
+
     @Test
     fun `throws exception when we pass incorrect gridSize (it length is 2)`() {
         // given
         val input = "66"
 
         // when
-        val actual = { GridConfigParser().parse(input)}
+        val actual = { sut.parse(input) }
 
         // then
         actual shouldThrow IllegalArgumentException::class withMessage "Incorrect grid size"
@@ -25,7 +27,7 @@ internal class GridConfigParserTest{
         val input = " 66"
 
         // when
-        val actual = { GridConfigParser().parse(input)}
+        val actual = { sut.parse(input) }
 
         // then
         actual shouldThrow IllegalArgumentException::class withMessage "Incorrect grid size"
@@ -37,7 +39,7 @@ internal class GridConfigParserTest{
         val input = "30 5"
 
         // when
-        val actual = GridConfigParser().parse(input)
+        val actual = sut.parse(input)
 
         // then
         actual.width shouldBeEqualTo 30
@@ -50,7 +52,7 @@ internal class GridConfigParserTest{
         val input = "60 5"
 
         // when
-        val actual = { GridConfigParser().parse(input)}
+        val actual = { sut.parse(input) }
 
         // then
         actual shouldThrow IllegalArgumentException::class withMessage "com.natalia.mars.Grid is rectangle: 51>x>0 and 51>y>0"

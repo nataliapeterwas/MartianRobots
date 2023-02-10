@@ -4,10 +4,11 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 internal class GridTest{
+    val sut = Grid(4,6)
+
     @Test
     fun `addPositionToPollutedList added Position(3,4) to pollutedList`() {
         //given
-        val sut = Grid(4,6)
         sut.addDeadPoint(3,4)
 
         //when
@@ -19,7 +20,6 @@ internal class GridTest{
     @Test
     fun `hasPositionInPollutedList returns true when Position(2,3) is in this list`() {
         //given
-        val sut = Grid(4,6)
         sut.addDeadPoint(2,3)
 
         //when
@@ -32,7 +32,6 @@ internal class GridTest{
     @Test
     fun `hasPositionInPollutedList returns false when Position(2,3) is not in this list`() {
         //given
-        val sut = Grid(4,6)
         sut.addDeadPoint(3,4)
 
         //when

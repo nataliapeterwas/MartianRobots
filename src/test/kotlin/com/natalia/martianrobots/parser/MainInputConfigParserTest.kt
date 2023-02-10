@@ -10,6 +10,8 @@ import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
 internal class MainInputConfigParserTest {
+    private val sut = MainInputConfigParser()
+
     @Test
     fun `correctly split input to three separate strings`() {
         // given
@@ -20,7 +22,7 @@ internal class MainInputConfigParserTest {
         """.trimIndent()
 
         // when
-        val actual = MainInputConfigParser().parse(input)
+        val actual = sut.parse(input)
 
         // then
         actual.gridSizeInfo shouldBeEqualTo "5 3"
@@ -35,7 +37,7 @@ internal class MainInputConfigParserTest {
         """.trimIndent()
 
         // when
-        val actual = { MainInputConfigParser().parse(input) }
+        val actual = { sut.parse(input) }
 
         // then
         actual shouldThrow IllegalArgumentException::class withMessage "You must pass grid size, robot position and robot moves"
@@ -50,35 +52,9 @@ internal class MainInputConfigParserTest {
         """.trimIndent()
 
         // when
-        val actual = { MainInputConfigParser().parse(input) }
+        val actual = { sut.parse(input) }
 
         // then
         actual shouldThrow IllegalArgumentException::class withMessage "Incorrect input"
     }
-
-    @Test
-    fun `transforms 'FRLLL' to list contains commandList moveForward, moveRight, moveLeft, moveLeft, moveLeft`() {
-        // given
-        val input = "FRLLL"
-        val moveForwardCommand = mockk<MoveForwardCommand>()
-        val moveRightCommand = mockk<MoveRightCommand>()
-        val moveLeftCommand = mockk<MoveLeftCommand>()
-
-        // when
-        val actual = CommandsConfigParser(
-            moveForwardCommand,
-            moveRightCommand,
-            moveLeftCommand
-        ).parse(input)
-
-        // then
-        actual shouldBeEqualTo listOf(
-            moveForwardCommand,
-            moveRightCommand,
-            moveLeftCommand,
-            moveLeftCommand,
-            moveLeftCommand
-        )
-    }
-
 }
