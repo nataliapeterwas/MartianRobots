@@ -39,10 +39,10 @@ internal class ConfigParserTest {
 
         val input = "input"
 
-        every { mainInputConfigParser.parse(input) } returns InputParsedToThreeLines(input, input, input)
-        every { gridConfigParser.parse(input) } returns gridSize
-        every { positionAndDirectionConfigParser.parse(input) } returns RobotPositionAndDirection(position, Direction.E)
-        every { commandsConfigParser.parse(input) } returns listOf(
+        every { mainInputConfigParser.parse(input) } returns InputParsedToThreeLines("first", "second", "third")
+        every { gridConfigParser.parse("first") } returns gridSize
+        every { positionAndDirectionConfigParser.parse("second") } returns RobotPositionAndDirection(position, Direction.E)
+        every { commandsConfigParser.parse("third") } returns listOf(
             moveRightCommand,
             moveForwardCommand,
             moveLeftCommand,
