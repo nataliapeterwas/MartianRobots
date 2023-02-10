@@ -17,7 +17,7 @@ class PositionAndDirectionConfigParser(){
         val y = robotPositionSplitWithSpace[1].toInt()
         val robotPosition = Position(x, y)
 
-        val direction = Direction.values().firstOrNull { it.letter == robotPositionSplitWithSpace[2] }
+        val direction = Direction.values().firstOrNull { it.letter.toString() == robotPositionSplitWithSpace[2] }
             ?: throw Exception("Incorrect direction")
 
         return RobotPositionAndDirection(robotPosition, direction)
