@@ -21,7 +21,7 @@ internal class CommandsConfigParserTest {
     )
 
     @Test
-    fun `throws exception when parse input contains digit`() {
+    fun `throw exception when parse input contains digit`() {
         // given
         val input = "RL1"
 
@@ -33,7 +33,7 @@ internal class CommandsConfigParserTest {
     }
 
     @Test
-    fun `returns list of commands`() {
+    fun `return list of commands`() {
         // given
         val input = "LFR"
 

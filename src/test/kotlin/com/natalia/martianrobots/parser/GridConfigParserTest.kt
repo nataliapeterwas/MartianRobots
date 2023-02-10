@@ -10,7 +10,7 @@ internal class GridConfigParserTest {
     private val sut = GridConfigParser()
 
     @Test
-    fun `throws exception when we pass incorrect gridSize (it length is 2)`() {
+    fun `throw exception when we pass incorrect gridSize (it length is 2)`() {
         // given
         val input = "66"
 
@@ -22,7 +22,7 @@ internal class GridConfigParserTest {
     }
 
     @Test
-    fun `throws exception when we pass incorrect gridSize (it has blank space at beginning)`() {
+    fun `throw exception when we pass incorrect gridSize (it has blank space at beginning)`() {
         // given
         val input = " 66"
 
@@ -34,7 +34,7 @@ internal class GridConfigParserTest {
     }
 
     @Test
-    fun `transforms string '30 5' to grid width and grid height`() {
+    fun `transform string '30 5' to grid width and grid height`() {
         // given
         val input = "30 5"
 

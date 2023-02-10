@@ -13,7 +13,7 @@ internal class MoveRightCommandTest {
     private val sut = MoveRightCommand()
 
     @Test
-    fun `class MoveRightCommand correctly change direction from N to E`() {
+    fun `change direction from N to E`() {
         // given
         every { robot.robotDirection } returns Direction.N
         justRun { robot.robotDirection = any()}
