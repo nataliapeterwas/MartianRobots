@@ -12,7 +12,6 @@ class CommandsConfigParser(
 ) {
     fun parse(input: String): List<Command> {
         require(input.length < 101) { "Too long instruction" }
-        require(input.toList().all { it.isLetter() && it.isUpperCase() }) { "Incorrect moves" }
 
         val splitMovesString = input.split("").toMutableList()
         splitMovesString.removeIf { it.isEmpty() }

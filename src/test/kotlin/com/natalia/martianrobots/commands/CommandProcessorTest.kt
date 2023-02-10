@@ -60,10 +60,10 @@ internal class CommandProcessorTest {
         //when
         sut.processCommands(robot, grid, commands)
 
-        //then
-//        verify  {
-//            moveRightCommand.execute(robot)
-//        }
+       // then
+        verify  {
+            moveRightCommand.execute(robot)
+        }
     }
 
     @Test

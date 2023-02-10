@@ -4,6 +4,7 @@ import com.natalia.martianrobots.commands.MoveForwardCommand
 import com.natalia.martianrobots.commands.MoveLeftCommand
 import com.natalia.martianrobots.commands.MoveRightCommand
 import io.mockk.mockk
+import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
@@ -13,58 +14,33 @@ internal class CommandsConfigParserTest {
     private val moveLeftCommand = mockk<MoveLeftCommand>()
     private val moveForwardCommand = mockk<MoveForwardCommand>()
 
+    private val sut = CommandsConfigParser(
+        moveForwardCommand,
+        moveRightCommand,
+        moveLeftCommand
+    )
+
     @Test
-    fun `MovesParser throws exception when we pass incorrect moves (contains Digit)`() {
+    fun `throws exception when parse input contains digit`() {
         // given
-        val input = "RR1"
+        val input = "RL1"
 
         // when
-        val actual = {
-            CommandsConfigParser(
-                moveForwardCommand,
-                moveRightCommand,
-                moveLeftCommand
-            ).parse(input)
-        }
+        val actual = { sut.parse(input) }
 
         // then
-        actual shouldThrow IllegalArgumentException::class withMessage "Incorrect moves"
+        actual shouldThrow Exception::class withMessage "Incorrect move"
     }
 
     @Test
-    fun `throws exception when we pass incorrect moves (contains blank space)`() {
-//    fun `throws exception when parse input contains space`() {
+    fun `returns list of commands`() {
         // given
-        val input = "RL "
+        val input = "LFR"
 
         // when
-        val actual = {
-            CommandsConfigParser(
-                moveForwardCommand,
-                moveRightCommand,
-                moveLeftCommand
-            ).parse(input)
-        }
+        val actual = sut.parse(input)
 
         // then
-        actual shouldThrow IllegalArgumentException::class withMessage "Incorrect moves"
-    }
-
-    @Test
-    fun `MovesParser throws exception when we pass incorrect moves (contains small letter)`() {
-        // given
-        val input = "LrF"
-
-        // when
-        val actual = {
-            CommandsConfigParser(
-                moveForwardCommand,
-                moveRightCommand,
-                moveLeftCommand
-            ).parse(input)
-        }
-
-        // then
-        actual shouldThrow IllegalArgumentException::class withMessage "Incorrect moves"
+        actual shouldBeEqualTo listOf(moveLeftCommand, moveForwardCommand, moveRightCommand)
     }
 }
