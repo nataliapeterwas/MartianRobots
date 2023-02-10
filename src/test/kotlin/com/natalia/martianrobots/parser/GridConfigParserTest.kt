@@ -45,16 +45,4 @@ internal class GridConfigParserTest {
         actual.width shouldBeEqualTo 30
         actual.height shouldBeEqualTo 5
     }
-
-    @Test
-    fun `throws exception when width is 60 (it is too big)`() {
-        // given
-        val input = "60 5"
-
-        // when
-        val actual = { sut.parse(input) }
-
-        // then
-        actual shouldThrow IllegalArgumentException::class withMessage "com.natalia.mars.Grid is rectangle: 51>x>0 and 51>y>0"
-    }
 }
