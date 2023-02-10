@@ -3,7 +3,6 @@ package com.natalia.martianrobots.commands
 import com.natalia.martianrobots.Grid
 import com.natalia.martianrobots.GridRobotLogger
 import com.natalia.martianrobots.Robot
-import com.natalia.martianrobots.RobotStatus
 import io.mockk.*
 import org.junit.jupiter.api.Test
 
@@ -24,7 +23,7 @@ internal class CommandProcessorTest {
     fun `nothing happens when robot status is Lost`() {
         //given
         val robot = mockk<Robot>()
-        every { robot.robotStatus } returns RobotStatus.LOST
+        every { robot.isAlive } returns false
 
         val grid = mockk<Grid>()
 
@@ -45,7 +44,7 @@ internal class CommandProcessorTest {
     fun `MoveRightCommand is called with correct parameters`() {
         //given
         val robot = mockk<Robot>()
-        every { robot.robotStatus } returns RobotStatus.ALIVE
+        every { robot.isAlive } returns true
 
         val grid = mockk<Grid>()
 
@@ -70,7 +69,7 @@ internal class CommandProcessorTest {
     fun `MoveLeftCommand is called with correct parameters`() {
         //given
         val robot = mockk<Robot>()
-        every { robot.robotStatus } returns RobotStatus.ALIVE
+        every { robot.isAlive } returns true
 
         val grid = mockk<Grid>()
 
@@ -95,7 +94,7 @@ internal class CommandProcessorTest {
     fun `MoveForwardCommand is called with correct parameters`() {
         //given
         val robot = mockk<Robot>()
-        every { robot.robotStatus } returns RobotStatus.ALIVE
+        every { robot.isAlive } returns true
 
         val grid = mockk<Grid>()
 
@@ -120,7 +119,7 @@ internal class CommandProcessorTest {
     fun `processCommands calls three commands when robot status is Alive`() {
         //given
         val robot = mockk<Robot>()
-        every { robot.robotStatus } returns RobotStatus.ALIVE
+        every { robot.isAlive } returns true
 
         val grid = mockk<Grid>()
 
@@ -151,7 +150,7 @@ internal class CommandProcessorTest {
     fun `processCommands calls command when robot status is Alive and not call when the status is Lost`() {
         //given
         val robot = mockk<Robot>()
-        every { robot.robotStatus } returns RobotStatus.ALIVE andThen RobotStatus.LOST
+        every { robot.isAlive } returns true andThen false
 
         val grid = mockk<Grid>()
 
@@ -184,7 +183,7 @@ internal class CommandProcessorTest {
     fun `logger is called when robot status is Alive`() {
         //given
         val robot = mockk<Robot>()
-        every { robot.robotStatus } returns RobotStatus.ALIVE
+        every { robot.isAlive } returns true
 
         val grid = mockk<Grid>()
 

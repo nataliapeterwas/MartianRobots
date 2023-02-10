@@ -3,7 +3,6 @@ package com.natalia.martianrobots.commands
 import com.natalia.martianrobots.Direction
 import com.natalia.martianrobots.Grid
 import com.natalia.martianrobots.Robot
-import com.natalia.martianrobots.RobotStatus
 
 sealed interface Command
 
@@ -46,7 +45,7 @@ class MoveForwardCommand : Command {
         } else if (!grid.isDeadPoint(temporaryX, temporaryY)) {
             grid.addDeadPoint(temporaryX, temporaryY)
             println("${robot.robotPosition.x} ${robot.robotPosition.y} ${robot.robotDirection} LOST \n")
-            robot.updateRobotStatus(RobotStatus.LOST)
+            robot.updateRobotStatus(false)
         }
     }
 }

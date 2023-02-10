@@ -50,10 +50,10 @@ internal class MoveForwardCommandTest {
         every { grid.deadPoints } returns mutableListOf()
         every { robot.robotDirection } returns Direction.S
         every { robot.robotPosition } returns Position(0, 0)
-        every { robot.robotStatus } returns RobotStatus.ALIVE
+        every { robot.isAlive } returns true
         every { grid.isDeadPoint(0, -1) } returns false
         justRun { grid.addDeadPoint(0, -1) }
-        justRun { robot.updateRobotStatus(RobotStatus.LOST) }
+        justRun { robot.updateRobotStatus(false) }
 
         // when
         sut.execute(robot, grid)
@@ -61,7 +61,7 @@ internal class MoveForwardCommandTest {
         // then
         verifyOrder {
             grid.addDeadPoint(0, -1)
-            robot.updateRobotStatus(RobotStatus.LOST)
+            robot.updateRobotStatus(false)
         }
     }
 }

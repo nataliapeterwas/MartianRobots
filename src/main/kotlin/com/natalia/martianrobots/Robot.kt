@@ -3,13 +3,13 @@ package com.natalia.martianrobots
 class Robot(
     var robotDirection: Direction,
     var robotPosition: Position,
-    var robotStatus: RobotStatus = RobotStatus.ALIVE
+    var isAlive: Boolean = true
 ) {
     fun updatePosition(x: Int, y: Int){
         robotPosition = Position(x,y)
     }
 
-    fun updateRobotStatus(robotStatus: RobotStatus){
-        this.robotStatus = robotStatus
+    fun updateRobotStatus(robotStatus: Boolean){
+        this.isAlive = robotStatus
     }
 }

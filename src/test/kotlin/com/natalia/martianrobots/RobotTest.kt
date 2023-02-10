@@ -22,9 +22,9 @@ internal class RobotTest {
         //given
 
         //when
-        sut.updateRobotStatus(RobotStatus.LOST)
+        sut.updateRobotStatus(false)
 
         //then
-        sut.robotStatus shouldBeEqualTo RobotStatus.LOST
+        sut.isAlive shouldBeEqualTo false
     }
 }
