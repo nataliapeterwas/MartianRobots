@@ -7,10 +7,11 @@ import org.junit.jupiter.api.Test
 internal class MoveForwardCommandTest {
     private val robot = mockk<Robot>()
     private val grid = mockk<Grid>()
+
     private val sut = MoveForwardCommand()
 
     @Test
-    fun `class MoveForwardCommand correctly change his position when his direction is S`() {
+    fun `changes robot position when his direction is S`() {
         // given
         every { grid.height } returns 10
         every { grid.width } returns 10
@@ -23,11 +24,10 @@ internal class MoveForwardCommandTest {
 
         // then
         verify { robot.updatePosition(1, 2) }
-
     }
 
     @Test
-    fun `class MoveForwardCommand doing nothing when robot's position is polluted`() {
+    fun `doing nothing when robot's position is polluted`() {
         // given
         every { grid.height } returns 10
         every { grid.width } returns 10
@@ -43,7 +43,7 @@ internal class MoveForwardCommandTest {
     }
 
     @Test
-    fun `class MoveForwardCommand makes that robot loses when he went outside grid`() {
+    fun `makes that robot loses when he went outside grid`() {
         // given
         every { grid.height } returns 10
         every { grid.width } returns 10

@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test
 internal class PositionAndDirectionConfigParserTest{
 
     @Test
-    fun `robotPositionParser throws exception when we pass incorrect robotPosition (it length is 1)`() {
+    fun `throws exception when we pass incorrect robotPosition (it length is 1)`() {
         // given
         val input = "1"
 
@@ -22,7 +22,7 @@ internal class PositionAndDirectionConfigParserTest{
     }
 
     @Test
-    fun `robotPositionParser throws exception when we pass incorrect robotPosition (incorrect format - 1 E 1)`() {
+    fun `throws exception when we pass incorrect robotPosition (incorrect format - 1 E 1)`() {
         // given
         val input = "1 E 1"
 
@@ -34,7 +34,7 @@ internal class PositionAndDirectionConfigParserTest{
     }
 
     @Test
-    fun `RobotPositionParser correctly transforms string '30 5 E' to robotPosition and robotDirection`() {
+    fun `transforms string '30 5 E' to robotPosition and robotDirection`() {
         // given
         val robotPosition = "30 5 E"
 
@@ -47,7 +47,7 @@ internal class PositionAndDirectionConfigParserTest{
     }
 
     @Test
-    fun `RobotPositionParser throw exception when its width is 60 and its bigger than grid size`() {
+    fun `throw exception when its width is 60 and its bigger than grid size`() {
         // given
         val robotPosition = "60 5 K"
 

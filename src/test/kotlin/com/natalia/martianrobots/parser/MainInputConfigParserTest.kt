@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test
 
 internal class MainInputConfigParserTest {
     @Test
-    fun `MainInputParser is correctly split  '5 3   1 1 E   RFRFRFRF' to three separate strings`() {
+    fun `correctly split input to three separate strings`() {
         // given
         val input = """
             5 3
@@ -29,7 +29,7 @@ internal class MainInputConfigParserTest {
     }
 
     @Test
-    fun `mainInputParser throws exception when we pass empty input`() {
+    fun `throws exception when we pass empty input`() {
         // given
         val input = """
         """.trimIndent()
@@ -42,7 +42,7 @@ internal class MainInputConfigParserTest {
     }
 
     @Test
-    fun `mainInput throws exception when we pass incorrect input (two lines instead of three)`() {
+    fun `throws exception when we pass incorrect input (two lines instead of three)`() {
         // given
         val input = """
             66
@@ -57,7 +57,7 @@ internal class MainInputConfigParserTest {
     }
 
     @Test
-    fun `MovesParser correctly transforms 'FRLLL' to list contains of commandList moveForward, moveRight, moveLeft, moveLeft, moveLeft`() {
+    fun `transforms 'FRLLL' to list contains commandList moveForward, moveRight, moveLeft, moveLeft, moveLeft`() {
         // given
         val input = "FRLLL"
         val moveForwardCommand = mockk<MoveForwardCommand>()

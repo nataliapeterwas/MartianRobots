@@ -8,7 +8,7 @@ import com.natalia.martianrobots.parser.GridConfigParser
 
 internal class GridConfigParserTest{
     @Test
-    fun `gridSizeParser throws exception when we pass incorrect gridSize (it length is 2)`() {
+    fun `throws exception when we pass incorrect gridSize (it length is 2)`() {
         // given
         val input = "66"
 
@@ -20,7 +20,7 @@ internal class GridConfigParserTest{
     }
 
     @Test
-    fun `gridSizeParser throws exception when we pass incorrect gridSize (it has blank space at beginning)`() {
+    fun `throws exception when we pass incorrect gridSize (it has blank space at beginning)`() {
         // given
         val input = " 66"
 
@@ -32,7 +32,7 @@ internal class GridConfigParserTest{
     }
 
     @Test
-    fun `GridSizeParser transforms string '30 5' to grid width and grid height`() {
+    fun `transforms string '30 5' to grid width and grid height`() {
         // given
         val input = "30 5"
 
@@ -45,7 +45,7 @@ internal class GridConfigParserTest{
     }
 
     @Test
-    fun `GridSizeParser throws exception when width is 60 (it is too big)`() {
+    fun `throws exception when width is 60 (it is too big)`() {
         // given
         val input = "60 5"
 

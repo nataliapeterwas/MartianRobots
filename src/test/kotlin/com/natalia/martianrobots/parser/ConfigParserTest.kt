@@ -25,7 +25,7 @@ internal class ConfigParserTest {
         )
 
     @Test
-    fun `Parser correctly transforms input to list contains of commandList moveRight, moveForward, moveLeft, moveRight`() {
+    fun `transforms input to list contains commandList moveRight, moveForward, moveLeft, moveRight`() {
         // given
         val position = Position(1, 1)
         val gridSize = GridSize(5, 3)

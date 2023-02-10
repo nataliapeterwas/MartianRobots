@@ -13,7 +13,7 @@ internal class MoveLeftCommandTest{
     private val sut = MoveLeftCommand()
 
     @Test
-    fun `class MoveLeftCommand correctly change direction from W to S`(){
+    fun `change direction from W to S`(){
         // given
         every { robot.robotDirection} returns Direction.W
         justRun { robot.robotDirection = any() }
