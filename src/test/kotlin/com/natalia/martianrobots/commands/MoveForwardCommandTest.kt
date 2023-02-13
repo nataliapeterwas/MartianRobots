@@ -1,67 +1,74 @@
 package com.natalia.martianrobots.commands
 
-import com.natalia.martianrobots.*
-import io.mockk.*
-import org.junit.jupiter.api.Test
+import com.natalia.martianrobots.Direction
+import com.natalia.martianrobots.Position
+import com.natalia.martianrobots.Robot
+import org.amshove.kluent.shouldBeEqualTo
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.Arguments.arguments
+import org.junit.jupiter.params.provider.MethodSource
 
-internal class MoveForwardCommandTest {
-    private val robot = mockk<Robot>()
-    private val grid = mockk<Grid>()
+class MoveForwardCommandTest {
+    private var sut = MoveForwardCommand()
 
-    private val sut = MoveForwardCommand()
-
-    @Test
-    fun `changes robot position when his direction is S`() {
+    @ParameterizedTest(name = "given {1}x{2}, direction {0} when execute then position {2}x{3}")
+    @MethodSource("provideValues")
+    fun `execute`(
+        direction: Direction,
+        startPositionX: Int,
+        startPositionY: Int,
+        endPositionX: Int,
+        endPositionY: Int,
+    ) {
         // given
-        every { grid.height } returns 10
-        every { grid.width } returns 10
-        every { robot.robotDirection } returns Direction.S
-        every { robot.robotPosition } returns Position(1, 3)
-        justRun { robot.updatePosition(1, 4)  }
+        val robot = Robot(
+            robotDirection = direction,
+            robotPosition = Position(startPositionX, startPositionY)
+        )
 
         // when
-        sut.execute(robot, grid)
+        sut.execute(robot)
 
         // then
-        verify { robot.updatePosition(1, 4) }
+        robot.robotPosition.x shouldBeEqualTo endPositionX
+        robot.robotPosition.y shouldBeEqualTo endPositionY
     }
 
-    @Test
-    fun `doing nothing when robot's position is polluted`() {
-        // given
-        every { grid.height } returns 10
-        every { grid.width } returns 10
-        every { robot.robotDirection } returns Direction.N
-        every { grid.isDeadPoint(0, -1) } returns true
-        every { robot.robotPosition } returns Position(0, 0)
+    companion object {
+        private const val START_COORDINATE_X = 2
+        private const val START_COORDINATE_Y = 4
 
-        // when
-        sut.execute(robot, grid)
-
-        // then
-        verify(exactly = 0) { robot.updatePosition(any(), any()) }
-    }
-
-    @Test
-    fun `makes that robot loses when he went outside grid`() {
-        // given
-        every { grid.height } returns 10
-        every { grid.width } returns 10
-        every { grid.deadPoints } returns mutableListOf()
-        every { robot.robotDirection } returns Direction.N
-        every { robot.robotPosition } returns Position(0, 0)
-        every { robot.isAlive } returns true
-        every { grid.isDeadPoint(0, -1) } returns false
-        justRun { grid.addDeadPoint(0, -1) }
-        justRun { robot.updateRobotStatus(false) }
-
-        // when
-        sut.execute(robot, grid)
-
-        // then
-        verifyOrder {
-            grid.addDeadPoint(0, -1)
-            robot.updateRobotStatus(false)
-        }
+        @Suppress("unused")
+        @JvmStatic
+        fun provideValues() = listOf(
+            arguments(
+                Direction.N,
+                START_COORDINATE_X,
+                START_COORDINATE_Y,
+                START_COORDINATE_X,
+                START_COORDINATE_Y - 1,
+            ),
+            arguments(
+                Direction.S,
+                START_COORDINATE_X,
+                START_COORDINATE_Y,
+                START_COORDINATE_X,
+                START_COORDINATE_Y + 1,
+            ),
+            arguments(
+                Direction.E,
+                START_COORDINATE_X,
+                START_COORDINATE_Y,
+                START_COORDINATE_X + 1,
+                START_COORDINATE_Y,
+            ),
+            arguments(
+                Direction.W,
+                START_COORDINATE_X,
+                START_COORDINATE_Y,
+                START_COORDINATE_X - 1,
+                START_COORDINATE_Y,
+            ),
+        )
     }
 }
