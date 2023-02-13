@@ -8,12 +8,12 @@ class MainApp : KoinComponent {
     init {
         val s = """
             5 3
-            0 3 N
-            FRRFFRFRFF
+            0 0 N
+            F
         """.trimIndent()
 
         game.startGame(s)
         game.startGame(s)
-        game.startGame(s)
+
     }
 }

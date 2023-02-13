@@ -2,21 +2,22 @@ package com.natalia.martianrobots.commands
 
 import com.natalia.martianrobots.Grid
 import com.natalia.martianrobots.GridRobotLogger
+import com.natalia.martianrobots.Position
 import com.natalia.martianrobots.Robot
 import io.mockk.*
+import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 internal class CommandProcessorTest {
     private val gridRobotLogger = mockk<GridRobotLogger>()
+    private val invalidation = mockk<Invalidation>()
     private val moveRightCommand = mockk<MoveRightCommand>()
     private val moveLeftCommand = mockk<MoveLeftCommand>()
     private val moveForwardCommand = mockk<MoveForwardCommand>()
 
     private val sut = CommandProcessor(
         gridRobotLogger,
-        moveForwardCommand,
-        moveLeftCommand,
-        moveRightCommand
+        invalidation
     )
 
     @Test
@@ -45,6 +46,7 @@ internal class CommandProcessorTest {
         //given
         val robot = mockk<Robot>()
         every { robot.isAlive } returns true
+        every { robot.robotPosition } returns Position(2, 3)
 
         val grid = mockk<Grid>()
 
@@ -59,8 +61,8 @@ internal class CommandProcessorTest {
         //when
         sut.processCommands(robot, grid, commands)
 
-       // then
-        verify  {
+        // then
+        verify {
             moveRightCommand.execute(robot)
         }
     }
@@ -70,6 +72,7 @@ internal class CommandProcessorTest {
         //given
         val robot = mockk<Robot>()
         every { robot.isAlive } returns true
+        every { robot.robotPosition } returns Position(2, 3)
 
         val grid = mockk<Grid>()
 
@@ -94,11 +97,15 @@ internal class CommandProcessorTest {
     fun `MoveForwardCommand is called with correct parameters`() {
         //given
         val robot = mockk<Robot>()
+        every { robot.robotPosition } returns Position(2, 3)
         every { robot.isAlive } returns true
 
         val grid = mockk<Grid>()
+        every { grid.width } returns 4
+        every { grid.height } returns 5
 
-        justRun { moveForwardCommand.execute(robot, grid) }
+        justRun { moveForwardCommand.execute(robot) }
+        every { invalidation.invalidatePosition(robot, grid) } returns true
 
         val commands = listOf(
             moveForwardCommand
@@ -111,7 +118,7 @@ internal class CommandProcessorTest {
 
         //then
         verify {
-            moveForwardCommand.execute(robot, grid)
+            moveForwardCommand.execute(robot)
         }
     }
 
@@ -119,15 +126,21 @@ internal class CommandProcessorTest {
     fun `processCommands calls three commands when robot status is Alive`() {
         //given
         val robot = mockk<Robot>()
+        every { robot.robotPosition } returns Position(2, 3)
+
         every { robot.isAlive } returns true
 
         val grid = mockk<Grid>()
+        every { grid.width } returns 4
+        every { grid.height } returns 5
 
         justRun { gridRobotLogger.log(robot, grid) }
 
-        justRun { moveForwardCommand.execute(robot, grid) }
+        justRun { moveForwardCommand.execute(robot) }
         justRun { moveRightCommand.execute(robot) }
         justRun { moveLeftCommand.execute(robot) }
+
+        every { invalidation.invalidatePosition(robot, grid) } returns true
 
         val commands = listOf(
             moveRightCommand,
@@ -141,7 +154,7 @@ internal class CommandProcessorTest {
         //then
         verifyOrder {
             moveRightCommand.execute(robot)
-            moveForwardCommand.execute(robot, grid)
+            moveForwardCommand.execute(robot)
             moveLeftCommand.execute(robot)
         }
     }
@@ -151,12 +164,13 @@ internal class CommandProcessorTest {
         //given
         val robot = mockk<Robot>()
         every { robot.isAlive } returns true andThen false
+        every { robot.robotPosition } returns Position(0, 0)
 
         val grid = mockk<Grid>()
 
         justRun { gridRobotLogger.log(robot, grid) }
 
-        justRun { moveForwardCommand.execute(robot, grid) }
+        justRun { moveForwardCommand.execute(robot) }
         justRun { moveRightCommand.execute(robot) }
         justRun { moveLeftCommand.execute(robot) }
 
@@ -174,7 +188,7 @@ internal class CommandProcessorTest {
             moveRightCommand.execute(robot)
         }
         verify(exactly = 0) {
-            moveForwardCommand.execute(robot, grid)
+            moveForwardCommand.execute(robot)
             moveLeftCommand.execute(robot)
         }
     }
@@ -184,6 +198,7 @@ internal class CommandProcessorTest {
         //given
         val robot = mockk<Robot>()
         every { robot.isAlive } returns true
+        every { robot.robotPosition } returns Position(2, 3)
 
         val grid = mockk<Grid>()
 
@@ -201,6 +216,36 @@ internal class CommandProcessorTest {
         //then
         verify {
             gridRobotLogger.log(robot, grid)
+        }
+    }
+
+    @Test
+    fun `robotPosition changes to the previous when invalidation returns false`() {
+        //given
+        val robot = mockk<Robot>()
+        every { robot.isAlive } returns true
+        every { robot.robotPosition } returns Position(2, 3)
+
+        val beforeRobotPosition =  Position(2,3)
+
+        val grid = mockk<Grid>()
+
+        justRun { moveForwardCommand.execute(robot) }
+        every { invalidation.invalidatePosition(robot, grid) } returns false
+
+        val commands = listOf(
+            moveForwardCommand
+        )
+
+        justRun { gridRobotLogger.log(robot, grid) }
+        justRun { robot.robotPosition = beforeRobotPosition }
+
+        //when
+        sut.processCommands(robot, grid, commands)
+
+        //then
+        verify {
+            robot.robotPosition = beforeRobotPosition
         }
     }
 }
