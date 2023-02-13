@@ -1,10 +1,7 @@
 package com.natalia.martianrobots.di
 
 import com.natalia.martianrobots.*
-import com.natalia.martianrobots.commands.CommandProcessor
-import com.natalia.martianrobots.commands.MoveForwardCommand
-import com.natalia.martianrobots.commands.MoveLeftCommand
-import com.natalia.martianrobots.commands.MoveRightCommand
+import com.natalia.martianrobots.commands.*
 import com.natalia.martianrobots.factory.ConfigParserFactory
 import com.natalia.martianrobots.factory.GridFactory
 import com.natalia.martianrobots.factory.RobotFactory
@@ -32,4 +29,6 @@ var module = module {
     singleOf(::ConfigParserFactory)
     singleOf(::GridFactory)
     singleOf(::RobotFactory)
+
+    singleOf(::Invalidation)
 }

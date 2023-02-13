@@ -1,10 +1,8 @@
 package com.natalia.martianrobots.commands
 
-import com.natalia.martianrobots.Grid
-import com.natalia.martianrobots.GridRobotLogger
-import com.natalia.martianrobots.Position
-import com.natalia.martianrobots.Robot
+import com.natalia.martianrobots.*
 import io.mockk.*
+import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 internal class CommandProcessorTest {
@@ -221,15 +219,12 @@ internal class CommandProcessorTest {
     @Test
     fun `robotPosition changes to the previous when invalidation returns false`() {
         //given
-        val robot = mockk<Robot>()
-        every { robot.isAlive } returns true
-        every { robot.position } returns Position(2, 3) andThen Position(1,3)
+        val robot = Robot(Direction.N, Position(2,3))
 
-        val beforeRobotPosition = robot.position.copy()
+        robot.position = Position(1,3)
 
         val grid = mockk<Grid>()
 
-        justRun { moveForwardCommand.execute(robot) }
         every { invalidation.invalidatePosition(robot, grid) } returns false
 
         val commands = listOf(
@@ -237,17 +232,14 @@ internal class CommandProcessorTest {
         )
 
         justRun { gridRobotLogger.log(robot, grid) }
-        justRun { robot.position = Position(1,3) }
-        justRun { robot.position = beforeRobotPosition }
-
-
+        justRun { moveForwardCommand.execute(robot) }
 
         //when
         sut.processCommands(robot, grid, commands)
 
         //then
         verify {
-            robot.position = beforeRobotPosition
+            robot.position = robot.position.copy()
         }
     }
 }
