@@ -14,7 +14,7 @@ internal class RobotTest {
         sut.updatePosition(2, 4)
 
         //then
-        sut.robotPosition shouldBeEqualTo Position(2, 4)
+        sut.position shouldBeEqualTo Position(2, 4)
     }
 
     @Test

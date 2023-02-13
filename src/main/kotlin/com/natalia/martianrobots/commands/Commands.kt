@@ -9,7 +9,7 @@ sealed interface Command {
 
 class MoveRightCommand : Command {
    override fun execute(robot: Robot) {
-        robot.robotDirection = when (robot.robotDirection) {
+        robot.direction = when (robot.direction) {
             Direction.N -> Direction.E
             Direction.S -> Direction.W
             Direction.E -> Direction.S
@@ -20,7 +20,7 @@ class MoveRightCommand : Command {
 
 class MoveLeftCommand : Command {
     override fun execute(robot: Robot) {
-        robot.robotDirection = when (robot.robotDirection) {
+        robot.direction = when (robot.direction) {
             Direction.N -> Direction.W
             Direction.S -> Direction.E
             Direction.E -> Direction.N
@@ -31,11 +31,11 @@ class MoveLeftCommand : Command {
 
 class MoveForwardCommand : Command {
     override fun execute(robot: Robot){
-        when (robot.robotDirection) {
-            Direction.N -> robot.robotPosition.y -= 1
-            Direction.S -> robot.robotPosition.y += 1
-            Direction.E -> robot.robotPosition.x += 1
-            Direction.W -> robot.robotPosition.x -= 1
+        when (robot.direction) {
+            Direction.N -> robot.position.y -= 1
+            Direction.S -> robot.position.y += 1
+            Direction.E -> robot.position.x += 1
+            Direction.W -> robot.position.x -= 1
         }
 
 //        if (temporaryX in 0..grid.width && temporaryY in 0..grid.height) {

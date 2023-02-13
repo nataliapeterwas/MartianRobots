@@ -13,26 +13,26 @@ internal class MoveForwardCommandTest2 {
     @Test
     fun `changes robot position when his direction is S`() {
         // given
-        every { robot.robotDirection } returns Direction.S
-        every { robot.robotPosition } returns Position(1, 3)
+        every { robot.direction } returns Direction.S
+        every { robot.position } returns Position(1, 3)
 
         // when
         sut.execute(robot)
 
         // then
-        robot.robotPosition shouldBeEqualTo Position(1, 4)
+        robot.position shouldBeEqualTo Position(1, 4)
     }
 
     @Test
     fun `doing nothing when robot's position is polluted`() {
         // given
-        every { robot.robotDirection } returns Direction.N
-        every { robot.robotPosition } returns Position(0, 0)
+        every { robot.direction } returns Direction.N
+        every { robot.position } returns Position(0, 0)
 
         // when
         sut.execute(robot)
 
         // then
-        robot.robotPosition shouldBeEqualTo Position(0, -1)
+        robot.position shouldBeEqualTo Position(0, -1)
     }
 }

@@ -9,7 +9,6 @@ import io.mockk.justRun
 import io.mockk.mockk
 import io.mockk.verifyOrder
 import org.amshove.kluent.shouldBeEqualTo
-import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
 internal class InvalidationTest {
@@ -19,7 +18,7 @@ internal class InvalidationTest {
     fun `return true when robot is on the grid`() {
         // given
         val robot = mockk<Robot>()
-        every { robot.robotPosition } returns Position(2, 3)
+        every { robot.position } returns Position(2, 3)
 
         val grid = mockk<Grid>()
         every { grid.width } returns 5
@@ -36,7 +35,7 @@ internal class InvalidationTest {
     fun `return false when robot is on DeadPoint`() {
         // given
         val robot = mockk<Robot>()
-        every { robot.robotPosition } returns Position(10, 3)
+        every { robot.position } returns Position(10, 3)
 
         val grid = mockk<Grid>()
         every { grid.width } returns 5
@@ -55,8 +54,8 @@ internal class InvalidationTest {
     fun `return false when robot is out the grid`() {
         // given
         val robot = mockk<Robot>()
-        every { robot.robotPosition } returns Position(10, 3)
-        every { robot.robotDirection } returns Direction.N
+        every { robot.position } returns Position(10, 3)
+        every { robot.direction } returns Direction.N
 
         val grid = mockk<Grid>()
         every { grid.width } returns 5
@@ -77,8 +76,8 @@ internal class InvalidationTest {
     fun `call all instruction when robot is out the grid`() {
         // given
         val robot = mockk<Robot>()
-        every { robot.robotPosition } returns Position(10, 3)
-        every { robot.robotDirection } returns Direction.N
+        every { robot.position } returns Position(10, 3)
+        every { robot.direction } returns Direction.N
 
         val grid = mockk<Grid>()
         every { grid.width } returns 5

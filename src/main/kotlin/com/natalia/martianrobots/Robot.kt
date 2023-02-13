@@ -1,12 +1,12 @@
 package com.natalia.martianrobots
 
-class Robot(
-    var robotDirection: Direction,
-    var robotPosition: Position,
+data class Robot(
+    var direction: Direction,
+    var position: Position,
     var isAlive: Boolean = true
 ) {
     fun updatePosition(x: Int, y: Int){
-        robotPosition = Position(x,y)
+        position = Position(x,y)
     }
 
     fun updateRobotStatus(robotStatus: Boolean){

@@ -22,16 +22,16 @@ class MoveForwardCommandTest {
     ) {
         // given
         val robot = Robot(
-            robotDirection = direction,
-            robotPosition = Position(startPositionX, startPositionY)
+            direction = direction,
+            position = Position(startPositionX, startPositionY)
         )
 
         // when
         sut.execute(robot)
 
         // then
-        robot.robotPosition.x shouldBeEqualTo endPositionX
-        robot.robotPosition.y shouldBeEqualTo endPositionY
+        robot.position.x shouldBeEqualTo endPositionX
+        robot.position.y shouldBeEqualTo endPositionY
     }
 
     companion object {

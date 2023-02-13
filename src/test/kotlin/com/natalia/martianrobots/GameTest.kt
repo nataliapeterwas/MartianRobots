@@ -42,8 +42,8 @@ internal class GameTest {
         every { configParser.parse(input) } returns config
 
         val robot = mockk<Robot>()
-        every { robot.robotDirection } returns direction
-        every { robot.robotPosition } returns position
+        every { robot.direction } returns direction
+        every { robot.position } returns position
         every { robotFactory.create(direction, position) } returns robot
 
         val grid = mockk<Grid>()
@@ -84,8 +84,8 @@ internal class GameTest {
         every { configParser.parse(input) } returns config
 
         val robot = mockk<Robot>()
-        every { robot.robotDirection } returns direction
-        every { robot.robotPosition } returns position
+        every { robot.direction } returns direction
+        every { robot.position } returns position
         every { robotFactory.create(direction, position) } returns robot
 
         val grid = mockk<Grid>()
@@ -126,7 +126,7 @@ internal class GameTest {
         every { configParser.parse(input) } returns config
 
         val robot = mockk<Robot>()
-        every { robot.robotPosition } returns position
+        every { robot.position } returns position
         every { robotFactory.create(direction, position) } returns robot
 
         val grid = mockk<Grid>()
@@ -164,7 +164,7 @@ internal class GameTest {
         every { configParser.parse(input) } returns config
 
         val robot = mockk<Robot>()
-        every { robot.robotPosition } returns position
+        every { robot.position } returns position
         every { robotFactory.create(direction, position) } returns robot
 
         val grid = mockk<Grid>()
@@ -202,7 +202,7 @@ internal class GameTest {
         every { configParser.parse(input) } returns config
 
         val robot = mockk<Robot>()
-        every { robot.robotPosition } returns position
+        every { robot.position } returns position
         every { robotFactory.create(direction, position) } returns robot
 
         val grid = mockk<Grid>()

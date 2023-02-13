@@ -8,21 +8,21 @@ import io.mockk.mockk
 import io.mockk.verify
 import org.junit.jupiter.api.Test
 
-internal class MoveLeftCommandTest{
+internal class MoveLeftCommandTest2{
     private val robot = mockk<Robot>()
     private val sut = MoveLeftCommand()
 
     @Test
     fun `change direction from W to S`(){
         // given
-        every { robot.robotDirection} returns Direction.W
-        justRun { robot.robotDirection = any() }
+        every { robot.direction} returns Direction.W
+        justRun { robot.direction = any() }
 
         // when
         sut.execute(robot)
 
         // then
-        verify { robot.robotDirection = Direction.S }
+        verify { robot.direction = Direction.S }
     }
 
 }

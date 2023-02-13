@@ -3,12 +3,12 @@ package com.natalia.martianrobots
 class GridRobotLogger {
     fun log(robot: Robot, grid: Grid) {
         val drawnGrid = buildString {
-            robot.robotDirection.let {
+            robot.direction.let {
                 val currentPlace = it.arrow.toString()
 
                 repeat(grid.height + 1) { yAxis ->
                     repeat(grid.width + 1) { xAxis ->
-                        if (xAxis == robot.robotPosition.x && yAxis == robot.robotPosition.y) {
+                        if (xAxis == robot.position.x && yAxis == robot.position.y) {
                             append("$currentPlace ")
                         } else {
                             append("□ ")
@@ -17,7 +17,7 @@ class GridRobotLogger {
                     append("\n")
                 }
             }
-            append("${robot.robotPosition.x} ${robot.robotPosition.y} ${robot.robotDirection}")
+            append("${robot.position.x} ${robot.position.y} ${robot.direction}")
             append("\n")
         }
         println(drawnGrid)

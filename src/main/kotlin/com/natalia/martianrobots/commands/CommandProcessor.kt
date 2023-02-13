@@ -10,11 +10,11 @@ class CommandProcessor(
         commands.forEach { command ->
             if (robot.isAlive) {
                 gridRobotLogger.log(robot, grid)
-                val beforeRobotPosition = robot.robotPosition.copy()
+                val beforeRobotPosition = robot.position.copy()
                 command.execute(robot)
                 if (command is MoveForwardCommand) {
                     if (!invalidation.invalidatePosition(robot, grid)) {
-                        robot.robotPosition = beforeRobotPosition
+                        robot.position = beforeRobotPosition
                     }
                 }
             }
